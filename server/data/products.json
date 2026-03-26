@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "name": {
+      "en": "High Voltage Cable (HV-01)",
+      "fa": "کابل فشار قوی (HV-01)"
+    },
+    "category": {
+      "en": "High Voltage",
+      "fa": "فشار قوی"
+    },
+    "description": {
+      "en": "Industrial high voltage cable designed for power transmission in harsh environments.",
+      "fa": "کابل فشار قوی صنعتی مناسب انتقال برق در شرایط سخت محیطی."
+    },
+    "features": {
+      "en": [
+        "Heat resistant up to 120°C",
+        "UV protection",
+        "Waterproof insulation",
+        "Long lifespan"
+      ],
+      "fa": [
+        "مقاوم تا 120 درجه",
+        "مقاوم در برابر UV",
+        "عایق ضد آب",
+        "طول عمر بالا"
+      ]
+    },
+    "applications": {
+      "en": [
+        "Power plants",
+        "Industrial facilities",
+        "Underground transmission"
+      ],
+      "fa": ["نیروگاه‌ها", "کارخانه‌ها", "انتقال زیرزمینی"]
+    }
+  },
+  {
+    "id": 2,
+    "name": {
+      "en": "Low Voltage Cable (LV-02)",
+      "fa": "کابل فشار ضعیف (LV-02)"
+    },
+    "category": {
+      "en": "Low Voltage",
+      "fa": "فشار ضعیف"
+    },
+    "description": {
+      "en": "Reliable low voltage cable for residential and commercial electrical systems.",
+      "fa": "کابل فشار ضعیف مناسب برای مصارف ساختمانی و تجاری."
+    },
+    "features": {
+      "en": [
+        "Flexible structure",
+        "Easy installation",
+        "Cost-effective",
+        "Durable insulation"
+      ],
+      "fa": ["ساختار انعطاف‌پذیر", "نصب آسان", "مقرون‌به‌صرفه", "عایق مقاوم"]
+    },
+    "applications": {
+      "en": ["Buildings", "Offices", "Lighting systems"],
+      "fa": ["ساختمان‌ها", "دفاتر", "سیستم‌های روشنایی"]
+    }
+  },
+  {
+    "id": 3,
+    "name": {
+      "en": "Fire Resistant Cable (FR-03)",
+      "fa": "کابل مقاوم در برابر آتش (FR-03)"
+    },
+    "category": {
+      "en": "Safety",
+      "fa": "ایمنی"
+    },
+    "description": {
+      "en": "Fire-resistant cable that maintains performance during fire conditions.",
+      "fa": "کابل مقاوم در برابر آتش که در شرایط حریق عملکرد خود را حفظ می‌کند."
+    },
+    "features": {
+      "en": [
+        "Fireproof coating",
+        "Low smoke emission",
+        "Maintains circuit integrity",
+        "Halogen-free"
+      ],
+      "fa": ["پوشش ضد حریق", "دود کم", "حفظ عملکرد مدار", "بدون هالوژن"]
+    },
+    "applications": {
+      "en": ["Hospitals", "Airports", "Emergency systems"],
+      "fa": ["بیمارستان‌ها", "فرودگاه‌ها", "سیستم‌های اضطراری"]
+    }
+  },
+  {
+    "id": 4,
+    "name": {
+      "en": "Armored Cable (AR-04)",
+      "fa": "کابل زره‌دار (AR-04)"
+    },
+    "category": {
+      "en": "Heavy Duty",
+      "fa": "صنعتی سنگین"
+    },
+    "description": {
+      "en": "Heavy-duty armored cable for mechanical protection in tough environments.",
+      "fa": "کابل زره‌دار برای محافظت مکانیکی در محیط‌های سخت."
+    },
+    "features": {
+      "en": [
+        "Steel armored protection",
+        "Impact resistant",
+        "Suitable for underground use",
+        "High durability"
+      ],
+      "fa": [
+        "محافظ فولادی",
+        "مقاوم در برابر ضربه",
+        "مناسب دفن زیرزمینی",
+        "دوام بالا"
+      ]
+    },
+    "applications": {
+      "en": ["Construction sites", "Mining", "Outdoor installations"],
+      "fa": ["پروژه‌های ساختمانی", "معادن", "نصب در فضای باز"]
+    }
+  },
+  {
+    "id": 5,
+    "name": {
+      "en": "Control Cable (CT-05)",
+      "fa": "کابل کنترل (CT-05)"
+    },
+    "category": {
+      "en": "Control",
+      "fa": "کنترل"
+    },
+    "description": {
+      "en": "Control cable for transmitting signals in industrial automation systems.",
+      "fa": "کابل کنترل برای انتقال سیگنال در سیستم‌های اتوماسیون صنعتی."
+    },
+    "features": {
+      "en": [
+        "Noise resistant",
+        "Multi-core design",
+        "Flexible",
+        "Stable signal transmission"
+      ],
+      "fa": [
+        "مقاوم در برابر نویز",
+        "چند رشته‌ای",
+        "انعطاف‌پذیر",
+        "انتقال پایدار سیگنال"
+      ]
+    },
+    "applications": {
+      "en": ["Automation systems", "Control panels", "Machinery"],
+      "fa": ["سیستم‌های اتوماسیون", "تابلوهای کنترل", "ماشین‌آلات"]
+    }
+  },
+  {
+    "id": 6,
+    "name": {
+      "en": "Solar Cable (SC-06)",
+      "fa": "کابل خورشیدی (SC-06)"
+    },
+    "category": {
+      "en": "Renewable Energy",
+      "fa": "انرژی تجدیدپذیر"
+    },
+    "description": {
+      "en": "Specialized cable for solar panel connections with high UV resistance.",
+      "fa": "کابل مخصوص سیستم‌های خورشیدی با مقاومت بالا در برابر UV."
+    },
+    "features": {
+      "en": [
+        "UV resistant",
+        "Weatherproof",
+        "High conductivity",
+        "Long outdoor lifespan"
+      ],
+      "fa": [
+        "مقاوم در برابر UV",
+        "ضد شرایط جوی",
+        "هدایت بالا",
+        "طول عمر زیاد در فضای باز"
+      ]
+    },
+    "applications": {
+      "en": ["Solar farms", "Rooftop systems", "Renewable projects"],
+      "fa": ["نیروگاه خورشیدی", "سیستم‌های پشت‌بامی", "پروژه‌های انرژی پاک"]
+    }
+  }
+]
