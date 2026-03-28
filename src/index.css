@@ -2,24 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* تنظیمات کلی بدنه با تم روشن */
-html,
-body,
-#root {
-  height: 100%;
-}
+/* Import modular styles */
+@import './styles/globals.css';
+@import './styles/animations.css';
 
-body {
-  /* تغییر از پس‌زمینه تیره به سفید ملایم مطابق عکس */
-  @apply bg-[#F9FAFB] text-[#1F2937] antialiased;
-}
+/* انیمیشن‌ها */
 @keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .animate-spin-slow {
@@ -27,69 +17,56 @@ body {
 }
 
 @keyframes gold-shimmer {
-  0% {
-    background-position: -200px 0;
-  }
-
-  100% {
-    background-position: 200px 0;
-  }
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
 }
 
 .animate-gold-shimmer {
   background-size: 200% auto;
-
   animation: gold-shimmer 4s linear infinite;
 }
-/* پنل‌های شیشه‌ای برای تم روشن (Light Glassmorphism) */
+
+/* کامپوننت‌های شیشه‌ای */
 .glass-panel {
-  /* استفاده از سفیدی ملایم و سایه بسیار ظریف به جای حاشیه سفید تند */
   @apply bg-white/70 border border-gray-200/50 backdrop-blur-2xl rounded-[40px] shadow-sm;
 }
 
 .glass-card {
-  /* کارت‌های خدمات با لبه‌های گردتر و سایه نرم */
   @apply bg-white border border-gray-100 backdrop-blur-md rounded-[30px] shadow-md shadow-gray-200/50;
 }
 
-/* دکمه اصلی - با رنگ طلایی لوگو و خاکستری تیره */
+/* دکمه‌ها */
 .btn-primary {
-  /* استفاده از رنگ خاکستری تیره (Anthracite) برای دکمه‌های اصلی مشابه عکس */
-  @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#2D2D2D] text-sm font-bold tracking-wide text-white hover:bg-black hover:scale-[1.02] transition-all shadow-lg shadow-gray-300;
+  @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#1A1A1A] text-sm font-bold tracking-wide text-white shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_35px_rgba(212,175,55,0.4)] hover:bg-[#D4AF37] hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37];
 }
 
-/* دکمه ثانویه یا اوت‌لاین */
 .btn-outline {
-  @apply inline-flex items-center justify-center px-8 py-3 rounded-full border-2 border-gray-200 text-sm font-bold tracking-wide text-[#2D2D2D] hover:bg-gray-50 transition-colors;
+  @apply inline-flex items-center justify-center px-8 py-3 rounded-full border-2 border-gray-200 text-sm font-bold tracking-wide text-[#2D2D2D] hover:bg-gray-50 hover:border-[#D4AF37] transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37];
 }
 
-/* نوار آمار طلایی (بخش 5k Nits در عکس) */
+/* آمار و هایلایت‌ها */
 .stats-highlight {
   @apply bg-[#D4AF37] text-white rounded-2xl p-4 shadow-lg shadow-[#D4AF37]/20;
 }
 
-/* انیمیشن‌ها و فونت */
 .fade-soft {
   @apply transition-all duration-500 ease-in-out;
 }
 
+/* فونت‌ها */
 .font-fa {
-  font-family: "Vazir", sans-serif;
+  font-family: "Vazirmatn", sans-serif;
 }
+
 .font-en {
   font-family: "Inter", sans-serif;
 }
 
-/* استایل مخصوص بخش Hero برای نمایش عکس کارخانه */
+/* استایل مخصوص بخش Hero */
 .hero-bg-overlay {
   background: linear-gradient(
     to bottom,
     rgba(249, 250, 251, 0.7),
     rgba(249, 250, 251, 0.9)
   );
-}
-
-.btn-primary {
-  @apply bg-[#1A1A1A] text-white shadow-[0_0_20px_rgba(212,175,55,0.2)] 
-         hover:shadow-[0_0_35px_rgba(212,175,55,0.4)] transition-all duration-300;
 }

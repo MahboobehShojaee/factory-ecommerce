@@ -9,7 +9,7 @@ import {
   useMotionTemplate,
   AnimatePresence,
 } from "framer-motion";
-import logoFull from "../../public/logo-wb-wt.png";
+import logoFull from "../assets/images/logo-wb-wt.png";
 
 // --- کامپوننت عدد شمار با staggered delay ---
 function Counter({ value, delay = 0 }) {
@@ -108,17 +108,18 @@ export default function Layout({ children }) {
       dir={isRTL ? "rtl" : "ltr"}
     >
       {/* هدر هوشمند */}
-      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-7xl">
-        <nav className="flex items-center justify-between px-5 py-3 bg-white/80 backdrop-blur-2xl rounded-[32px] border border-gray-100 shadow-2xl shadow-gray-200/50">
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-7xl" role="banner">
+        <nav className="flex items-center justify-between px-5 py-3 bg-white/80 backdrop-blur-2xl rounded-[32px] border border-gray-100 shadow-2xl shadow-gray-200/50" role="navigation" aria-label="Main navigation">
           {/* لوگو */}
           <Link
             to="/"
-            className="flex items-center gap-3 group relative z-[110]"
+            className="flex items-center gap-3 group relative z-[110] focus:outline-none focus:ring-2 focus:ring-[#D4AF37] rounded-xl"
+            aria-label="Setareh Kerman Home"
           >
             <div className="h-11 w-11 flex items-center justify-center rounded-2xl bg-white border border-gray-100 transition-all group-hover:rotate-[15deg] group-hover:scale-105 shadow-md overflow-hidden">
               <img
                 src={logoFull}
-                alt="Logo"
+                alt="Setareh Kerman Logo"
                 className="h-full w-full object-contain p-1"
                 loading="lazy"
               />
@@ -137,18 +138,19 @@ export default function Layout({ children }) {
           </Link>
 
           {/* منوی دسکتاپ */}
-          <div className="hidden md:flex items-center bg-gray-50/50 p-1.5 rounded-[22px] border border-gray-100">
+          <div className="hidden md:flex items-center bg-gray-50/50 p-1.5 rounded-[22px] border border-gray-100" role="menubar">
             {navLinks.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  `px-6 py-2.5 rounded-[18px] text-[10px] font-black uppercase tracking-widest transition-all ${
+                  `px-6 py-2.5 rounded-[18px] text-[10px] font-black uppercase tracking-widest transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37] ${
                     isActive
                       ? "bg-[#374151] text-white shadow-lg"
                       : "text-gray-400 hover:text-[#374151]"
                   }`
                 }
+                role="menuitem"
               >
                 {item.label}
               </NavLink>
@@ -159,14 +161,17 @@ export default function Layout({ children }) {
           <div className="flex items-center gap-3 relative z-[110]">
             <button
               onClick={() => setLang(lang === LANGS.EN ? LANGS.FA : LANGS.EN)}
-              className="h-11 px-5 rounded-2xl bg-gray-50 border border-gray-100 text-[#374151] text-[10px] font-black hover:bg-gradient-to-r hover:from-[#FFD700] hover:via-[#D4AF37] hover:to-[#B8860B] hover:text-white transition-all"
+              className="h-11 px-5 rounded-2xl bg-gray-50 border border-gray-100 text-[#374151] text-[10px] font-black hover:bg-gradient-to-r hover:from-[#FFD700] hover:via-[#D4AF37] hover:to-[#B8860B] hover:text-white transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+              aria-label={`Switch language to ${lang === LANGS.EN ? "Persian" : "English"}`}
             >
               {lang === LANGS.EN ? "FA" : "EN"}
             </button>
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden h-11 w-11 flex flex-col items-center justify-center gap-1.5 bg-[#374151] rounded-2xl"
+              className="md:hidden h-11 w-11 flex flex-col items-center justify-center gap-1.5 bg-[#374151] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMenuOpen}
             >
               <motion.span
                 animate={
@@ -196,6 +201,7 @@ export default function Layout({ children }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -20, scale: 0.95 }}
               className="absolute top-20 left-0 w-full bg-[#374151] rounded-[35px] p-8 shadow-3xl md:hidden border border-white/10"
+              role="menu"
             >
               <div className="flex flex-col gap-6 text-center">
                 {navLinks.map((link) => (
@@ -203,7 +209,8 @@ export default function Layout({ children }) {
                     key={link.to}
                     to={link.to}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-2xl font-black text-white hover:text-[#D4AF37] transition-colors"
+                    className="text-2xl font-black text-white hover:text-[#D4AF37] transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37] rounded-lg px-4 py-2"
+                    role="menuitem"
                   >
                     {link.label}
                   </Link>
@@ -216,7 +223,7 @@ export default function Layout({ children }) {
 
       <div className="h-32" />
 
-      <main className="mx-auto max-w-7xl px-6 md:px-8">
+      <main className="mx-auto max-w-7xl px-6 md:px-8" role="main">
         <motion.div
           key={lang}
           initial={{ opacity: 0 }}
@@ -228,7 +235,8 @@ export default function Layout({ children }) {
       </main>
 
       {/* بخش آمار */}
-      <section className="container mx-auto px-6 py-20">
+      <section className="container mx-auto px-6 py-20" aria-labelledby="stats-heading">
+        <h2 id="stats-heading" className="sr-only">{isRTL ? "آمار و دستاوردها" : "Statistics and Achievements"}</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {statsData.map((stat, idx) => (
             <StatCard key={idx} stat={stat} index={idx} />
@@ -237,7 +245,7 @@ export default function Layout({ children }) {
       </section>
 
       {/* فوتر */}
-      <footer className="bg-white border-t border-gray-100 py-16">
+      <footer className="bg-white border-t border-gray-100 py-16" role="contentinfo">
         <div
           className={`mx-auto max-w-7xl px-8 flex flex-col md:flex-row justify-between items-center gap-10 ${isRTL ? "md:flex-row-reverse" : ""}`}
         >

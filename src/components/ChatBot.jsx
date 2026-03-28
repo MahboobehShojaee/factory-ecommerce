@@ -1,17 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
+import { useLocalStorage } from "../hooks/useLocalStorage.js";
 
 export default function ChatBot() {
   const { lang, isRTL } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("chatbot_messages")) || [];
-    } catch {
-      return [];
-    }
-  });
+  const [messages, setMessages] = useLocalStorage("chatbot_messages", []);
 
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -37,7 +32,6 @@ export default function ChatBot() {
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-    localStorage.setItem("chatbot_messages", JSON.stringify(messages));
   }, [messages]);
 
   useEffect(() => {
