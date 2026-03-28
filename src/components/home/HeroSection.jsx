@@ -63,7 +63,7 @@ export default function HeroSection() {
         aria-hidden="true"
       >
         <img
-          src="/factory.png"
+          src="/src/assets/images/factory.png"
           loading="lazy"
           className="w-full h-full object-cover scale-110"
           alt="Factory background"
@@ -142,7 +142,7 @@ export default function HeroSection() {
             className="absolute w-[350px] h-[350px] bg-gradient-to-tr from-[#FFD700]/20 via-[#D4AF37]/20 to-[#B8860B]/20 rounded-full blur-[130px]"
           />
           <img
-            src="/men.png"
+            src="/src/assets/images/men.png"
             loading="lazy"
             className="relative z-20 max-w-[400px] drop-shadow-[0_40px_60px_rgba(0,0,0,0.25)]"
             alt="Factory worker"

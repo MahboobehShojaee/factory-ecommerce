@@ -27,7 +27,7 @@ export default function TechnicalSection() {
               <div className="w-40 h-40 rounded-full border-[3px] border-dashed border-[#D4AF37]/20 animate-spin-slow" />
 
               <img
-                src="/logo-wb-wt.png"
+                src="/src/assets/images/logo-wb-wt.png"
                 className="absolute w-28 h-28 object-contain 
                 drop-shadow-[0_10px_20px_rgba(0,0,0,0.1)]"
                 alt="Setareh Kerman"

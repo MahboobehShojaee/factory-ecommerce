@@ -2,11 +2,11 @@ import { motion } from "framer-motion";
 
 export default function ClientsSlider() {
   const clients = [
-    "/logos/c1.png",
-    "/logos/c2.png",
-    "/logos/c3.png",
-    "/logos/c4.png",
-    "/logos/c5.png",
+    "/src/assets/images/logos/c1.png",
+    "/src/assets/images/logos/c2.png",
+    "/src/assets/images/logos/c3.png",
+    "/src/assets/images/logos/c4.png",
+    "/src/assets/images/logos/c5.png",
   ];
 
   return (

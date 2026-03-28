@@ -47,7 +47,7 @@ export default function SidebarInfo({ t, isRTL }) {
 
       <motion.div className="relative z-10 mt-12 flex justify-center opacity-80 hover:opacity-100 transition-opacity duration-700">
         <img
-          src="/logo-withoutBackground.png"
+          src="/src/assets/images/logo-withoutBackground.png"
           alt="watermark"
           className="h-28 w-28 object-contain brightness-125 saturate-150 dropshadow-[0_0_15px_rgba(212,175,55,0.3)]"
         />

@@ -31,22 +31,22 @@ export default function About() {
     {
       title: isRTL ? "تست ولتاژ بالا" : "High Voltage Test",
       code: "IEC 60502",
-      imgSrc: "/images/lab1.jpg",
+      imgSrc: "/src/assets/images/images/lab1.jpg",
     },
     {
       title: isRTL ? "تست مقاومت هادی" : "Conductor Resistance",
       code: "IEC 60228",
-      imgSrc: "/images/lab2.jpg",
+      imgSrc: "/src/assets/images/images/lab2.jpg",
     },
     {
       title: isRTL ? "آنالیز مواد پلیمری" : "Polymer Analysis",
       code: "ASTM D1238",
-      imgSrc: "/images/lab3.jpg",
+      imgSrc: "/src/assets/images/images/lab3.jpg",
     },
     {
       title: isRTL ? "تست انتشار شعله" : "Flame Retardancy",
       code: "IEC 60332",
-      imgSrc: "/images/lab4.jpg",
+      imgSrc: "/src/assets/images/images/lab4.jpg",
     },
   ];
 
