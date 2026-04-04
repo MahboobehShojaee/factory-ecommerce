@@ -3,6 +3,7 @@ import { useLanguage } from "../context/LanguageContext.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "../components/products/ProductCard.jsx";
 import ProductFilters from "../components/products/ProductFilters.jsx";
+import ProductListFromJSON from "../components/products/ProductListFromJSON.jsx";
 
 export default function Products() {
   const { dict, isRTL, lang } = useLanguage();
@@ -41,7 +42,7 @@ export default function Products() {
 
   return (
     <main
-      className={`space-y-12 pb-20 ${isRTL ? "text-right" : "text-left"}`}
+      className={`space-y-12 pb-20 pt-24 ${isRTL ? "text-right" : "text-left"}`}
     >
       {/* Hero Header */}
       <header
@@ -116,6 +117,27 @@ export default function Products() {
           </AnimatePresence>
         </motion.div>
       </section>
+
+      {/* Section Divider */}
+      <div className="container mx-auto px-6" aria-hidden="true">
+        <div className="relative my-16">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-200"></div>
+          </div>
+          <div className="relative flex justify-center">
+            <div className="bg-[#F8F9FA] px-4">
+              <div className="flex gap-2">
+                <div className="w-2 h-2 bg-[#D4AF37] rounded-full"></div>
+                <div className="w-2 h-2 bg-[#D4AF37] rounded-full"></div>
+                <div className="w-2 h-2 bg-[#D4AF37] rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Complete Product Catalog from JSON */}
+      <ProductListFromJSON />
 
       {/* Scroll to Top Indicator */}
       <motion.div

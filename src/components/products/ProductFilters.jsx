@@ -11,6 +11,7 @@ export default function ProductFilters({
       className={`flex flex-wrap gap-3 mt-8 ${
         isRTL ? "justify-end" : "justify-start"
       }`}
+      aria-label="Product filters"
     >
       {filterOptions.map((opt) => (
         <button

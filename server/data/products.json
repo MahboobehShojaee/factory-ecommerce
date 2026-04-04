@@ -6,13 +6,15 @@
       "fa": "کابل فشار قوی (HV-01)"
     },
     "category": {
-      "en": "High Voltage",
-      "fa": "فشار قوی"
+      "en": "Power Cables",
+      "fa": "کابل‌های برق"
     },
     "description": {
       "en": "Industrial high voltage cable designed for power transmission in harsh environments.",
       "fa": "کابل فشار قوی صنعتی مناسب انتقال برق در شرایط سخت محیطی."
     },
+    "price": "$2,450",
+    "image": "/src/assets/images/products/high-voltage-cable.jpg",
     "features": {
       "en": [
         "Heat resistant up to 120°C",
@@ -39,45 +41,124 @@
   {
     "id": 2,
     "name": {
-      "en": "Low Voltage Cable (LV-02)",
-      "fa": "کابل فشار ضعیف (LV-02)"
+      "en": "Medium Voltage Cable (MV-02)",
+      "fa": "کابل ولتاژ متوسط (MV-02)"
     },
     "category": {
-      "en": "Low Voltage",
-      "fa": "فشار ضعیف"
+      "en": "Power Cables",
+      "fa": "کابل‌های برق"
     },
     "description": {
-      "en": "Reliable low voltage cable for residential and commercial electrical systems.",
-      "fa": "کابل فشار ضعیف مناسب برای مصارف ساختمانی و تجاری."
+      "en": "Medium voltage cable for distribution networks and industrial applications.",
+      "fa": "کابل ولتاژ متوسط برای شبکه‌های توزیع و کاربردهای صنعتی."
     },
+    "price": "$1,850",
+    "image": "/src/assets/images/products/medium-voltage-cable.jpg",
     "features": {
       "en": [
-        "Flexible structure",
-        "Easy installation",
-        "Cost-effective",
-        "Durable insulation"
+        "15kV rating",
+        "XLPE insulation",
+        "Corrosion resistant",
+        "Long service life"
       ],
-      "fa": ["ساختار انعطاف‌پذیر", "نصب آسان", "مقرون‌به‌صرفه", "عایق مقاوم"]
+      "fa": [
+        "ولتاژ 15kV",
+        "عایق XLPE",
+        "مقاوم در برابر خوردگی",
+        "طول عمر خدمات طولانی"
+      ]
     },
     "applications": {
-      "en": ["Buildings", "Offices", "Lighting systems"],
-      "fa": ["ساختمان‌ها", "دفاتر", "سیستم‌های روشنایی"]
+      "en": ["Distribution networks", "Industrial plants", "Utility systems"],
+      "fa": ["شبکه‌های توزیع", "کارخانه‌ها", "سیستم‌های خدماتی"]
     }
   },
   {
     "id": 3,
     "name": {
-      "en": "Fire Resistant Cable (FR-03)",
-      "fa": "کابل مقاوم در برابر آتش (FR-03)"
+      "en": "Low Voltage Building Cable (LV-03)",
+      "fa": "کابل ساختمانی فشار ضعیف (LV-03)"
     },
     "category": {
-      "en": "Safety",
-      "fa": "ایمنی"
+      "en": "Building Cables",
+      "fa": "کابل‌های ساختمانی"
+    },
+    "description": {
+      "en": "Standard building wire for residential and commercial construction projects.",
+      "fa": "سیم استاندارد ساختمانی برای پروژه‌های ساختمانی مسکونی و تجاری."
+    },
+    "price": "$650",
+    "image": "/src/assets/images/products/building-wire.jpg",
+    "features": {
+      "en": [
+        "THHN/THWN insulation",
+        "600V rating",
+        "Copper conductor",
+        "Flame retardant"
+      ],
+      "fa": [
+        "عایق THHN/THWN",
+        "ولتاژ 600V",
+        "هادی مس",
+        "ضد شعله"
+      ]
+    },
+    "applications": {
+      "en": ["Residential wiring", "Commercial buildings", "Panel boards"],
+      "fa": ["سیم‌کشی مسکونی", "ساختمان‌های تجاری", "تابلوهای برق"]
+    }
+  },
+  {
+    "id": 4,
+    "name": {
+      "en": "Flexible Building Cable (FB-04)",
+      "fa": "کابل ساختمانی انعطاف‌پذیر (FB-04)"
+    },
+    "category": {
+      "en": "Building Cables",
+      "fa": "کابل‌های ساختمانی"
+    },
+    "description": {
+      "en": "Flexible building cable for complex wiring installations and tight spaces.",
+      "fa": "کابل ساختمانی انعطاف‌پذیر برای سیم‌کشی پیچیده و فضاهای تنگ."
+    },
+    "price": "$890",
+    "image": "/src/assets/images/products/flexible-building-cable.jpg",
+    "features": {
+      "en": [
+        "High flexibility",
+        "Easy routing",
+        "Stranded conductors",
+        "Color coded"
+      ],
+      "fa": [
+        "انعطاف‌پذیری بالا",
+        "مسیریابی آسان",
+        "هادی رشته‌ای",
+        "کدگذاری رنگی"
+      ]
+    },
+    "applications": {
+      "en": ["Complex installations", "Control panels", "Automation systems"],
+      "fa": ["نصب‌های پیچیده", "تابلوهای کنترل", "سیستم‌های اتوماسیون"]
+    }
+  },
+  {
+    "id": 5,
+    "name": {
+      "en": "Fire Resistant Cable (FR-05)",
+      "fa": "کابل مقاوم در برابر آتش (FR-05)"
+    },
+    "category": {
+      "en": "Safety Cables",
+      "fa": "کابل‌های ایمنی"
     },
     "description": {
       "en": "Fire-resistant cable that maintains performance during fire conditions.",
       "fa": "کابل مقاوم در برابر آتش که در شرایط حریق عملکرد خود را حفظ می‌کند."
     },
+    "price": "$1,890",
+    "image": "/src/assets/images/products/fire-resistant-cable.jpg",
     "features": {
       "en": [
         "Fireproof coating",
@@ -93,19 +174,56 @@
     }
   },
   {
-    "id": 4,
+    "id": 6,
     "name": {
-      "en": "Armored Cable (AR-04)",
-      "fa": "کابل زره‌دار (AR-04)"
+      "en": "Low Smoke Zero Halogen Cable (LSZH-06)",
+      "fa": "کابل دود کم بدون هالوژن (LSZH-06)"
     },
     "category": {
-      "en": "Heavy Duty",
-      "fa": "صنعتی سنگین"
+      "en": "Safety Cables",
+      "fa": "کابل‌های ایمنی"
+    },
+    "description": {
+      "en": "Low smoke zero halogen cable for enhanced safety in public spaces.",
+      "fa": "کابل دود کم بدون هالوژن برای ایمنی بالا در فضاهای عمومی."
+    },
+    "price": "$2,100",
+    "image": "/src/assets/images/products/lszh-cable.jpg",
+    "features": {
+      "en": [
+        "Zero halogen emission",
+        "Low smoke density",
+        "Self-extinguishing",
+        "Non-toxic"
+      ],
+      "fa": [
+        "بدون انتشار هالوژن",
+        "چگالی دود کم",
+        "خاموش‌شونده خودکار",
+        "سمی نبودن"
+      ]
+    },
+    "applications": {
+      "en": ["Public buildings", "Transportation", "Underground installations"],
+      "fa": ["ساختمان‌های عمومی", "حمل و نقل", "نصب‌های زیرزمینی"]
+    }
+  },
+  {
+    "id": 7,
+    "name": {
+      "en": "Armored Power Cable (AP-07)",
+      "fa": "کابل برق زره‌دار (AP-07)"
+    },
+    "category": {
+      "en": "Industrial Cables",
+      "fa": "کابل‌های صنعتی"
     },
     "description": {
       "en": "Heavy-duty armored cable for mechanical protection in tough environments.",
       "fa": "کابل زره‌دار برای محافظت مکانیکی در محیط‌های سخت."
     },
+    "price": "$3,200",
+    "image": "/src/assets/images/products/armored-cable.jpg",
     "features": {
       "en": [
         "Steel armored protection",
@@ -126,19 +244,21 @@
     }
   },
   {
-    "id": 5,
+    "id": 8,
     "name": {
-      "en": "Control Cable (CT-05)",
-      "fa": "کابل کنترل (CT-05)"
+      "en": "Industrial Control Cable (IC-08)",
+      "fa": "کابل کنترل صنعتی (IC-08)"
     },
     "category": {
-      "en": "Control",
-      "fa": "کنترل"
+      "en": "Industrial Cables",
+      "fa": "کابل‌های صنعتی"
     },
     "description": {
       "en": "Control cable for transmitting signals in industrial automation systems.",
       "fa": "کابل کنترل برای انتقال سیگنال در سیستم‌های اتوماسیون صنعتی."
     },
+    "price": "$1,350",
+    "image": "/src/assets/images/products/control-cable.jpg",
     "features": {
       "en": [
         "Noise resistant",
@@ -159,19 +279,126 @@
     }
   },
   {
-    "id": 6,
+    "id": 9,
     "name": {
-      "en": "Solar Cable (SC-06)",
-      "fa": "کابل خورشیدی (SC-06)"
+      "en": "Instrumentation Cable (INS-09)",
+      "fa": "کابل ابزار دقیق (INS-09)"
     },
     "category": {
-      "en": "Renewable Energy",
-      "fa": "انرژی تجدیدپذیر"
+      "en": "Industrial Cables",
+      "fa": "کابل‌های صنعتی"
+    },
+    "description": {
+      "en": "Precision cable for instrumentation and control systems.",
+      "fa": "کابل دقیق برای سیستم‌های ابزار دقیق و کنترل."
+    },
+    "price": "$2,250",
+    "image": "/src/assets/images/products/instrumentation-cable.jpg",
+    "features": {
+      "en": [
+        "Shielded pairs",
+        "Low capacitance",
+        "Temperature stable",
+        "EMI protected"
+      ],
+      "fa": [
+        "زوج‌های شیلد شده",
+        "ظرفیت خازنی کم",
+        "پایداری دمایی",
+        "محافظت در برابر EMI"
+      ]
+    },
+    "applications": {
+      "en": ["Process control", "Measurement systems", "Industrial automation"],
+      "fa": ["کنترل فرآیند", "سیستم‌های اندازه‌گیری", "اتوماسیون صنعتی"]
+    }
+  },
+  {
+    "id": 10,
+    "name": {
+      "en": "Fiber Optic Cable (FO-10)",
+      "fa": "کابل فیبر نوری (FO-10)"
+    },
+    "category": {
+      "en": "Communication Cables",
+      "fa": "کابل‌های ارتباطی"
+    },
+    "description": {
+      "en": "High-speed fiber optic cable for data transmission networks.",
+      "fa": "کابل فیبر نوری سرعت بالا برای شبکه‌های انتقال داده."
+    },
+    "price": "$1,750",
+    "image": "/src/assets/images/products/fiber-optic-cable.jpg",
+    "features": {
+      "en": [
+        "High bandwidth",
+        "EMI immune",
+        "Long distance transmission",
+        "Secure data transfer"
+      ],
+      "fa": [
+        "پهنای باند بالا",
+        "مصون در برابر EMI",
+        "انتقال از راه دور",
+        "انتقال داده امن"
+      ]
+    },
+    "applications": {
+      "en": ["Data centers", "Telecommunications", "Network infrastructure"],
+      "fa": ["مراکز داده", "مخابرات", "زیرساخت شبکه"]
+    }
+  },
+  {
+    "id": 11,
+    "name": {
+      "en": "Coaxial Cable (CX-11)",
+      "fa": "کابل کواکسیال (CX-11)"
+    },
+    "category": {
+      "en": "Communication Cables",
+      "fa": "کابل‌های ارتباطی"
+    },
+    "description": {
+      "en": "High-performance coaxial cable for data and signal transmission.",
+      "fa": "کابل کواکسیال با عملکرد بالا برای انتقال داده و سیگنال."
+    },
+    "price": "$450",
+    "image": "/src/assets/images/products/coaxial-cable.jpg",
+    "features": {
+      "en": [
+        "75 ohm impedance",
+        "Shielded construction",
+        "Low signal loss",
+        "Broadband compatible"
+      ],
+      "fa": [
+        "امپدانس 75 اهم",
+        "ساختار شیلد شده",
+        "اتلاف سیگنال کم",
+        "سازگار با پهنای باند"
+      ]
+    },
+    "applications": {
+      "en": ["Cable TV", "Internet", "Security systems"],
+      "fa": ["تلویزیون کابلی", "اینترنت", "سیستم‌های امنیتی"]
+    }
+  },
+  {
+    "id": 12,
+    "name": {
+      "en": "Solar Cable (SC-12)",
+      "fa": "کابل خورشیدی (SC-12)"
+    },
+    "category": {
+      "en": "Specialty Cables",
+      "fa": "کابل‌های تخصصی"
     },
     "description": {
       "en": "Specialized cable for solar panel connections with high UV resistance.",
       "fa": "کابل مخصوص سیستم‌های خورشیدی با مقاومت بالا در برابر UV."
     },
+    "price": "$2,750",
+    "image": "/src/assets/images/products/solar-cable.jpg",
     "features": {
       "en": [
         "UV resistant",
@@ -189,6 +416,216 @@
     "applications": {
       "en": ["Solar farms", "Rooftop systems", "Renewable projects"],
       "fa": ["نیروگاه خورشیدی", "سیستم‌های پشت‌بامی", "پروژه‌های انرژی پاک"]
+    }
+  },
+  {
+    "id": 13,
+    "name": {
+      "en": "Marine Cable (MC-13)",
+      "fa": "کابل دریایی (MC-13)"
+    },
+    "category": {
+      "en": "Specialty Cables",
+      "fa": "کابل‌های تخصصی"
+    },
+    "description": {
+      "en": "Specialized cable for marine and offshore applications.",
+      "fa": "کابل تخصصی برای کاربردهای دریایی و فراساحلی."
+    },
+    "price": "$3,850",
+    "image": "/src/assets/images/products/marine-cable.jpg",
+    "features": {
+      "en": [
+        "Waterproof construction",
+        "Salt water resistant",
+        "UV stabilized",
+        "Flame retardant"
+      ],
+      "fa": [
+        "ساختار ضد آب",
+        "مقاوم در برابر آب شور",
+        "پایداری در برابر UV",
+        "ضد شعله"
+      ]
+    },
+    "applications": {
+      "en": ["Ships", "Offshore platforms", "Marine equipment"],
+      "fa": ["کشتی‌ها", "سکوهای فراساحلی", "تجهیزات دریایی"]
+    }
+  },
+  {
+    "id": 14,
+    "name": {
+      "en": "Mining Cable (MN-14)",
+      "fa": "کابل معدنی (MN-14)"
+    },
+    "category": {
+      "en": "Specialty Cables",
+      "fa": "کابل‌های تخصصی"
+    },
+    "description": {
+      "en": "Heavy-duty cable specifically designed for mining operations.",
+      "fa": "کابل سنگین مخصوص طراحی شده برای عملیات معدنی."
+    },
+    "price": "$4,150",
+    "image": "/src/assets/images/products/mining-cable.jpg",
+    "features": {
+      "en": [
+        "Flame retardant",
+        "Abrasion resistant",
+        "Flexible in cold temperatures",
+        "Mechanical protection"
+      ],
+      "fa": [
+        "ضد شعله",
+        "مقاوم در برابر سایش",
+        "انعطاف‌پذیر در دمای پایین",
+        "محافظت مکانیکی"
+      ]
+    },
+    "applications": {
+      "en": ["Underground mining", "Excavation equipment", "Mining machinery"],
+      "fa": ["استخراج زیرزمینی", "تجهیزات حفاری", "ماشین‌آلات معدنی"]
+    }
+  },
+  {
+    "id": 15,
+    "name": {
+      "en": "Railway Cable (RW-15)",
+      "fa": "کابل راه‌آهن (RW-15)"
+    },
+    "category": {
+      "en": "Specialty Cables",
+      "fa": "کابل‌های تخصصی"
+    },
+    "description": {
+      "en": "Specialized cable for railway and transportation systems.",
+      "fa": "کابل تخصصی برای سیستم‌های راه‌آهن و حمل و نقل."
+    },
+    "price": "$2,950",
+    "image": "/src/assets/images/products/railway-cable.jpg",
+    "features": {
+      "en": [
+        "Low smoke zero halogen",
+        "Fire resistant",
+        "Vibration resistant",
+        "Long service life"
+      ],
+      "fa": [
+        "دود بدون هالوژن",
+        "مقاوم در برابر آتش",
+        "مقاوم در برابر ارتعاش",
+        "طول عمر خدمات طولانی"
+      ]
+    },
+    "applications": {
+      "en": ["Railway signaling", "Train lighting", "Station equipment"],
+      "fa": ["سیگنالینگ راه‌آهن", "نورپردازی قطار", "تجهیزات ایستگاه"]
+    }
+  },
+  {
+    "id": 16,
+    "name": {
+      "en": "Flexible Control Cable (FC-16)",
+      "fa": "کابل کنترل انعطاف‌پذیر (FC-16)"
+    },
+    "category": {
+      "en": "Industrial Cables",
+      "fa": "کابل‌های صنعتی"
+    },
+    "description": {
+      "en": "Highly flexible cable for applications requiring frequent movement.",
+      "fa": "کابل بسیار انعطاف‌پذیر برای کاربردهای نیازمند حرکت مکرر."
+    },
+    "price": "$1,150",
+    "image": "/src/assets/images/products/flexible-cable.jpg",
+    "features": {
+      "en": [
+        "High flexibility",
+        "Abrasion resistant",
+        "Fine stranded conductors",
+        "Dynamic applications"
+      ],
+      "fa": [
+        "انعطاف‌پذیری بالا",
+        "مقاوم در برابر سایش",
+        "هادی رشته‌ای نرم",
+        "کاربردهای دینامیکی"
+      ]
+    },
+    "applications": {
+      "en": ["Robotics", "Moving machinery", "Portable equipment"],
+      "fa": ["رباتیک", "ماشین‌آلات متحرک", "تجهیزات قابل حمل"]
+    }
+  },
+  {
+    "id": 17,
+    "name": {
+      "en": "Industrial Power Cable (IP-17)",
+      "fa": "کابل برق صنعتی (IP-17)"
+    },
+    "category": {
+      "en": "Industrial Cables",
+      "fa": "کابل‌های صنعتی"
+    },
+    "description": {
+      "en": "Heavy-duty power cable for industrial machinery and equipment.",
+      "fa": "کابل برق سنگین برای ماشین‌آلات و تجهیزات صنعتی."
+    },
+    "price": "$1,950",
+    "image": "/src/assets/images/products/industrial-power-cable.jpg",
+    "features": {
+      "en": [
+        "Oil resistant",
+        "Chemical resistant",
+        "High temperature rating",
+        "Reinforced construction"
+      ],
+      "fa": [
+        "مقاوم در برابر روغن",
+        "مقاوم در برابر مواد شیمیایی",
+        "درجه حرارت بالا",
+        "ساختار تقویت شده"
+      ]
+    },
+    "applications": {
+      "en": ["Manufacturing plants", "Heavy machinery", "Industrial equipment"],
+      "fa": ["کارخانه‌های تولیدی", "ماشین‌آلات سنگین", "تجهیزات صنعتی"]
+    }
+  },
+  {
+    "id": 18,
+    "name": {
+      "en": "Armored Building Cable (AB-18)",
+      "fa": "کابل ساختمانی زره‌دار (AB-18)"
+    },
+    "category": {
+      "en": "Building Cables",
+      "fa": "کابل‌های ساختمانی"
+    },
+    "description": {
+      "en": "Armored building cable for underground installations and mechanical protection.",
+      "fa": "کابل ساختمانی زره‌دار برای نصب‌های زیرزمینی و محافظت مکانیکی."
+    },
+    "price": "$1,250",
+    "image": "/src/assets/images/products/armored-building-cable.jpg",
+    "features": {
+      "en": [
+        "Steel armor",
+        "Moisture resistant",
+        "UV protected",
+        "Crush resistant"
+      ],
+      "fa": [
+        "زره فولادی",
+        "مقاوم در برابر رطوبت",
+        "محافظت UV",
+        "مقاوم در برابر خرد شدن"
+      ]
+    },
+    "applications": {
+      "en": ["Underground wiring", "Industrial buildings", "Outdoor installations"],
+      "fa": ["سیم‌کشی زیرزمینی", "ساختمان‌های صنعتی", "نصب در فضای باز"]
     }
   }
 ]
