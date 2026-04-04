@@ -131,6 +131,9 @@ export default function HeroSection() {
 
         {/* IMAGE SIDE */}
         <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
           style={{ x: manX, y: manY, translateY: scrollMove }}
           className="relative flex justify-center"
           aria-hidden="true"
@@ -138,12 +141,23 @@ export default function HeroSection() {
           {/* subtle gold glow */}
           <motion.div
             animate={{ scale: [1, 1.15, 1], opacity: [0.25, 0.45, 0.25] }}
-            transition={{ duration: 6, repeat: Infinity }}
+            transition={{ duration: 6, repeat: Infinity, ease: [0.25, 0.1, 0.25, 1] }}
             className="absolute w-[350px] h-[350px] bg-gradient-to-tr from-[#FFD700]/20 via-[#D4AF37]/20 to-[#B8860B]/20 rounded-full blur-[130px]"
           />
-          <img
+          <motion.img
             src="/src/assets/images/men.png"
             loading="lazy"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ 
+              opacity: 1, 
+              scale: [1, 1.02, 1],
+              y: [0, -2, 0]
+            }}
+            transition={{ 
+              opacity: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] },
+              scale: { duration: 4, repeat: Infinity, ease: [0.25, 0.1, 0.25, 1] },
+              y: { duration: 3, repeat: Infinity, ease: [0.25, 0.1, 0.25, 1] }
+            }}
             className="relative z-20 max-w-[400px] drop-shadow-[0_40px_60px_rgba(0,0,0,0.25)]"
             alt="Factory worker"
           />

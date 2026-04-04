@@ -40,60 +40,103 @@ export default function Products() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+    <main
       className={`space-y-12 pb-20 ${isRTL ? "text-right" : "text-left"}`}
     >
-      {/* Header */}
+      {/* Hero Header */}
       <header
-        className={`space-y-4 border-[#D4AF37] ${
-          isRTL ? "border-r-4 pr-6" : "border-l-4 pl-6"
-        }`}
+        className="space-y-4 border-[#D4AF37]"
+        aria-label="Products page introduction"
       >
-        <p className="text-[10px] font-black tracking-[0.4em] text-[#D4AF37] uppercase">
-          {t.eyebrow}
-        </p>
-        <h2 className="text-4xl font-black tracking-tight text-[#374151] sm:text-5xl">
-          {t.title}
-        </h2>
-        <p className="max-w-2xl text-base leading-relaxed text-gray-500 sm:text-lg font-medium">
-          {t.subtitle}
-        </p>
+        <div className={`container mx-auto px-6 ${isRTL ? "border-r-4 pr-6" : "border-l-4 pl-6"}`}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="space-y-4"
+          >
+            <p className="text-[10px] font-black tracking-[0.4em] text-[#D4AF37] uppercase">
+              {t.eyebrow}
+            </p>
+            <h2 className="text-4xl font-black tracking-tight text-[#374151] sm:text-5xl">
+              {t.title}
+            </h2>
+            <p className="max-w-2xl text-base leading-relaxed text-gray-500 sm:text-lg font-medium">
+              {t.subtitle}
+            </p>
+          </motion.div>
+        </div>
       </header>
 
-      {/* Filters */}
-      <ProductFilters
-        filterOptions={filterOptions}
-        activeFilter={activeFilter}
-        setActiveFilter={setActiveFilter}
-        isRTL={isRTL}
-      />
+      {/* Filters Section */}
+      <section className="container mx-auto px-6" aria-label="Product filters">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <ProductFilters
+            filterOptions={filterOptions}
+            activeFilter={activeFilter}
+            setActiveFilter={setActiveFilter}
+            isRTL={isRTL}
+          />
+        </motion.div>
+      </section>
 
       {/* Product Grid */}
-      <motion.section layout className="grid gap-8 md:grid-cols-2">
-        <AnimatePresence mode="popLayout">
-          {filteredItems.map((category) => (
-            <ProductCard
-              key={
-                typeof category.name === "object"
-                  ? category.name[lang]
-                  : category.name
-              }
-              category={category}
-              isRTL={isRTL}
-              lang={lang}
-              isHighlighted={
-                highlightedCategory &&
-                highlightedCategory ===
-                  (typeof category.name === "object"
+      <section className="container mx-auto px-6" aria-label="Product listings">
+        <motion.div
+          layout
+          className="grid gap-8 md:grid-cols-2"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <AnimatePresence mode="popLayout">
+            {filteredItems.map((category) => (
+              <ProductCard
+                key={
+                  typeof category.name === "object"
                     ? category.name[lang]
-                    : category.name)
-              }
-            />
-          ))}
-        </AnimatePresence>
-      </motion.section>
-    </motion.div>
+                    : category.name
+                }
+                category={category}
+                isRTL={isRTL}
+                lang={lang}
+                isHighlighted={
+                  highlightedCategory &&
+                  highlightedCategory ===
+                    (typeof category.name === "object"
+                      ? category.name[lang]
+                      : category.name)
+                }
+              />
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </section>
+
+      {/* Scroll to Top Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.8 }}
+        className={`fixed bottom-8 z-50 ${isRTL ? "right-8" : "left-8"}`}
+        aria-hidden="true"
+      >
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="w-12 h-12 bg-[#D4AF37] text-white rounded-full shadow-lg flex items-center justify-center"
+          aria-label="Scroll to top"
+        >
+          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+            <path d="M18 15l-6-6-6 6" />
+          </svg>
+        </motion.button>
+      </motion.div>
+    </main>
   );
 }

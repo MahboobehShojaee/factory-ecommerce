@@ -1,40 +1,14 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext.jsx";
+import { projects } from "../data/projects.js";
 
 export default function ProjectsSection() {
   const { dict, isRTL } = useLanguage();
   const t = dict?.projects || {};
 
-  // داده‌های نمونه برای پروژه‌ها (بهتر است این‌ها را در فایل JSON ترجمه قرار دهی)
-  const projectList = t.items || [
-    {
-      id: 1,
-      title: isRTL ? "پروژه آبرسانی خلیج فارس" : "Persian Gulf Water Project",
-      category: "Industrial Solution",
-      desc: isRTL
-        ? "تامین بیش از ۵۰۰ کیلومتر کابل فشار قوی."
-        : "Supply of 500+ km of high voltage cables.",
-    },
-    {
-      id: 2,
-      title: isRTL ? "نیروگاه خورشیدی کرمان" : "Kerman Solar Plant",
-      category: "Energy Sector",
-      desc: isRTL
-        ? "اتصالات تخصصی پنل‌های فتوولتائیک."
-        : "Specialized PV panel connections.",
-    },
-    {
-      id: 3,
-      title: isRTL ? "مجتمع تجاری ستاره" : "Setareh Commercial Complex",
-      category: "Building Construction",
-      desc: isRTL
-        ? "سیستم هوشمند توزیع برق داخلی."
-        : "Smart internal power distribution.",
-    },
-  ];
-
   return (
-    <section className="py-24 bg-[#F8F9FA]">
+    <section className="py-24 bg-[#F8F9FA]" id="projects">
       <div className="container mx-auto px-6">
         {/* هدر بخش - هماهنگ با جهت زبان */}
         <div
@@ -58,73 +32,81 @@ export default function ProjectsSection() {
           >
             {isRTL
               ? "کابل‌های ستاره کرمان، رگ‌های حیاتی بزرگترین پروژه‌های صنعتی و ساختمانی کشور."
-              : "Setareh Kerman cables, the vital veins of the country's largest industrial and construction projects."}
+              : "Setareh Kerman cables, vital veins of country's largest industrial and construction projects."}
           </p>
         </div>
 
         {/* گرید پروژه‌ها */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projectList.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -10 }}
-              className="group relative h-[480px] overflow-hidden rounded-[40px] bg-[#374151] shadow-2xl"
-            >
-              {/* تصویر پروژه - با فیلتر Grayscale که در هاور رنگی می‌شود */}
-              <img
-                src={`https://images.unsplash.com/photo-1581094120979-af4b61488a2c?auto=format&fit=crop&q=80&w=800`}
-                className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
-                alt={project.title}
-              />
-
-              {/* لایه گرادینت برای خوانایی متن */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/20 to-transparent opacity-90" />
-
-              {/* محتوا */}
-              <div
-                className={`absolute inset-0 p-10 flex flex-col justify-end ${isRTL ? "text-right" : "text-left"}`}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {projects.map((project, index) => {
+            const title = project.title[isRTL ? "fa" : "en"];
+            const shortDescription = project.shortDescription[isRTL ? "fa" : "en"];
+            const altText = project.alt[isRTL ? "fa" : "en"];
+            
+            return (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -10 }}
+                className="group relative h-[400px] sm:h-[480px] overflow-hidden rounded-[40px] bg-[#374151] shadow-2xl"
               >
-                <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest mb-2 block">
-                  {project.category}
-                </span>
-                <h3 className="text-2xl font-black text-white mb-4 leading-tight">
-                  {project.title}
-                </h3>
+                {/* تصویر پروژه - با فیلتر Grayscale که در هاور رنگی می‌شود */}
+                <img
+                  src={project.image}
+                  className="absolute inset-0 h-full w-full object-cover opacity-60 grayscale transition-all duration-700 group-hover:grayscale-0 group-hover:scale-110"
+                  alt={altText}
+                />
 
-                {/* توضیحات با انیمیشن ارتفاع */}
-                <div className="h-0 overflow-hidden group-hover:h-12 transition-all duration-500 ease-in-out">
-                  <p className="text-gray-300 text-xs font-medium leading-relaxed">
-                    {project.desc}
-                  </p>
-                </div>
+                {/* لایه گرادینت برای خوانایی متن */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#111827] via-[#111827]/20 to-transparent opacity-90" />
 
+                {/* محتوا */}
                 <div
-                  className={`mt-6 flex items-center justify-between ${isRTL ? "flex-row-reverse" : ""}`}
+                  className={`absolute inset-0 p-10 flex flex-col justify-end ${isRTL ? "text-right" : "text-left"}`}
                 >
-                  <div className="h-[1px] flex-grow bg-white/20" />
+                  <span className="text-[10px] font-bold text-[#D4AF37] uppercase tracking-widest mb-2 block">
+                    {project.category}
+                  </span>
+                  <h3 className="text-2xl font-black text-white mb-4 leading-tight">
+                    {title}
+                  </h3>
+
+                  {/* توضیحات با انیمیشن ارتفاع */}
+                  <div className="h-0 overflow-hidden group-hover:h-12 transition-all duration-500 ease-in-out">
+                    <p className="text-gray-300 text-xs font-medium leading-relaxed">
+                      {shortDescription}
+                    </p>
+                  </div>
+
                   <div
-                    className={`h-11 w-11 rounded-full border border-white/30 flex items-center justify-center text-white group-hover:bg-[#D4AF37] group-hover:border-[#D4AF37] transition-all duration-500 ${isRTL ? "mr-4" : "ml-4"}`}
+                    className={`mt-6 flex items-center justify-between ${isRTL ? "flex-row-reverse" : ""}`}
                   >
-                    <svg
-                      width="20"
-                      height="20"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.5"
-                      viewBox="0 0 24 24"
-                      className={isRTL ? "rotate-180" : ""}
+                    <div className="h-[1px] flex-grow bg-white/20" />
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      className={`h-12 w-12 min-w-[48px] rounded-full border border-white/30 flex items-center justify-center text-white group-hover:bg-[#D4AF37] group-hover:border-[#D4AF37] transition-all duration-500 ${isRTL ? "mr-4" : "ml-4"} focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-transparent`}
+                      aria-label={`View ${title} details`}
                     >
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
+                      <svg
+                        width="20"
+                        height="20"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        viewBox="0 0 24 24"
+                        className={isRTL ? "rotate-180" : ""}
+                      >
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </Link>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
