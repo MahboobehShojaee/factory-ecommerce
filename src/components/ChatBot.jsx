@@ -11,6 +11,7 @@ export default function ChatBot() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
 
   const messagesEndRef = useRef(null);
   const chatRef = useRef(null);
@@ -48,8 +49,10 @@ export default function ChatBot() {
   const startVoice = () => {
     const SpeechRecognition =
       window.SpeechRecognition || window.webkitSpeechRecognition;
-    if (!SpeechRecognition)
-      return alert("مرورگر شما از ضبط صدا پشتیبانی نمی‌کند.");
+    if (!SpeechRecognition) {
+      setStatusMessage(lang === "fa" ? "مرورگر شما از ضبط صدا پشتیبانی نمی کند." : "Voice input is not supported in this browser.");
+      return;
+    }
 
     const recognition = new SpeechRecognition();
     recognition.lang = lang === "fa" ? "fa-IR" : "en-US";
@@ -72,7 +75,7 @@ export default function ChatBot() {
       console.error("Voice Error:", e.error);
       setIsListening(false);
       if (e.error === "not-allowed")
-        alert("لطفاً دسترسی به میکروفون را در مرورگر تایید کنید.");
+        setStatusMessage(lang === "fa" ? "لطفا دسترسی به میکروفون را تایید کنید." : "Please allow microphone access.");
     };
 
     recognition.onend = () => setIsListening(false);
@@ -122,8 +125,9 @@ export default function ChatBot() {
   const sendToApi = async (allMessages) => {
     setIsLoading(true);
     try {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
       const res = await fetch(
-        import.meta.env.VITE_API_URL || "http://localhost:5000/chat",
+        `${apiBase}/chat`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -182,7 +186,7 @@ export default function ChatBot() {
               </button>
             </div>
 
-            <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30">
+            <div className="flex-1 p-4 overflow-y-auto space-y-4 bg-gray-50/30" aria-live="polite">
               {messages.map((m, i) => (
                 <div
                   key={i}
@@ -216,6 +220,7 @@ export default function ChatBot() {
                 onChange={(e) => setInput(e.target.value)}
                 className="flex-1 bg-gray-100 border-none rounded-xl px-4 py-2 text-sm focus:ring-1 focus:ring-gray-300 outline-none"
                 placeholder={t.placeholder}
+                aria-label={lang === "fa" ? "پیام خود را بنویسید" : "Type your message"}
               />
 
               {/* دکمه میکروفون با تغییر وضعیت بصری */}
@@ -223,6 +228,7 @@ export default function ChatBot() {
                 type="button"
                 onClick={startVoice}
                 className={`${isListening ? "text-red-500 scale-125" : "text-gray-400"} transition-all duration-300 hover:text-gray-600`}
+                aria-label={lang === "fa" ? "ضبط صدا" : "Start voice input"}
               >
                 <svg
                   width="20"
@@ -235,7 +241,7 @@ export default function ChatBot() {
                 </svg>
               </button>
 
-              <label className="cursor-pointer text-gray-400 hover:text-gray-600">
+              <label className="cursor-pointer text-gray-400 hover:text-gray-600" aria-label={lang === "fa" ? "آپلود تصویر" : "Upload image"}>
                 <svg
                   width="20"
                   height="20"
@@ -257,6 +263,7 @@ export default function ChatBot() {
               <button
                 type="submit"
                 className="text-gray-500 hover:text-gray-800"
+                aria-label={lang === "fa" ? "ارسال پیام" : "Send message"}
               >
                 <svg
                   width="22"
@@ -274,6 +281,7 @@ export default function ChatBot() {
             key="chat-toggle"
             onClick={() => setIsOpen(true)}
             className="w-14 h-14 bg-[#374151] text-white rounded-full flex items-center justify-center shadow-xl border-2 border-white/20"
+            aria-label={lang === "fa" ? "باز کردن چت" : "Open chat assistant"}
           >
             <svg
               width="26"
@@ -288,6 +296,7 @@ export default function ChatBot() {
           </motion.button>
         )}
       </AnimatePresence>
+      {statusMessage ? <p className="sr-only">{statusMessage}</p> : null}
     </div>
   );
 }

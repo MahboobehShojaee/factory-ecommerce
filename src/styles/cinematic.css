@@ -1,0 +1,172 @@
+/* ============================================================
+   Design system — final polish tokens (calm, consistent)
+   ============================================================ */
+
+/* Radius: 16px base → 24px lg */
+:root {
+  --ds-radius: 1rem;
+  --ds-radius-lg: 1.5rem;
+  --ds-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.04);
+  --ds-shadow-hover: 0 4px 16px rgb(0 0 0 / 0.06);
+  --ds-transition: 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* --- Layout rhythm --- */
+.section-spacing {
+  @apply py-10 sm:py-16 md:py-24;
+}
+
+.section-spacing-sm {
+  @apply py-8 sm:py-12 md:py-20;
+}
+
+.page-container {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+/* --- Surfaces --- */
+.ds-card {
+  @apply bg-white border border-gray-100 rounded-2xl lg:rounded-3xl;
+  box-shadow: var(--ds-shadow);
+  transition: border-color var(--ds-transition), box-shadow var(--ds-transition);
+}
+
+.ds-card:hover {
+  border-color: rgb(229 231 235 / 0.95);
+  box-shadow: var(--ds-shadow-hover);
+}
+
+.ds-card-static:hover {
+  box-shadow: var(--ds-shadow);
+  border-color: rgb(243 244 246);
+}
+
+.ds-card-dark {
+  @apply bg-[#374151] text-white border border-white/10 rounded-2xl lg:rounded-3xl;
+  box-shadow: var(--ds-shadow);
+}
+
+.ds-stat-card {
+  @apply ds-card ds-card-static p-5 sm:p-6;
+}
+
+/* --- Product / category cards --- */
+.product-card-premium,
+.category-card-premium {
+  @apply ds-card relative overflow-hidden;
+}
+
+.product-card-premium:hover,
+.category-card-premium:hover {
+  @apply border-[#D4AF37]/15;
+  box-shadow: var(--ds-shadow-hover);
+}
+
+/* --- Buttons (single CTA hierarchy) --- */
+.btn-cinematic {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl font-bold uppercase tracking-[0.14em] text-[10px] sm:text-[11px] min-h-[44px] px-5 sm:px-6;
+  transition: background-color var(--ds-transition), border-color var(--ds-transition), color var(--ds-transition);
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]/80 focus-visible:ring-offset-2;
+}
+
+.btn-cinematic-gold {
+  @apply btn-cinematic bg-[#D4AF37] text-white hover:bg-[#B8860B];
+}
+
+.btn-cinematic-dark {
+  @apply btn-cinematic bg-[#374151] text-white hover:bg-[#2d3748];
+}
+
+.btn-cinematic-ghost {
+  @apply btn-cinematic bg-white border border-gray-200 text-[#374151] hover:border-gray-300 hover:bg-gray-50/80;
+}
+
+/* --- Footer --- */
+.cinematic-footer {
+  @apply bg-[#374151] text-white border-t border-white/[0.06];
+}
+
+/* --- Hero --- */
+.hero-cinematic {
+  @apply relative overflow-hidden rounded-2xl lg:rounded-3xl bg-white border border-gray-100;
+  box-shadow: var(--ds-shadow);
+}
+
+/* --- Dividers --- */
+.section-divider {
+  @apply h-px w-full max-w-4xl mx-auto bg-gray-200/80;
+}
+
+/* --- Media --- */
+.media-cover {
+  @apply w-full h-full object-cover;
+}
+
+.media-frame {
+  @apply relative overflow-hidden bg-[#374151];
+}
+
+.media-frame-aspect {
+  @apply media-frame aspect-[4/3];
+}
+
+/* --- Typography helpers --- */
+.text-balance {
+  text-wrap: balance;
+}
+
+.eyebrow-label {
+  @apply text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.22em] text-[#D4AF37];
+}
+
+.prose-calm {
+  @apply text-gray-500 leading-relaxed text-[0.9375rem] sm:text-base;
+}
+
+/* --- Header --- */
+.header-scrolled nav {
+  @apply py-2.5;
+  box-shadow: var(--ds-shadow-hover);
+}
+
+.header-scrolled {
+  @apply top-3 sm:top-4;
+}
+
+/* --- Scroll indicator (static, no bounce) --- */
+.scroll-indicator {
+  @apply flex flex-col items-center gap-1.5 text-gray-400;
+}
+
+.scroll-indicator-line {
+  @apply w-px h-6 bg-gray-300;
+}
+
+/* --- Cart --- */
+.cart-drawer-premium {
+  @apply bg-white;
+  box-shadow: -4px 0 24px rgb(0 0 0 / 0.08);
+}
+
+/* --- Forms (align legacy forms to system) --- */
+.ds-form-panel {
+  @apply ds-card p-6 sm:p-8;
+}
+
+/* --- Legacy alias: map old glass to calmer surface --- */
+.glass-panel {
+  @apply ds-card;
+}
+
+.glass-card {
+  @apply ds-card;
+}
+
+/* --- Carousel --- */
+.carousel-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.carousel-scroll::-webkit-scrollbar {
+  display: none;
+}

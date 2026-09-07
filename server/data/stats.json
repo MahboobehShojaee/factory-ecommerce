@@ -1,0 +1,14 @@
+{
+  "en": [
+    { "value": "40+", "label": "Years of Expertise" },
+    { "value": "500+", "label": "Industrial Projects" },
+    { "value": "3", "label": "International Certs" },
+    { "value": "10k+", "label": "Installed Equip" }
+  ],
+  "fa": [
+    { "value": "۴۰+", "label": "سال تجربه تخصصی" },
+    { "value": "۵۰۰+", "label": "پروژه صنعتی" },
+    { "value": "۳", "label": "گواهینامه بین‌المللی" },
+    { "value": "۱۰هزار+", "label": "تجهیزات نصب شده" }
+  ]
+}

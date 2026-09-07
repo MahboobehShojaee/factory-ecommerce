@@ -1,12 +1,15 @@
+@import './styles/globals.css';
+@import './styles/cinematic.css';
+@import './styles/animations.css';
+@import './styles/accessibility.css';
+@import './styles/pdf.css';
+@import './styles/technicalSpecs.css';
+@import './styles/article.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Import modular styles */
-@import './styles/globals.css';
-@import './styles/animations.css';
-
-/* انیمیشن‌ها */
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
@@ -16,57 +19,58 @@
   animation: spin-slow 20s linear infinite;
 }
 
-@keyframes gold-shimmer {
-  0% { background-position: -200px 0; }
-  100% { background-position: 200px 0; }
-}
-
-.animate-gold-shimmer {
-  background-size: 200% auto;
-  animation: gold-shimmer 4s linear infinite;
-}
-
-/* کامپوننت‌های شیشه‌ای */
-.glass-panel {
-  @apply bg-white/70 border border-gray-200/50 backdrop-blur-2xl rounded-[40px] shadow-sm;
-}
-
-.glass-card {
-  @apply bg-white border border-gray-100 backdrop-blur-md rounded-[30px] shadow-md shadow-gray-200/50;
-}
-
-/* دکمه‌ها */
+/* Legacy buttons — aligned with design system (no glow) */
 .btn-primary {
-  @apply inline-flex items-center justify-center px-8 py-3 rounded-full bg-[#1A1A1A] text-sm font-bold tracking-wide text-white shadow-[0_0_20px_rgba(212,175,55,0.2)] hover:shadow-[0_0_35px_rgba(212,175,55,0.4)] hover:bg-[#D4AF37] hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#D4AF37];
+  @apply btn-cinematic-gold px-8 normal-case tracking-wide text-sm;
 }
 
 .btn-outline {
-  @apply inline-flex items-center justify-center px-8 py-3 rounded-full border-2 border-gray-200 text-sm font-bold tracking-wide text-[#2D2D2D] hover:bg-gray-50 hover:border-[#D4AF37] transition-colors focus:outline-none focus:ring-2 focus:ring-[#D4AF37];
+  @apply btn-cinematic-ghost px-8 normal-case tracking-wide text-sm;
 }
 
-/* آمار و هایلایت‌ها */
 .stats-highlight {
-  @apply bg-[#D4AF37] text-white rounded-2xl p-4 shadow-lg shadow-[#D4AF37]/20;
+  @apply bg-[#D4AF37] text-white rounded-xl p-4;
+  box-shadow: var(--ds-shadow);
 }
 
 .fade-soft {
-  @apply transition-all duration-500 ease-in-out;
+  transition: opacity var(--ds-transition), transform var(--ds-transition);
 }
 
-/* فونت‌ها */
-.font-fa {
-  font-family: "Vazirmatn", sans-serif;
-}
-
-.font-en {
-  font-family: "Inter", sans-serif;
-}
-
-/* استایل مخصوص بخش Hero */
 .hero-bg-overlay {
   background: linear-gradient(
     to bottom,
-    rgba(249, 250, 251, 0.7),
-    rgba(249, 250, 251, 0.9)
+    rgba(249, 250, 251, 0.75),
+    rgba(249, 250, 251, 0.92)
   );
+}
+
+/* Touch targets: interactive controls only (not every inline link) */
+@media (max-width: 768px) {
+  button,
+  [role="button"],
+  .btn-cinematic,
+  .btn-primary,
+  .btn-outline,
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

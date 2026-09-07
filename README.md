@@ -1,154 +1,237 @@
-# Setareh Kerman Wire & Cable Factory
+# Setareh Kerman Factory Website
 
-A modern, responsive React application for Setareh Kerman Wire & Cable Factory, featuring bilingual support (Persian/English), advanced animations, and comprehensive accessibility features.
+Production-focused bilingual (Persian + English) React/Vite frontend for Setareh Kerman Wire & Cable, with RTL support, luxury dark-gold design language, SEO-first routing, and a backend-ready data architecture.
 
-## 🚀 Features
+## 🚀 Features & Improvements
 
-### Core Features
-- **Bilingual Support**: Full Persian (RTL) and English (LTR) language support
-- **Responsive Design**: Optimized for mobile, tablet, desktop, and large screens
-- **Modern UI**: Beautiful animations and glassmorphism effects
-- **SEO Optimized**: Enhanced meta tags, semantic HTML, and accessibility features
-- **Performance**: Optimized loading with lazy loading and efficient animations
+### Performance & Image Optimization
+- **High-Performance Image Component** (`src/shared/ui/Image.jsx`)
+  - Lazy loading with Intersection Observer
+  - WebP support with automatic fallbacks
+  - Proper srcset and sizes for responsive images
+  - Blur-up loading effect and error handling
+  - Accessibility support and SEO optimization
 
-### Technical Stack
-- **React 18+** with functional components and hooks
-- **Vite** for fast development and building
-- **TailwindCSS** for utility-first styling
-- **Framer Motion** for smooth animations
-- **React Router** for navigation
-- **React Helmet Async** for SEO management
+### Cart System & State Management
+- **Complete Shopping Cart** using Zustand
+  - Add/remove/update quantity functionality
+  - localStorage persistence
+  - Cart icon with real-time item count
+  - Beautiful Cart Drawer with Framer Motion animations
+  - Dedicated Cart page (`/cart`)
+  - Bilingual support (fa/en) and RTL compatibility
+  - Structure prepared for Wishlist and Comparison features
 
-### Project Structure
-```
-src/
-├── components/          # Reusable UI components
-│   ├── home/           # Home page specific components
-│   ├── about/          # About page components
-│   ├── contact/        # Contact page components
-│   └── products/      # Products page components
-├── context/            # React context providers
-├── hooks/              # Custom React hooks
-├── pages/              # Page components
-├── styles/             # Modular CSS files
-├── utils/              # Utility functions and constants
-└── Constants/          # Application constants
-```
+### Form Handling & Validation
+- **Modern Form System** with react-hook-form + Zod
+  - Strong type-safe validation schemas
+  - Bilingual error messages (Persian + English)
+  - Real-time validation with modern UX
+  - Reusable form components:
+    - `FormInput`, `FormTextarea`, `FormSelect`, `ErrorMessage`
+  - Loading, success, and error states
+  - Refactored ContactForm with comprehensive validation
 
-## 🛠 Development
+### Mobile Experience & Responsiveness
+- **Enhanced Mobile UX** across the entire website
+  - Improved typography scale and spacing on mobile
+  - Larger touch targets and better button sizes
+  - Mobile-optimized navigation and cart drawer
+  - Responsive product grid layout
+  - Better hero sections and footer layout
+  - Fixed layout shifts and overflow issues
+  - Maintained luxury dark + gold aesthetic
 
-### Prerequisites
-- Node.js 16+
-- npm or yarn
+### Performance Optimizations
+- **React Performance** improvements
+  - React.memo, useMemo, and useCallback optimizations
+  - Optimized ProductGrid and list components
+  - Intelligent route prefetching for important pages
+  - Improved Vite config with granular chunk splitting
 
-### Installation
+### Animation & Accessibility
+- **Motion Optimization** with reduced motion support
+  - Respects `prefers-reduced-motion` settings
+  - Optimized Framer Motion animations
+  - Motion configuration utilities for consistent animations
+  - Enhanced accessibility (a11y) standards
+
+### Bundle Optimization
+- **Improved Bundle Splitting**
+  - Separate chunks for PDF functionality
+  - Better manualChunks configuration in Vite
+  - Optimized import strategies for heavy dependencies
+
+## Tech Stack
+
+- **Core**: React 18 + Vite 5
+- **Styling**: Tailwind CSS + Framer Motion
+- **Routing**: React Router + React Helmet Async
+- **Data**: TanStack Query + Axios
+- **State**: Zustand (Cart System)
+- **Forms**: react-hook-form + Zod + @hookform/resolvers
+- **Performance**: React.memo, useMemo, useCallback optimizations
+- **Images**: Custom high-performance Image component
+- **Animations**: Framer Motion with reduced motion support
+
+## Quick Start
+
 ```bash
 npm install
-```
-
-### Development Server
-```bash
 npm run dev
 ```
 
-### Build for Production
+Build and preview:
+
 ```bash
 npm run build
-```
-
-### Preview Production Build
-```bash
 npm run preview
 ```
 
-## 🎨 Design System
+## Environment Variables
 
-### Colors
-- Primary: `#374151` (Dark Gray)
-- Secondary: `#D4AF37` (Gold)
-- Background: `#F8F9FA` (Light Gray)
-- White: `#FFFFFF`
-
-### Typography
-- English: Inter font family
-- Persian: Vazirmatn font family
-
-### Components
-- **Glass Panel**: Semi-transparent panels with backdrop blur
-- **Buttons**: Primary and secondary variants with hover effects
-- **Cards**: Rounded corners with subtle shadows
-- **Navigation**: Responsive header with mobile menu
-
-## ♿ Accessibility
-
-### Features Implemented
-- **Semantic HTML5**: Proper use of header, nav, main, section, and footer tags
-- **ARIA Labels**: Comprehensive ARIA attributes for screen readers
-- **Keyboard Navigation**: Full keyboard accessibility with focus indicators
-- **Alt Text**: All images have descriptive alt text
-- **Language Support**: Proper lang attributes and RTL/LTR support
-- **Focus Management**: Visible focus states and logical tab order
-
-### WCAG 2.1 Compliance
-- Level A: Fully compliant
-- Level AA: Majority compliant
-- Level AAA: Partial compliance
-
-## 📱 Responsive Breakpoints
-
-- **Mobile**: < 640px
-- **Tablet**: 640px - 1024px
-- **Desktop**: 1024px - 1280px
-- **Large Desktop**: > 1280px
-
-## 🔧 Optimization
-
-### Performance
-- **Code Splitting**: Automatic with React Router
-- **Lazy Loading**: Images and components loaded on demand
-- **Tree Shaking**: Unused code eliminated in build
-- **Minification**: CSS and JavaScript minified
-
-### SEO
-- **Meta Tags**: Comprehensive meta descriptions and titles
-- **Open Graph**: Social media sharing optimization
-- **Twitter Cards**: Twitter-specific meta tags
-- **Canonical URLs**: Prevent duplicate content issues
-- **Structured Data**: JSON-LD for search engines
-
-## 🌐 Browser Support
-
-- Chrome 90+
-- Firefox 88+
-- Safari 14+
-- Edge 90+
-
-## 📝 Environment Variables
-
-Create a `.env` file in the root directory:
+Copy `.env.example` to `.env` and set values:
 
 ```env
-VITE_API_URL=http://localhost:5000/chat
+VITE_API_BASE_URL=http://localhost:5000
+OPENAI_API_KEY=your_openai_api_key
+PORT=5000
 ```
 
-## 🤝 Contributing
+## Architecture
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+```
+src/
+  app/
+    AppShell.jsx
+    providers/AppProviders.jsx
+    router/AppRouter.jsx
+  features/
+    cart/
+      store/cartStore.js
+      components/CartDrawer.jsx
+      components/CartIcon.jsx
+      components/CartItem.jsx
+      components/EmptyCart.jsx
+  shared/
+    api/
+      client.js
+      hooks/useProductsQuery.js
+      services/productsService.js
+    forms/
+      FormInput.jsx
+      FormTextarea.jsx
+      FormSelect.jsx
+      ErrorMessage.jsx
+      validationSchemas.js
+    seo/
+      SeoHead.jsx
+      schema.js
+    ui/
+      AsyncState.jsx
+      ErrorBoundary.jsx
+      Image.jsx
+    utils/
+      motionConfig.js
+  pages/
+    Cart.jsx
+    Products.jsx
+    Contact.jsx
+    CategorySpecs.jsx
+    About.jsx
+    Home.jsx
+    ProjectDetails.jsx
+    NotFound.jsx
+  components/
+    Layout.jsx
+    contact/ContactForm.jsx
+    products/ProductCard.jsx
+    ...
+  context/
+    LanguageContext.jsx
+```
 
-## 📄 License
+## Standards Implemented
 
-This project is proprietary and confidential to Setareh Kerman Wire & Cable Factory.
+- ✅ Route-level lazy loading and suspense fallbacks
+- ✅ Global error boundary
+- ✅ Shared loading/error/empty states
+- ✅ Unified SEO component (`SeoHead`) with OpenGraph/Twitter/JSON-LD support
+- ✅ Improved modal and form accessibility (`role=dialog`, `aria-modal`, labels, keyboard support)
+- ✅ Bilingual + RTL behavior preserved via `LanguageContext`
+- ✅ High-performance image loading with WebP support
+- ✅ Modern form validation with react-hook-form + Zod
+- ✅ Mobile-first responsive design
+- ✅ Accessibility (a11y) standards compliance
+- ✅ Performance optimizations (React.memo, useMemo, useCallback)
+- ✅ Reduced motion support
+- ✅ Bundle optimization with code splitting
 
-## 📞 Contact
+## Key Components
 
-- **Website**: https://setarehkerman.com
-- **Email**: info@setarehkerman.com
-- **Phone**: +98 34 1234 5678
+### Image Component (`src/shared/ui/Image.jsx`)
+- Lazy loading with Intersection Observer
+- WebP support with fallbacks
+- Blur-up loading effect
+- Error handling and placeholders
+- SEO-optimized with proper alt text
 
----
+### Cart System (`src/features/cart/`)
+- Zustand store with localStorage persistence
+- Beautiful cart drawer with animations
+- Real-time cart icon with item count
+- Full cart page with checkout flow
+- Bilingual support
 
-© 2026 Setareh Kerman Wire & Cable Factory. All rights reserved.
+### Form System (`src/shared/forms/`)
+- Type-safe validation with Zod
+- Bilingual error messages
+- Reusable form components
+- Real-time validation feedback
+
+### Motion Config (`src/shared/utils/motionConfig.js`)
+- Reduced motion support
+- Consistent animation presets
+- Performance-optimized animations
+
+## Performance Features
+
+- **Bundle Splitting**: Optimized Vite config with granular chunks
+- **Image Optimization**: WebP support, lazy loading, responsive images
+- **React Performance**: Memoization strategies for components
+- **Animation Performance**: Reduced motion support, optimized Framer Motion
+- **Route Prefetching**: Intelligent prefetching for important pages
+
+## Mobile Features
+
+- **Responsive Design**: Mobile-first approach with breakpoints
+- **Touch Targets**: Larger touch targets for better mobile UX
+- **Typography**: Optimized font scales for mobile readability
+- **Navigation**: Mobile-optimized navigation and cart drawer
+- **Grid Layout**: Responsive product grid that adapts to screen size
+
+## Notes
+
+- The duplicate legacy app folder `factory-ecommerce/` has been removed from active code.
+- Product/category data is consumed via the service + query layer to ease future REST/GraphQL backend migration.
+- All components are optimized for performance and accessibility.
+- The codebase follows React best practices with proper error boundaries and loading states.
+- Mobile experience has been significantly improved with better touch targets and responsive design.
+
+## Production deployment (Liara)
+
+This project is configured for **Liara** (Iranian hosting):
+
+- **Static app** → website (`setarehkerman.com`)
+- **Node app** → API (`api.setarehkerman.com`)
+
+Full step-by-step guide: **[LIARA-DEPLOYMENT.md](./LIARA-DEPLOYMENT.md)**
+
+Quick commands (replace app names with yours):
+
+```bash
+npm run build:production
+cd dist && liara deploy --app=YOUR-WEB-APP --platform=static
+
+cd server && liara deploy --app=YOUR-API-APP --platform=node --port=5000
+```

@@ -2,12 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext.jsx";
+import { useRTL } from "../hooks/useRTL.js";
+import { getLocalizedNavPath } from "../content/navigation/data.js";
+import SeoHead from "../lib/seo/SeoHead.jsx";
+import { Heading, Text } from "../components/ui/Typography.jsx";
 
 export default function NotFound() {
-  const { isRTL, dict } = useLanguage();
-  const t = dict.notFound; // فرض بر این است که در فایل دیکشنری بخش notFound را دارید
+  const { lang } = useLanguage();
+  const { isRTL } = useRTL();
+  const homePath = getLocalizedNavPath("/", lang);
 
-  // اگر در دیکشنری ندارید، می‌توانید مستقیماً اینجا تعریف کنید:
   const content = {
     title: isRTL ? "ارتباط قطع شده است!" : "Connection Lost!",
     sub: isRTL
@@ -17,14 +21,25 @@ export default function NotFound() {
   };
 
   return (
-    <div
+    <>
+      <SeoHead
+        title={isRTL ? "صفحه پیدا نشد | ستاره کرمان" : "Page Not Found | Setareh Kerman"}
+        description={
+          isRTL
+            ? "صفحه مورد نظر پیدا نشد. به صفحه اصلی ستاره کرمان بازگردید."
+            : "The requested page could not be found. Return to Setareh Kerman home."
+        }
+        canonical="/404"
+        noindex
+      />
+      <section
       className={`min-h-[70vh] flex flex-col items-center justify-center text-center space-y-8 relative overflow-hidden ${isRTL ? "font-fa" : "font-en"}`}
     >
       {/* المان گرافیکی پس‌زمینه */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
-        <h1 className="text-[15rem] md:text-[20rem] font-black text-[#374151]">
+        <p className="text-[8rem] sm:text-[12rem] md:text-[20rem] font-black text-[#374151]">
           404
-        </h1>
+        </p>
       </div>
 
       {/* بخش بصری کابل و عدد */}
@@ -48,21 +63,20 @@ export default function NotFound() {
 
       {/* متن‌ها */}
       <div className="space-y-4 relative z-10 px-6">
-        <h2 className="text-2xl font-black text-[#374151] uppercase tracking-tighter sm:text-3xl">
+        <Heading level={2} className="text-2xl sm:text-3xl uppercase tracking-tighter">
           {content.title}
-        </h2>
-        <p className="max-w-md mx-auto text-gray-500 font-medium leading-relaxed text-sm md:text-base">
+        </Heading>
+        <Text className="max-w-md mx-auto font-medium leading-relaxed text-sm md:text-base">
           {content.sub}
-        </p>
+        </Text>
       </div>
 
       {/* دکمه بازگشت */}
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
         <Link
-          to="/"
-          className="group relative inline-flex items-center gap-3 bg-[#374151] hover:bg-[#D4AF37] text-white px-8 py-4 rounded-2xl font-black text-[10px] md:text-xs transition-all duration-500 shadow-xl shadow-gray-300/20"
-        >
-          <span className="uppercase tracking-[0.2em]">{content.btn}</span>
+          to={homePath}
+          className="group relative inline-flex items-center gap-3 bg-[#374151] hover:bg-[#D4AF37] text-white px-6 sm:px-8 py-4 rounded-2xl font-black text-[10px] md:text-xs transition-all duration-500 shadow-xl shadow-gray-300/20 min-h-[48px]"
+        >          <span className="uppercase tracking-[0.2em]">{content.btn}</span>
           <svg
             className={`w-5 h-5 transition-transform duration-300 ${isRTL ? "group-hover:translate-x-[-5px]" : "rotate-180 group-hover:translate-x-[5px]"}`}
             fill="none"
@@ -83,6 +97,7 @@ export default function NotFound() {
       <div
         className={`absolute top-0 ${isRTL ? "right-0" : "left-0"} w-32 h-[1px] bg-gradient-to-l from-[#D4AF37] to-transparent opacity-20`}
       />
-    </div>
+      </section>
+    </>
   );
 }

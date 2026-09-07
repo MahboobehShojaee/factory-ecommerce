@@ -1,0 +1,219 @@
+/**
+ * Enhanced Technical Specifications Page Styles
+ * Modern, professional design system for category specs pages
+ */
+
+/* Custom Tailwind Extensions */
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-[#D4AF37] to-[#B8941F] bg-clip-text text-transparent;
+  }
+  
+  .shadow-gold {
+    box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.25), 0 10px 10px -5px rgba(212, 175, 55, 0.2);
+  }
+  
+  .shadow-gold-lg {
+    box-shadow: 0 20px 25px -5px rgba(212, 175, 55, 0.15), 0 10px 10px -5px rgba(212, 175, 55, 0.1);
+  }
+  
+  .border-gold {
+    border-color: #D4AF37;
+  }
+  
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%);
+  }
+  
+  .spec-card {
+    @apply bg-white rounded-2xl border border-gray-200 p-6 transition-all duration-300 hover:shadow-xl hover:border-[#D4AF37]/30 hover:-translate-y-1;
+  }
+  
+  .spec-icon {
+    @apply w-16 h-16 rounded-2xl flex items-center justify-center text-3xl font-bold shadow-lg transition-transform duration-300 hover:scale-110;
+  }
+  
+  .section-title {
+    @apply text-2xl font-bold text-gray-900 mb-8 flex items-center gap-3;
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply flex-1 h-0.5 bg-gradient-to-r from-[#D4AF37] to-transparent ml-4;
+  }
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGold {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.animate-pulse-gold {
+  animation: pulseGold 2s infinite;
+}
+
+/* Enhanced Image Styles */
+.spec-image {
+  @apply rounded-2xl shadow-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:scale-105;
+}
+
+.spec-image img {
+  @apply w-full h-full object-cover;
+  transition: transform 0.5s ease;
+}
+
+.spec-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Enhanced Typography */
+.spec-title {
+  @apply text-4xl font-bold text-gray-900 mb-4 leading-tight;
+  background: linear-gradient(135deg, #1a1a1a 0%, #374151 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.spec-subtitle {
+  @apply text-xl font-semibold text-gray-700 mb-6;
+}
+
+.spec-description {
+  @apply text-gray-600 leading-relaxed text-lg;
+}
+
+/* Enhanced Grid Layouts */
+.specs-grid {
+  @apply grid gap-6;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.applications-grid {
+  @apply grid gap-4;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.features-grid {
+  @apply grid gap-4;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+/* Enhanced Cards */
+.spec-card-enhanced {
+  @apply bg-white rounded-2xl border border-gray-100 p-8 shadow-lg transition-all duration-300 hover:shadow-2xl hover:border-[#D4AF37]/20 hover:-translate-y-2 relative overflow-hidden;
+}
+
+.spec-card-enhanced::before {
+  content: '';
+  @apply absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] transform -translate-x-full transition-transform duration-500;
+}
+
+.spec-card-enhanced:hover::before {
+  transform: translateX(0);
+}
+
+/* Enhanced Buttons */
+.btn-gold {
+  @apply px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-white font-bold rounded-full shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 hover:from-[#B8941F] hover:to-[#A67C1F] active:scale-95;
+}
+
+.btn-gold-outline {
+  @apply px-8 py-4 border-2 border-[#D4AF37] text-[#D4AF37] font-bold rounded-full transition-all duration-300 hover:bg-[#D4AF37] hover:text-white hover:shadow-lg active:scale-95;
+}
+
+/* Enhanced Breadcrumb */
+.breadcrumb {
+  @apply flex items-center space-x-2 text-sm text-gray-600 mb-8;
+}
+
+.breadcrumb a {
+  @apply hover:text-[#D4AF37] transition-colors duration-200;
+}
+
+.breadcrumb-separator {
+  @apply text-gray-400;
+}
+
+/* Enhanced Footer */
+.spec-footer {
+  @apply bg-gradient-to-br from-gray-50 to-gray-100 border-t border-gray-200 p-8 text-center;
+}
+
+.spec-footer-divider {
+  @apply w-24 h-1 bg-gradient-to-r from-[#D4AF37] to-transparent mx-auto mb-6;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .applications-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .spec-title {
+    @apply text-3xl;
+  }
+  
+  .section-title {
+    @apply text-xl;
+  }
+}
+
+/* Print Styles for PDF Generation */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .spec-card-enhanced {
+    @apply shadow-none border border-gray-300;
+    break-inside: avoid;
+  }
+  
+  .spec-image {
+    @apply shadow-none;
+  }
+}

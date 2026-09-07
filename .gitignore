@@ -12,6 +12,7 @@ node_modules
 # Misc
 .DS_Store
 *.pem
+vite.config.mts.timestamp-*.mjs
 
 # Debug
 npm-debug.log*

@@ -1,0 +1,10 @@
+{
+  "routes": [
+    { "key": "home", "path": "/" },
+    { "key": "products", "path": "/products" },
+    { "key": "blog", "path": "/blog" },
+    { "key": "about", "path": "/about" },
+    { "key": "contact", "path": "/contact" },
+    { "key": "factory", "path": "/factory-media" }
+  ]
+}

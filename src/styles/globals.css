@@ -8,25 +8,24 @@
   --color-gray-100: 243 244 246;
   --color-gray-400: 156 163 175;
   --color-gray-500: 107 114 128;
-  
-  --font-family-en: 'Inter', system-ui, ui-sans-serif, sans-serif;
-  --font-family-fa: 'Vazirmatn', system-ui, ui-sans-serif, sans-serif;
-  
+
+  --font-family-en: "Inter", system-ui, ui-sans-serif, sans-serif;
+  --font-family-fa: "Vazirmatn", system-ui, ui-sans-serif, sans-serif;
+
   --border-radius-sm: 0.5rem;
   --border-radius-md: 0.75rem;
   --border-radius-lg: 1rem;
   --border-radius-xl: 1.5rem;
-  --border-radius-2xl: 2rem;
-  --border-radius-3xl: 3rem;
-  
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+
+  --motion-duration-fast: 200ms;
+  --motion-duration-base: 280ms;
+  --motion-duration-reveal: 550ms;
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --section-py: 3.5rem;
+  --section-py-lg: 5.5rem;
 }
 
-/* Basic body styles */
 html,
 body,
 #root {
@@ -38,29 +37,51 @@ body {
   color: rgb(var(--color-primary));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  overflow-x: clip;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
-/* Focus styles for better accessibility */
+/* RTL / LTR typography rhythm */
+.font-fa {
+  font-family: var(--font-family-fa);
+  line-height: 1.75;
+}
+
+.font-en {
+  font-family: var(--font-family-en);
+  line-height: 1.65;
+}
+
+.font-fa h1,
+.font-fa h2,
+.font-fa h3 {
+  line-height: 1.35;
+}
+
+.font-en h1,
+.font-en h2,
+.font-en h3 {
+  line-height: 1.25;
+}
+
 *:focus-visible {
   outline: 2px solid rgb(var(--color-secondary));
   outline-offset: 2px;
 }
 
-/* Selection styles */
 ::selection {
   background-color: rgb(var(--color-secondary) / 0.2);
   color: rgb(var(--color-primary));
 }
 
-/* Scrollbar styles */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -72,16 +93,15 @@ html {
   border-radius: var(--border-radius-sm);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(var(--color-gray-500));
+img {
+  content-visibility: auto;
 }
 
-/* Print styles */
 @media print {
   .no-print {
     display: none !important;
   }
-  
+
   body {
     background: white !important;
     color: black !important;

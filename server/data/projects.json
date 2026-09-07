@@ -1,0 +1,156 @@
+[
+  {
+    "id": 1,
+    "title": {
+      "en": "National Iranian Copper Industries Company",
+      "fa": "شرکت ملی صنایع مس ایران"
+    },
+    "category": "Mining & Metals",
+    "slug": "national-copper-industries",
+    "shortDescription": {
+      "en": "Industrial cable systems for copper production facilities.",
+      "fa": "سیستم‌های کابل صنعتی برای تأسیسات تولید مس."
+    },
+    "fullDescription": {
+      "en": "Comprehensive industrial cable supply and installation for one of the largest copper production complexes in the Middle East.",
+      "fa": "تأمین و نصب جامع کابل صنعتی برای یکی از بزرگترین مجتمع‌های تولید مس در خاورمیانه."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Copper production facility with industrial cable systems",
+      "fa": "تأسیسات تولید مس با سیستم‌های کابل صنعتی"
+    }
+  },
+  {
+    "id": 2,
+    "title": {
+      "en": "Zamzam Iran Company",
+      "fa": "شرکت زمزم ایران"
+    },
+    "category": "Food & Beverage",
+    "slug": "zamzam-iran",
+    "shortDescription": {
+      "en": "Power infrastructure for beverage production lines.",
+      "fa": "زیرساخت برقی خطوط تولید نوشیدنی."
+    },
+    "fullDescription": {
+      "en": "Complete electrical infrastructure and cable systems for Zamzam's beverage production facilities.",
+      "fa": "زیرساخت الکتریکی کامل و سیستم‌های کابل برای تأسیسات تولید نوشیدنی زمزم."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Beverage production facility with power infrastructure",
+      "fa": "تأسیسات تولید نوشیدنی با زیرساخت برقی"
+    }
+  },
+  {
+    "id": 3,
+    "title": {
+      "en": "Robat Ferroalloy Complex",
+      "fa": "مجتمع فروآلیاژ رباط"
+    },
+    "category": "Metallurgy & Alloys",
+    "slug": "robat-ferroalloy-complex",
+    "shortDescription": {
+      "en": "Heavy-duty cable networks for smelting operations.",
+      "fa": "شبکه‌های کابل سنگین برای عملیات ذوب."
+    },
+    "fullDescription": {
+      "en": "Design and supply of heavy-duty electrical cable networks for the Robat Ferroalloy smelting complex.",
+      "fa": "طراحی و تأمین شبکه‌های کابل الکتریکی سنگین برای مجتمع ذوب فروآلیاژ رباط."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Ferroalloy smelting complex with heavy-duty cable networks",
+      "fa": "مجتمع ذوب فروآلیاژ با شبکه‌های کابل سنگین"
+    }
+  },
+  {
+    "id": 4,
+    "title": {
+      "en": "Jihad Nasr Sistan Company",
+      "fa": "شرکت جهاد نصر سیستان"
+    },
+    "category": "Construction & Development",
+    "slug": "jihad-nasr-sistan",
+    "shortDescription": {
+      "en": "Infrastructure cable networks for regional development.",
+      "fa": "شبکه‌های کابل زیرساختی برای توسعه منطقه‌ای."
+    },
+    "fullDescription": {
+      "en": "Large-scale infrastructure cable supply and installation for Jihad Nasr Sistan's regional development projects.",
+      "fa": "تأمین و نصب کابل زیرساختی در مقیاس بزرگ برای پروژه‌های توسعه منطقه‌ای شرکت جهاد نصر سیستان."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Regional development project with infrastructure cable networks",
+      "fa": "پروژه توسعه منطقه‌ای با شبکه‌های کابل زیرساختی"
+    }
+  },
+  {
+    "id": 5,
+    "title": {
+      "en": "Persian Gulf Water Project",
+      "fa": "پروژه آبرسانی خلیج فارس"
+    },
+    "category": "Industrial Solution",
+    "slug": "persian-gulf-water-project",
+    "shortDescription": {
+      "en": "Supply of 500+ km of high voltage cables.",
+      "fa": "تامین بیش از ۵۰۰ کیلومتر کابل فشار قوی."
+    },
+    "fullDescription": {
+      "en": "A large-scale water infrastructure project requiring specialized high voltage cable systems.",
+      "fa": "یک پروژه زیرساختی آب در مقیاس بزرگ که نیازمند سیستم‌های کابل فشار قوی تخصصی بود."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Industrial factory showing water infrastructure project with high voltage cable systems",
+      "fa": "کارخانه صنعتی نمایش پروژه زیرساختی آب با سیستم‌های کابل فشار قوی"
+    }
+  },
+  {
+    "id": 6,
+    "title": {
+      "en": "Kerman Solar Plant",
+      "fa": "نیروگاه خورشیدی کرمان"
+    },
+    "category": "Energy Sector",
+    "slug": "kerman-solar-plant",
+    "shortDescription": {
+      "en": "Specialized PV panel connections.",
+      "fa": "اتصالات تخصصی پنل‌های فتوولتائیک."
+    },
+    "fullDescription": {
+      "en": "State-of-the-art solar power plant implementation featuring advanced photovoltaic panel connection systems.",
+      "fa": "پیاده‌سازی نیروگاه خورشیدی پیشرفته با سیستم‌های اتصال پنل فتوولتائیک پیشرفته."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Solar power plant with photovoltaic panels and specialized cable connections",
+      "fa": "نیروگاه خورشیدی با پنل‌های فتوولتائیک و اتصالات کابل تخصصی"
+    }
+  },
+  {
+    "id": 7,
+    "title": {
+      "en": "Setareh Commercial Complex",
+      "fa": "مجتمع تجاری ستاره"
+    },
+    "category": "Building Construction",
+    "slug": "setareh-commercial-complex",
+    "shortDescription": {
+      "en": "Smart internal power distribution.",
+      "fa": "سیستم هوشمند توزیع برق داخلی."
+    },
+    "fullDescription": {
+      "en": "Modern commercial complex featuring intelligent power distribution systems throughout the facility.",
+      "fa": "مجتمع تجاری مدرن با سیستم‌های توزیع برق هوشمند در سراسر تأسیسات."
+    },
+    "image": "factory",
+    "alt": {
+      "en": "Modern commercial complex building with smart power distribution systems",
+      "fa": "مجتمع تجاری مدرن با سیستم‌های توزیع برق هوشمند"
+    }
+  }
+]

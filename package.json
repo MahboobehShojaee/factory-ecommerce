@@ -5,22 +5,39 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "build:production": "vite build --mode production",
+    "preview": "vite preview",
+    "check": "vite build --mode production",
+    "analyze": "vite-bundle-visualizer",
+    "generate:logo-assets": "node scripts/generate-logo-assets.mjs",
+    "deploy:liara:web": "npm run build:production && cd dist && liara deploy --platform=static",
+    "deploy:liara:api": "cd server && liara deploy --platform=node --port=3000"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@tanstack/react-query": "^5.100.10",
+    "axios": "^1.16.0",
     "framer-motion": "^12.35.0",
+    "jspdf": "^4.2.1",
+    "lucide-react": "^1.14.0",
+    "prop-types": "^15.8.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^3.0.0",
+    "react-hook-form": "^7.75.0",
     "react-hot-toast": "^2.6.0",
     "react-intersection-observer": "^10.0.3",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "zod": "^4.4.3",
+    "zustand": "^5.0.13"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
+    "sharp": "^0.35.3",
     "tailwindcss": "^3.4.15",
-    "vite": "^5.4.10"
+    "vite": "^5.4.10",
+    "vite-bundle-visualizer": "^1.2.1"
   }
 }

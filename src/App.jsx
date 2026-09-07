@@ -1,26 +1,24 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout.jsx";
-import Home from "./pages/Home.jsx";
-import Products from "./pages/Products.jsx";
-import About from "./pages/About.jsx";
-import Contact from "./pages/Contact.jsx";
-import ProjectDetails from "./pages/ProjectDetails.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import ChatBot from "./components/ChatBot.jsx";
+// Developed by Mahboobeh Shojaei | محبوبه شجاعی
+
+import AppShell from "./app/AppShell.jsx";
+import GoogleAnalytics from "./lib/analytics/GoogleAnalytics.jsx";
+import MicrosoftClarity from "./lib/analytics/MicrosoftClarity.jsx";
+import ErrorBoundary from "./components/common/ErrorBoundary.jsx";
+
+if (import.meta.env.DEV) {
+  console.log(
+    "%c🧕 Developed by Mahboobeh Shojaei %c🌐 محبوبه شجاعی",
+    "color:#d4af37;font-size:16px;font-weight:700;background:#1f2937;padding:8px 12px;border-radius:6px 0 0 6px;",
+    "color:#fff;font-size:16px;font-weight:700;background:#374151;padding:8px 12px;border-radius:0 6px 6px 0;",
+  );
+}
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/projects/:slug" element={<ProjectDetails />} />
-        <Route path="/*" element={<NotFound />} />
-      </Routes>
-      <ChatBot />
-    </Layout>
+    <ErrorBoundary>
+      <GoogleAnalytics />
+      <MicrosoftClarity />
+      <AppShell />
+    </ErrorBoundary>
   );
 }

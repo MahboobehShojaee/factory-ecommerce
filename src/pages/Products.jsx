@@ -1,38 +1,50 @@
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useCallback, useState } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "../components/products/ProductCard.jsx";
-import ProductFilters from "../components/products/ProductFilters.jsx";
 import ProductListFromJSON from "../components/products/ProductListFromJSON.jsx";
+import SeoHead from "../lib/seo/SeoHead.jsx";
+import { buildBreadcrumbSchema } from "../lib/seo/schema.js";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import { useRTL } from "../hooks/useRTL.js";
+import { FadeInUp } from "../animations/motionPresets.jsx";
+import { Heading, Text } from "../components/ui/Typography.jsx";
 
-export default function Products() {
-  const { dict, isRTL, lang } = useLanguage();
+const Products = React.memo(function Products() {
+  const { dict, lang } = useLanguage();
+  const { isRTL, dirClass } = useRTL();
   const t = dict.products || {};
   const categories = t.categories || [];
+  const [showCategories, setShowCategories] = useState(true);
 
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [highlightedCategory, setHighlightedCategory] = useState(null); // برای هایلایت حرفه‌ای
+  // Memoized categories to prevent unnecessary re-renders
+  const memoizedCategories = useMemo(() => categories, [categories]);
 
-  // 🔹 گزینه‌های فیلتر
-  const filterOptions = useMemo(() => {
-    const allLabel = isRTL ? "همه محصولات" : "All Products";
-    return [
-      { id: "all", label: allLabel },
-      ...categories.map((c) => ({
-        id: c.name,
-        label: typeof c.name === "object" ? c.name[lang] : c.name, // multi-language
-      })),
-    ];
-  }, [categories, isRTL, lang]);
+  // Memoized breadcrumb schema
+  const breadcrumbSchema = useMemo(() => 
+    buildBreadcrumbSchema([
+      { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com/" },
+      { name: isRTL ? "محصولات" : "Products", url: "https://setarehkerman.com/products" },
+    ]),
+    [isRTL]
+  );
 
-  // 🔹 محصولات فیلتر شده
-  const filteredItems = useMemo(() => {
-    if (activeFilter === "all") return categories;
-    return categories.filter((item) => item.name === activeFilter);
-  }, [activeFilter, categories]);
+  // Callback for scroll to top
+  const handleScrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  // 🔹 Error boundary fallback
+  if (!t || typeof t !== 'object') {
+    return (
+      <div className="py-20 text-center font-black opacity-20 text-4xl uppercase tracking-tighter">
+        Loading Products...
+      </div>
+    );
+  }
 
   // 🔹 Loading state
-  if (categories.length === 0) {
+  if (memoizedCategories.length === 0) {
     return (
       <div className="py-20 text-center font-black opacity-20 text-4xl uppercase tracking-tighter">
         Loading Products...
@@ -41,124 +53,131 @@ export default function Products() {
   }
 
   return (
-    <main
-      className={`space-y-12 pb-20 pt-24 ${isRTL ? "text-right" : "text-left"}`}
+    <>
+      <SeoHead
+        title={isRTL ? "محصولات | ستاره کرمان" : "Products | Setareh Kerman"}
+        description={
+          isRTL
+            ? "کاتالوگ کامل کابل های قدرت، صنعتی، ارتباطی و تخصصی با مشخصات فنی."
+            : "Explore the full catalog of power, industrial, communication, and specialty cables."
+        }
+        canonical="/products"
+        jsonLd={buildBreadcrumbSchema([
+          { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com/" },
+          { name: isRTL ? "محصولات" : "Products", url: "https://setarehkerman.com/products" },
+        ])}
+      />
+      <section
+      className={`space-y-8 sm:space-y-12 pb-12 sm:pb-16 md:pb-20 pt-14 sm:pt-16 md:pt-24 ${dirClass}`}
     >
       {/* Hero Header */}
       <header
-        className="space-y-4 border-[#D4AF37]"
+        className="space-y-6 sm:space-y-8 border-[#D4AF37]"
         aria-label="Products page introduction"
       >
-        <div className={`container mx-auto px-6 ${isRTL ? "border-r-4 pr-6" : "border-l-4 pl-6"}`}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-4"
-          >
-            <p className="text-[10px] font-black tracking-[0.4em] text-[#D4AF37] uppercase">
-              {t.eyebrow}
-            </p>
-            <h2 className="text-4xl font-black tracking-tight text-[#374151] sm:text-5xl">
-              {t.title}
-            </h2>
-            <p className="max-w-2xl text-base leading-relaxed text-gray-500 sm:text-lg font-medium">
-              {t.subtitle}
-            </p>
-          </motion.div>
+        <div className={`container mx-auto px-4 sm:px-6 ${isRTL ? "border-r-2 sm:border-r-4 pr-3 sm:pr-6" : "border-l-2 sm:border-l-4 pl-3 sm:pl-6"}`}>
+          <FadeInUp>
+            <div className="space-y-3 sm:space-y-4">
+              <Text className="text-[8px] sm:text-[10px] font-black tracking-[0.3em] sm:tracking-[0.4em] text-[#D4AF37] uppercase">
+                {t.eyebrow}
+              </Text>
+              <Heading level={1} className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl tracking-tight">
+                {t.title}
+              </Heading>
+              <Text className="max-w-2xl lg:text-lg text-gray-500 font-medium">
+                {t.subtitle}
+              </Text>
+            </div>
+          </FadeInUp>
         </div>
       </header>
 
-      {/* Filters Section */}
-      <section className="container mx-auto px-6" aria-label="Product filters">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+      {/* Collapsible Category Overview */}
+      <section className="container mx-auto px-4 sm:px-6">
+        <motion.button
+          onClick={() => setShowCategories(!showCategories)}
+          className={`w-full flex items-center justify-between p-6 bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${isRTL ? "flex-row-reverse" : ""}`}
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
         >
-          <ProductFilters
-            filterOptions={filterOptions}
-            activeFilter={activeFilter}
-            setActiveFilter={setActiveFilter}
-            isRTL={isRTL}
-          />
-        </motion.div>
-      </section>
-
-      {/* Product Grid */}
-      <section className="container mx-auto px-6" aria-label="Product listings">
-        <motion.div
-          layout
-          className="grid gap-8 md:grid-cols-2"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((category) => (
-              <ProductCard
-                key={
-                  typeof category.name === "object"
-                    ? category.name[lang]
-                    : category.name
-                }
-                category={category}
-                isRTL={isRTL}
-                lang={lang}
-                isHighlighted={
-                  highlightedCategory &&
-                  highlightedCategory ===
-                    (typeof category.name === "object"
-                      ? category.name[lang]
-                      : category.name)
-                }
-              />
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </section>
-
-      {/* Section Divider */}
-      <div className="container mx-auto px-6" aria-hidden="true">
-        <div className="relative my-16">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200"></div>
-          </div>
-          <div className="relative flex justify-center">
-            <div className="bg-[#F8F9FA] px-4">
-              <div className="flex gap-2">
-                <div className="w-2 h-2 bg-[#D4AF37] rounded-full"></div>
-                <div className="w-2 h-2 bg-[#D4AF37] rounded-full"></div>
-                <div className="w-2 h-2 bg-[#D4AF37] rounded-full"></div>
-              </div>
+          <div className={`flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
+            <div className="w-12 h-12 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center">
+              <span className="text-[#D4AF37] font-black text-lg">{memoizedCategories.length}</span>
+            </div>
+            <div className={isRTL ? "text-right" : "text-left"}>
+              <Heading level={2} className="text-lg">
+                {isRTL ? "دسته‌بندی‌های اصلی" : "Main Categories"}
+              </Heading>
+              <Text className="text-sm">
+                {isRTL ? "بررسی سریع دسته‌بندی‌های محصول" : "Quick overview of product categories"}
+              </Text>
             </div>
           </div>
-        </div>
-      </div>
+          <motion.div
+            animate={{ rotate: showCategories ? 180 : 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {isRTL ? <ChevronUp className="w-6 h-6 text-[#D4AF37]" /> : <ChevronDown className="w-6 h-6 text-[#D4AF37]" />}
+          </motion.div>
+        </motion.button>
+
+        <AnimatePresence>
+          {showCategories && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mt-6"
+            >
+              <motion.div
+                layout
+                className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4"
+              >
+                <AnimatePresence mode="popLayout">
+                  {memoizedCategories.map((category) => (
+                    <ProductCard
+                      key={
+                        typeof category.name === "object"
+                          ? category.name[lang]
+                          : category.name
+                      }
+                      category={category}
+                      lang={lang}
+                      isHighlighted={false}
+                    />
+                  ))}
+                </AnimatePresence>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </section>
 
       {/* Complete Product Catalog from JSON */}
       <ProductListFromJSON />
 
       {/* Scroll to Top Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
-        className={`fixed bottom-8 z-50 ${isRTL ? "right-8" : "left-8"}`}
-        aria-hidden="true"
-      >
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="w-12 h-12 bg-[#D4AF37] text-white rounded-full shadow-lg flex items-center justify-center"
-          aria-label="Scroll to top"
-        >
-          <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-            <path d="M18 15l-6-6-6 6" />
-          </svg>
-        </motion.button>
-      </motion.div>
-    </main>
+      <FadeInUp delay={1.5}>
+        <div className={`fixed bottom-8 z-50 ${isRTL ? "right-8" : "left-8"}`} aria-hidden="true">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={handleScrollToTop}
+            className="w-12 h-12 bg-[#D4AF37] text-white rounded-full shadow-lg flex items-center justify-center"
+            aria-label="Scroll to top"
+          >
+            <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+              <path d="M18 15l-6-6-6 6" />
+            </svg>
+          </motion.button>
+        </div>
+      </FadeInUp>
+      </section>
+    </>
   );
-}
+});
+
+Products.displayName = 'Products';
+
+export default Products;

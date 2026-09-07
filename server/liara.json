@@ -1,0 +1,9 @@
+{
+  "app": "setareh-kerman-api",
+  "platform": "node",
+  "port": 3000,
+  "node": {
+    "version": "20",
+    "timezone": "Asia/Tehran"
+  }
+}

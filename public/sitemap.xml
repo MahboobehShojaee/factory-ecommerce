@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://setarehkerman.com/</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/products</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/products" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/products" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/products/power/specifications</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/products/power/specifications" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/products/power/specifications" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/products/industrial/specifications</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/products/industrial/specifications" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/products/industrial/specifications" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/products/communication/specifications</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/products/communication/specifications" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/products/communication/specifications" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/products/specialty/specifications</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/products/specialty/specifications" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/products/specialty/specifications" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/about</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/about" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/about" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/contact</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/contact" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/contact" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/xlpe-vs-pvc-insulation-comparison</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/xlpe-vs-pvc-insulation-comparison" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/xlpe-vs-pvc-insulation-comparison" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/low-voltage-cables-guide</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/low-voltage-cables-guide" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/low-voltage-cables-guide" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/cable-faqs</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/cable-faqs" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/cable-faqs" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/cable-sizing-basics</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/cable-sizing-basics" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/cable-sizing-basics" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/copper-vs-aluminum-conductors</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/copper-vs-aluminum-conductors" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/copper-vs-aluminum-conductors" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/iec-standards-overview</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/iec-standards-overview" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/iec-standards-overview" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/voltage-drop-calculation-guide</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/voltage-drop-calculation-guide" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/voltage-drop-calculation-guide" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/blog/ampacity-chart-reference</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/blog/ampacity-chart-reference" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/blog/ampacity-chart-reference" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/national-copper-industries</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/national-copper-industries" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/national-copper-industries" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/zamzam-iran</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/zamzam-iran" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/zamzam-iran" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/robat-ferroalloy-complex</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/robat-ferroalloy-complex" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/robat-ferroalloy-complex" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/jihad-nasr-sistan</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/jihad-nasr-sistan" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/jihad-nasr-sistan" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/persian-gulf-water-project</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/persian-gulf-water-project" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/persian-gulf-water-project" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/kerman-solar-plant</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/kerman-solar-plant" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/kerman-solar-plant" />
+  </url>
+
+  <url>
+    <loc>https://setarehkerman.com/projects/setareh-commercial-complex</loc>
+    <lastmod>2026-09-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://setarehkerman.com/projects/setareh-commercial-complex" />
+    <xhtml:link rel="alternate" hreflang="fa" href="https://setarehkerman.com/fa/projects/setareh-commercial-complex" />
+  </url>
+
+</urlset>
