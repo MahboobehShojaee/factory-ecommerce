@@ -7,21 +7,21 @@ export const homeTranslations = {
   en: {
     home: {
       badge: "Setareh Kerman Wire & Cable Factory",
-      title: "Powering the {highlight} of Energy & Connectivity",
-      titleHighlight: "Future",
+      title: "{highlight} at the Core of Every Connection",
+      titleHighlight: "Quality",
       subtitle:
-        "From industrial grids to mission-critical automation, we engineer copper and aluminum cables with laboratory-proven performance, precise conductivity and long-term reliability.",
+        "Specialized wire and cable manufacturing, built on high-quality materials, advanced technology, and rigorous quality control to deliver safe and reliable power transmission for industrial, construction, and infrastructure projects.",
       ctaPrimary: "Explore Products",
       ctaSecondary: "Our Quality Lab",
       stats: [
         {
-          label: "Certified Lab",
-          value: "IEC / ISO 17025",
-          sub: "Type & routine testing",
+          label: "Industrial Experience",
+          value: "+25 Years",
+          sub: "Wire & cable manufacturing",
         },
         {
-          label: "Annual Capacity",
-          value: "120,000 km",
+          label: "Monthly Capacity",
+          value: "480,000 km",
           sub: "LV & MV power cables",
         },
         {
@@ -44,8 +44,8 @@ export const homeTranslations = {
       macroTestingText: "HV withstand, partial discharge & fire resistance.",
       heroFeatures: [
         { label: "Guaranteed Quality" },
-        { label: "Advanced Technology" },
         { label: "On-time Delivery" },
+        { label: "Advanced Technology" },
         { label: "Professional Support" },
       ],
       heroStatCard: {
@@ -57,21 +57,21 @@ export const homeTranslations = {
   fa: {
     home: {
       badge: "کارخانه سیم و کابل ستاره کرمان",
-      titleHighlight: "آینده",
-      title: "قدرت‌بخشی به {highlight} انرژی و ارتباطات",
+      titleHighlight: "کیفیت",
+      title: "{highlight}، هسته اصلی هر اتصال",
       subtitle:
-        "از شبکه‌های صنعتی تا اتوماسیون‌های حیاتی، ما کابل‌های مسی و آلومینیومی را با عملکرد تأییدشده آزمایشگاهی، رسانایی دقیق و دوام طولانی‌مدت طراحی و تولید می‌کنیم.",
+        "تولید تخصصی سیم و کابل با تکیه بر مواد اولیه باکیفیت، فناوری روز و کنترل دقیق کیفیت؛ برای انتقال ایمن و پایدار انرژی در پروژه‌های صنعتی، ساختمانی و زیرساختی.",
       ctaPrimary: "مشاهده محصولات",
       ctaSecondary: "آزمایشگاه کیفیت ما",
       stats: [
         {
-          label: "آزمایشگاه معتبر",
-          value: "IEC / ISO 17025",
-          sub: "آزمون‌های نوعی و روتین",
+          label: "تجربه صنعتی",
+          value: "+۲۵ سال",
+          sub: "در صنعت سیم و کابل",
         },
         {
-          label: "ظرفیت سالانه",
-          value: "۱۲۰٬۰۰۰ کیلومتر",
+          label: "ظرفیت ماهانه",
+          value: "۴۸۰٬۰۰۰ کیلومتر",
           sub: "کابل‌های قدرت فشار ضعیف و متوسط",
         },
         {
@@ -94,8 +94,8 @@ export const homeTranslations = {
       macroTestingText: "آزمون ولتاژ بالا، تخلیه جزئی و مقاومت در برابر حریق.",
       heroFeatures: [
         { label: "کیفیت تضمین‌شده" },
-        { label: "تکنولوژی پیشرفته" },
         { label: "تحویل به‌موقع" },
+        { label: "تکنولوژی پیشرفته" },
         { label: "پشتیبانی حرفه‌ای" },
       ],
       heroStatCard: {

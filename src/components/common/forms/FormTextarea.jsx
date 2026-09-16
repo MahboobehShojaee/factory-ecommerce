@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { useController } from 'react-hook-form';
 
 /**
@@ -16,8 +16,12 @@ const FormTextarea = React.memo(function FormTextarea({
   labelClassName = '',
   required = false,
   rows = 4,
+  id: providedId,
   ...props
 }) {
+  const generatedId = useId();
+  const textareaId = providedId || `${name}-${generatedId}`;
+  const errorId = `${textareaId}-error`;
   const {
     field,
     fieldState: { error, isTouched },
@@ -33,7 +37,7 @@ const FormTextarea = React.memo(function FormTextarea({
     <div className={`space-y-2 ${className}`}>
       {label && (
         <label
-          htmlFor={name}
+          htmlFor={textareaId}
           className={`block text-sm font-medium text-gray-700 ${
             hasError ? 'text-red-600' : ''
           } ${labelClassName}`}
@@ -44,10 +48,12 @@ const FormTextarea = React.memo(function FormTextarea({
       )}
       
       <textarea
-        id={name}
+        id={textareaId}
         placeholder={placeholder}
         disabled={disabled}
         rows={rows}
+        aria-invalid={hasError ? "true" : undefined}
+        aria-describedby={hasError ? errorId : undefined}
         className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/20 focus:border-[#D4AF37] resize-vertical ${
           hasError
             ? 'border-red-500 bg-red-50'
@@ -58,7 +64,7 @@ const FormTextarea = React.memo(function FormTextarea({
       />
       
       {hasError && (
-        <p className="text-sm text-red-600 font-medium">
+        <p id={errorId} role="alert" className="text-sm text-red-600 font-medium">
           {error.message}
         </p>
       )}

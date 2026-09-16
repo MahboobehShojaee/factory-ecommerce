@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../../context/LanguageContext.jsx";
@@ -13,15 +13,43 @@ export default function CartDrawer() {
   const { isRTL } = useRTL();
   const { isOpen, closeCart, items, getTotalPrice, getTotalItems, clearCart } =
     useCartStore();
+  const drawerRef = useRef(null);
+  const closeButtonRef = useRef(null);
 
   useEffect(() => {
     if (isOpen) {
+      const previouslyFocused = document.activeElement;
       document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
+      closeButtonRef.current?.focus();
+
+      const handleKeyDown = (event) => {
+        if (event.key === "Escape") closeCart();
+        if (event.key !== "Tab" || !drawerRef.current) return;
+
+        const focusable = drawerRef.current.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        );
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
+      };
+
+      document.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.removeEventListener("keydown", handleKeyDown);
+        document.body.style.overflow = "";
+        previouslyFocused?.focus();
+      };
     }
-    return () => { document.body.style.overflow = ""; };
-  }, [isOpen]);
+    document.body.style.overflow = "";
+    return undefined;
+  }, [closeCart, isOpen]);
 
   const t = dict.cart || {};
   const totalItems = getTotalItems();
@@ -43,6 +71,7 @@ export default function CartDrawer() {
           />
 
           <motion.aside
+            ref={drawerRef}
             initial={{ x: slideFrom }}
             animate={{ x: 0 }}
             exit={{ x: slideFrom }}
@@ -90,6 +119,7 @@ export default function CartDrawer() {
               </div>
 
               <button
+                ref={closeButtonRef}
                 type="button"
                 onClick={closeCart}
                 className="p-2.5 rounded-2xl border border-gray-200 hover:bg-gray-50 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"

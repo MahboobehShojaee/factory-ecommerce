@@ -1,10 +1,12 @@
+import { absoluteUrl, defaultOgImage, siteUrl } from "../../config/site.js";
+
 export function buildOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Setareh Kerman Wire & Cable",
-    url: "https://setarehkerman.com",
-    logo: "https://setarehkerman.com/og-image.jpg",
+    url: siteUrl,
+    logo: defaultOgImage,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Kerman",
@@ -57,13 +59,13 @@ export function buildArticleSchema({ headline, description, author, publishDate,
       "@type": "WebPage",
       "@id": url,
     },
-    image: image || "https://setarehkerman.com/og-image.jpg",
+    image: image || defaultOgImage,
     publisher: {
       "@type": "Organization",
       name: "Setareh Kerman Wire & Cable",
       logo: {
         "@type": "ImageObject",
-        url: "https://setarehkerman.com/og-image.jpg",
+        url: defaultOgImage,
       },
     },
   };
@@ -74,7 +76,7 @@ export function buildLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Setareh Kerman Wire & Cable Factory",
-    image: "https://setarehkerman.com/og-image.jpg",
+    image: defaultOgImage,
     description: "Industrial wire and cable manufacturing factory in Kerman, Iran. Producing high-quality power, control, and communication cables.",
     address: {
       "@type": "PostalAddress",
@@ -89,7 +91,7 @@ export function buildLocalBusinessSchema() {
       latitude: 30.2839,
       longitude: 57.0833,
     },
-    url: "https://setarehkerman.com",
+    url: siteUrl,
     telephone: "+98-34-32522626",
     email: "info.setarehkerman@gmail.com",
     openingHoursSpecification: [
@@ -177,13 +179,13 @@ export function buildTechnicalArticleSchema({ headline, description, author, pub
       "@type": "WebPage",
       "@id": url,
     },
-    image: image || "https://setarehkerman.com/og-image.jpg",
+    image: image || defaultOgImage,
     publisher: {
       "@type": "Organization",
       name: "Setareh Kerman Wire & Cable",
       logo: {
         "@type": "ImageObject",
-        url: "https://setarehkerman.com/og-image.jpg",
+        url: defaultOgImage,
       },
     },
     proficiencyLevel: proficiencyLevel || "Beginner",
@@ -209,7 +211,7 @@ export function buildGlossarySchema({ name, definition, url, category }) {
     inDefinedTermSet: {
       "@type": "DefinedTermSet",
       name: "Wire and Cable Industry Glossary",
-      url: "https://setarehkerman.com/glossary",
+      url: absoluteUrl("/glossary"),
     },
     url,
   };

@@ -16,7 +16,7 @@ export default function CartIcon() {
       whileHover={{ scale: 1.06 }}
       whileTap={{ scale: 0.94 }}
       onClick={openCart}
-      className="relative p-2.5 rounded-2xl border border-transparent hover:border-gray-100 hover:bg-gray-50 transition-all min-h-[44px] min-w-[44px] flex items-center justify-center"
+      className="relative p-2.5 lg:p-1.5 rounded-full border border-transparent hover:border-gray-100 hover:bg-gray-50 transition-all min-h-[44px] min-w-[44px] lg:min-h-[2.15rem] lg:min-w-[2.15rem] flex items-center justify-center"
       aria-label={t.openCart}
     >
       <ShoppingCart className="w-5 h-5 text-[#374151]" strokeWidth={2} />

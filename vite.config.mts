@@ -2,8 +2,20 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { fileURLToPath, URL } from "node:url";
 
+const DEFAULT_SITE_URL = "https://setarehkerman.com";
+
+function siteUrlHtmlPlugin() {
+  return {
+    name: "site-url-html",
+    transformIndexHtml(html) {
+      const siteUrl = (process.env.VITE_SITE_URL || DEFAULT_SITE_URL).replace(/\/$/, "");
+      return html.replaceAll(DEFAULT_SITE_URL, siteUrl);
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => ({
-  plugins: [react()],
+  plugins: [react(), siteUrlHtmlPlugin()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -24,18 +36,34 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     sourcemap: mode === 'development',
-    minify: 'esbuild',
+    minify: 'oxc',
     target: 'es2020',
-    rollupOptions: {
+    rolldownOptions: {
+      checks: {
+        pluginTimings: false,
+      },
       output: {
-        manualChunks: {
-          react: ["react", "react-dom", "react-router-dom"],
-          motion: ["framer-motion"],
-          query: ["@tanstack/react-query", "axios"],
-          pdf: ["jspdf"],
-          forms: ["react-hook-form", "zod", "@hookform/resolvers"],
-          state: ["zustand"],
-          ui: ["react-helmet-async", "react-hot-toast", "react-intersection-observer"],
+        manualChunks(id) {
+          const normalizedId = id.replaceAll("\\", "/");
+          if (!normalizedId.includes("/node_modules/")) return undefined;
+
+          const groups = {
+            react: ["react", "react-dom", "react-router-dom"],
+            motion: ["framer-motion"],
+            query: ["@tanstack/react-query", "axios"],
+            pdf: ["jspdf"],
+            forms: ["react-hook-form", "zod", "@hookform/resolvers"],
+            state: ["zustand"],
+            ui: ["react-hot-toast", "react-intersection-observer"],
+          };
+
+          for (const [chunkName, packages] of Object.entries(groups)) {
+            if (packages.some((packageName) => normalizedId.includes(`/node_modules/${packageName}/`))) {
+              return chunkName;
+            }
+          }
+
+          return undefined;
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',

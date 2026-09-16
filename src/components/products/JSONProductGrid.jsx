@@ -29,12 +29,11 @@ export default function JSONProductGrid() {
   const [addedItems, setAddedItems] = useState({});
   const { addItem } = useCartStore();
   const productsQuery = useProductsQuery();
-  const productData = productsQuery.data || [];
   const ITEMS_PER_PAGE = 12;
 
   // Filter products based on search term and category
   const filteredProducts = React.useMemo(() => {
-    let products = productData;
+    let products = productsQuery.data || [];
 
     // Apply category filter
     if (selectedCategory !== null) {
@@ -61,7 +60,7 @@ export default function JSONProductGrid() {
     }
 
     return products;
-  }, [productData, lang, searchTerm, selectedCategory]);
+  }, [productsQuery.data, lang, searchTerm, selectedCategory]);
 
   // Pagination logic
   const paginatedProducts = React.useMemo(() => {

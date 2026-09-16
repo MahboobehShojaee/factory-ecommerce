@@ -3,6 +3,10 @@ import { isMailConfigured, sendContactEmail } from "../services/mailService.js";
 
 export async function submitContact(req, res, next) {
   try {
+    if (typeof req.body?.website === "string" && req.body.website.trim()) {
+      return res.status(204).end();
+    }
+
     if (!isMailConfigured()) {
       return res.status(503).json({
         error: "Contact form is temporarily unavailable. Please try again later or email us directly.",

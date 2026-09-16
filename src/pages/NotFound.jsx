@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext.jsx";
@@ -29,7 +28,6 @@ export default function NotFound() {
             ? "صفحه مورد نظر پیدا نشد. به صفحه اصلی ستاره کرمان بازگردید."
             : "The requested page could not be found. Return to Setareh Kerman home."
         }
-        canonical="/404"
         noindex
       />
       <section
@@ -63,7 +61,7 @@ export default function NotFound() {
 
       {/* متن‌ها */}
       <div className="space-y-4 relative z-10 px-6">
-        <Heading level={2} className="text-2xl sm:text-3xl uppercase tracking-tighter">
+        <Heading level={1} className="text-2xl sm:text-3xl uppercase tracking-tighter">
           {content.title}
         </Heading>
         <Text className="max-w-md mx-auto font-medium leading-relaxed text-sm md:text-base">

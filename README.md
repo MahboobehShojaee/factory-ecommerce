@@ -28,7 +28,7 @@ Production-focused bilingual (Persian + English) React/Vite frontend for Setareh
   - Bilingual error messages (Persian + English)
   - Real-time validation with modern UX
   - Reusable form components:
-    - `FormInput`, `FormTextarea`, `FormSelect`, `ErrorMessage`
+    - `FormInput`, `FormTextarea`, `FormSelect`
   - Loading, success, and error states
   - Refactored ContactForm with comprehensive validation
 
@@ -122,7 +122,6 @@ src/
       FormInput.jsx
       FormTextarea.jsx
       FormSelect.jsx
-      ErrorMessage.jsx
       validationSchemas.js
     seo/
       SeoHead.jsx

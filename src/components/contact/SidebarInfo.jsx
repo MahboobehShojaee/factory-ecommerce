@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { useRTL } from "../../hooks/useRTL.js";
@@ -159,7 +158,7 @@ export default function SidebarInfo({ t }) {
       <motion.div className="relative z-10 mt-12 flex justify-center opacity-80 hover:opacity-100 transition-opacity duration-700">
         <img
           src={images.logo.watermark}
-          alt="watermark"
+          alt=""
           className="h-28 w-28 object-contain brightness-125 saturate-150"
         />
       </motion.div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLanguage } from '../../context/LanguageContext.jsx';
 import { useRTL } from '../../hooks/useRTL.js';
 
 export default function TechnicalTable({ 

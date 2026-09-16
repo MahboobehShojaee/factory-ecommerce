@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
 import { useLocalStorage } from "../hooks/useLocalStorage.js";
@@ -41,8 +41,15 @@ export default function ChatBot() {
         setIsOpen(false);
       }
     }
+    function handleKeyDown(event) {
+      if (event.key === "Escape") setIsOpen(false);
+    }
     if (isOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    if (isOpen) document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [isOpen]);
 
   // --- بخش اصلی: ضبط صدا و ارسال خودکار ---
@@ -124,6 +131,8 @@ export default function ChatBot() {
 
   const sendToApi = async (allMessages) => {
     setIsLoading(true);
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), 30000);
     try {
       const apiBase = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
       const res = await fetch(
@@ -132,30 +141,34 @@ export default function ChatBot() {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ messages: allMessages }),
+          signal: controller.signal,
         },
       );
 
-      if (res.body) {
-        const reader = res.body.getReader();
-        const decoder = new TextDecoder();
-        let fullText = "";
-        setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+      if (!res.ok || !res.body) {
+        throw new Error(`Chat request failed with status ${res.status}`);
+      }
 
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          const chunk = decoder.decode(value);
-          fullText += chunk;
-          setMessages((prev) => {
-            const copy = [...prev];
-            copy[copy.length - 1].content = fullText;
-            return copy;
-          });
-        }
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = "";
+      setMessages((prev) => [...prev, { role: "assistant", content: "" }]);
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        fullText += chunk;
+        setMessages((prev) => {
+          const copy = [...prev];
+          copy[copy.length - 1].content = fullText;
+          return copy;
+        });
       }
     } catch (err) {
       setMessages((prev) => [...prev, { role: "assistant", content: t.error }]);
     } finally {
+      window.clearTimeout(timeoutId);
       setIsLoading(false);
     }
   };
@@ -163,24 +176,29 @@ export default function ChatBot() {
   return (
     <div
       ref={chatRef}
-      className={`fixed z-[999] ${isRTL ? "left-6" : "right-6"} bottom-6`}
+      className={`fixed z-[999] ${isRTL ? "left-4 sm:left-6" : "right-4 sm:right-6"} bottom-6`}
       dir={isRTL ? "rtl" : "ltr"}
     >
       <AnimatePresence mode="wait">
         {isOpen ? (
           <motion.div
             key="chat-panel"
+            role="dialog"
+            aria-modal="false"
+            aria-label={t.title}
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="w-[340px] sm:w-[380px] bg-white rounded-[25px] shadow-2xl border border-gray-100 flex flex-col overflow-hidden"
+            className="w-[calc(100vw-2rem)] max-w-[380px] bg-white rounded-[25px] shadow-2xl border border-gray-100 flex flex-col overflow-hidden"
             style={{ maxHeight: "calc(100vh - 140px)", bottom: "0px" }}
           >
             <div className="p-4 border-b bg-white flex justify-between items-center">
               <span className="font-bold text-gray-700">{t.title}</span>
               <button
+                type="button"
                 onClick={() => setIsOpen(false)}
                 className="text-gray-400 hover:text-gray-600 text-2xl"
+                aria-label={isRTL ? "بستن گفت‌وگو" : "Close chat"}
               >
                 ×
               </button>

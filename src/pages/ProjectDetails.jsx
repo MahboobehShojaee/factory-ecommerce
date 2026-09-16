@@ -7,6 +7,7 @@ import SeoHead from "../lib/seo/SeoHead.jsx";
 import { buildProductSchema } from "../lib/seo/schema.js";
 import { FadeInUp } from "../animations/motionPresets.jsx";
 import { Heading, Text } from "../components/ui/Typography.jsx";
+import { absoluteUrl } from "../config/site.js";
 
 export default function ProjectDetails() {
   const { slug } = useParams();
@@ -17,7 +18,14 @@ export default function ProjectDetails() {
   
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
+      <>
+        <SeoHead
+          title={lang === "fa" ? "پروژه یافت نشد" : "Project Not Found"}
+          description={lang === "fa" ? "پروژه درخواست‌شده یافت نشد." : "The requested project could not be found."}
+          noindex
+          lang={lang}
+        />
+        <div className="min-h-screen flex items-center justify-center bg-[#F8F9FA]">
         <FadeInUp>
           <div className={`text-center ${dirClass}`}>
             <Heading level={1} className="mb-4">
@@ -40,7 +48,8 @@ export default function ProjectDetails() {
             </Link>
           </div>
         </FadeInUp>
-      </div>
+        </div>
+      </>
     );
   }
 
@@ -59,7 +68,7 @@ export default function ProjectDetails() {
           name: title,
           description: shortDescription,
           category: project.category,
-          url: `https://setarehkerman.com/projects/${project.slug}`,
+          url: absoluteUrl(`/projects/${project.slug}`),
         })}
         image={project.image}
         type="article"
@@ -70,7 +79,7 @@ export default function ProjectDetails() {
           <FadeInUp delay={0.2}>
             <div className={`mb-8 ${dirClass}`}>
               <Link
-                to="/#projects"
+                to={`${getLocalizedNavPath("/", lang)}#projects`}
                 className="inline-flex items-center gap-2 text-gray-500 hover:text-[#D4AF37] transition-colors mb-6 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:ring-offset-2 focus:ring-offset-transparent"
               >
                 <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">

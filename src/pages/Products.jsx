@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import ProductCard from "../components/products/ProductCard.jsx";
@@ -9,6 +9,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { useRTL } from "../hooks/useRTL.js";
 import { FadeInUp } from "../animations/motionPresets.jsx";
 import { Heading, Text } from "../components/ui/Typography.jsx";
+import { absoluteUrl } from "../config/site.js";
 
 const Products = React.memo(function Products() {
   const { dict, lang } = useLanguage();
@@ -16,18 +17,6 @@ const Products = React.memo(function Products() {
   const t = dict.products || {};
   const categories = t.categories || [];
   const [showCategories, setShowCategories] = useState(true);
-
-  // Memoized categories to prevent unnecessary re-renders
-  const memoizedCategories = useMemo(() => categories, [categories]);
-
-  // Memoized breadcrumb schema
-  const breadcrumbSchema = useMemo(() => 
-    buildBreadcrumbSchema([
-      { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com/" },
-      { name: isRTL ? "محصولات" : "Products", url: "https://setarehkerman.com/products" },
-    ]),
-    [isRTL]
-  );
 
   // Callback for scroll to top
   const handleScrollToTop = useCallback(() => {
@@ -44,7 +33,7 @@ const Products = React.memo(function Products() {
   }
 
   // 🔹 Loading state
-  if (memoizedCategories.length === 0) {
+  if (categories.length === 0) {
     return (
       <div className="py-20 text-center font-black opacity-20 text-4xl uppercase tracking-tighter">
         Loading Products...
@@ -63,8 +52,8 @@ const Products = React.memo(function Products() {
         }
         canonical="/products"
         jsonLd={buildBreadcrumbSchema([
-          { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com/" },
-          { name: isRTL ? "محصولات" : "Products", url: "https://setarehkerman.com/products" },
+          { name: isRTL ? "خانه" : "Home", url: absoluteUrl("/") },
+          { name: isRTL ? "محصولات" : "Products", url: absoluteUrl("/products") },
         ])}
       />
       <section
@@ -95,14 +84,17 @@ const Products = React.memo(function Products() {
       {/* Collapsible Category Overview */}
       <section className="container mx-auto px-4 sm:px-6">
         <motion.button
+          type="button"
           onClick={() => setShowCategories(!showCategories)}
+          aria-expanded={showCategories}
+          aria-controls="product-category-overview"
           className={`w-full flex items-center justify-between p-6 bg-white border border-gray-100 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 ${isRTL ? "flex-row-reverse" : ""}`}
           whileHover={{ scale: 1.01 }}
           whileTap={{ scale: 0.99 }}
         >
           <div className={`flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
             <div className="w-12 h-12 bg-[#D4AF37]/10 rounded-xl flex items-center justify-center">
-              <span className="text-[#D4AF37] font-black text-lg">{memoizedCategories.length}</span>
+              <span className="text-[#D4AF37] font-black text-lg">{categories.length}</span>
             </div>
             <div className={isRTL ? "text-right" : "text-left"}>
               <Heading level={2} className="text-lg">
@@ -124,6 +116,7 @@ const Products = React.memo(function Products() {
         <AnimatePresence>
           {showCategories && (
             <motion.div
+              id="product-category-overview"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -135,7 +128,7 @@ const Products = React.memo(function Products() {
                 className="grid gap-6 sm:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4"
               >
                 <AnimatePresence mode="popLayout">
-                  {memoizedCategories.map((category) => (
+                {categories.map((category) => (
                     <ProductCard
                       key={
                         typeof category.name === "object"

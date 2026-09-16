@@ -1,4 +1,3 @@
-import React from "react";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { Toaster } from "react-hot-toast";
 
@@ -10,8 +9,9 @@ import SeoHead from "../lib/seo/SeoHead.jsx";
 import { buildBreadcrumbSchema, buildLocalBusinessSchema } from "../lib/seo/schema.js";
 import { useRTL } from "../hooks/useRTL.js";
 import { FadeInUp } from "../animations/motionPresets.jsx";
-import { Heading, Text } from "../components/ui/Typography.jsx";
+import { Text } from "../components/ui/Typography.jsx";
 import { SectionWrapper } from "../components/layout/SectionWrapper.jsx";
+import { absoluteUrl } from "../config/site.js";
 
 export default function Contact() {
   const { dict } = useLanguage();
@@ -32,8 +32,8 @@ export default function Contact() {
         canonical="/contact"
         jsonLd={[
           buildBreadcrumbSchema([
-            { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com" },
-            { name: isRTL ? "تماس با ما" : "Contact Us", url: "https://setarehkerman.com/contact" },
+            { name: isRTL ? "خانه" : "Home", url: absoluteUrl("/") },
+            { name: isRTL ? "تماس با ما" : "Contact Us", url: absoluteUrl("/contact") },
           ]),
           buildLocalBusinessSchema(),
         ]}

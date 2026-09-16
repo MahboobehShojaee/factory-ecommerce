@@ -28,6 +28,7 @@ export const CategoryFilter = React.memo(({
     <AnimatePresence>
       {showFilters && (
         <motion.div
+          id="product-category-filters"
           initial={{ height: 0, opacity: 0 }}
           animate={{ height: 'auto', opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
@@ -37,9 +38,11 @@ export const CategoryFilter = React.memo(({
           <div className="flex flex-wrap gap-2 p-4 bg-white border border-gray-200 rounded-xl">
             {/* All Categories Button */}
             <motion.button
+              type="button"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => handleSelectCategory(null)}
+              aria-pressed={selectedCategory === null}
               className={`px-4 py-2 rounded-lg text-xs font-black uppercase transition-all duration-300 ${
                 selectedCategory === null
                   ? "bg-[#D4AF37] text-white"
@@ -52,10 +55,12 @@ export const CategoryFilter = React.memo(({
             {/* Category Buttons */}
             {CATEGORY_FILTERS.map((filter, index) => (
               <motion.button
+                type="button"
                 key={index}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => handleSelectCategory(index)}
+                aria-pressed={selectedCategory === index}
                 className={`px-4 py-2 rounded-lg text-xs font-black uppercase transition-all duration-300 ${
                   selectedCategory === index
                     ? "bg-[#D4AF37] text-white"
@@ -69,6 +74,7 @@ export const CategoryFilter = React.memo(({
             {/* Clear Filter Button */}
             {selectedCategory !== null && (
               <motion.button
+                type="button"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleClearFilter}

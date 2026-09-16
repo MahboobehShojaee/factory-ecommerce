@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { useRTL } from "../hooks/useRTL.js";
@@ -10,6 +10,7 @@ import CertificationsSection from "../components/about/CertificationsSection.jsx
 import FactoryCredibilitySection from "../components/about/FactoryCredibilitySection.jsx";
 import SeoHead from "../lib/seo/SeoHead.jsx";
 import { buildBreadcrumbSchema, buildOrganizationSchema } from "../lib/seo/schema.js";
+import { absoluteUrl } from "../config/site.js";
 import { Heading, Text } from "../components/ui/Typography.jsx";
 import EngineeringExpertise from "../components/ui/EngineeringExpertise.jsx";
 import QualityAssurance from "../components/ui/QualityAssurance.jsx";
@@ -197,8 +198,8 @@ export default function About() {
         canonical="/about"
         jsonLd={[
           buildBreadcrumbSchema([
-            { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com" },
-            { name: isRTL ? "درباره ما" : "About Us", url: "https://setarehkerman.com/about" },
+            { name: isRTL ? "خانه" : "Home", url: absoluteUrl("/") },
+            { name: isRTL ? "درباره ما" : "About Us", url: absoluteUrl("/about") },
           ]),
           buildOrganizationSchema(),
         ]}

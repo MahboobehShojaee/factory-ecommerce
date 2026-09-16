@@ -40,12 +40,7 @@ export const GridProductCard = React.memo(function GridProductCard({
       className="group h-full"
     >
       <div
-        role="button"
-        tabIndex={0}
-        onClick={handleClick}
-        onKeyDown={(e) => e.key === "Enter" && handleClick()}
-        className="product-card-premium h-full flex flex-col cursor-pointer touch-manipulation !shadow-sm"
-        aria-label={`${product.name[lang]} — ${viewLabel}`}
+        className="product-card-premium h-full flex flex-col touch-manipulation !shadow-sm"
       >
         <div className="media-frame-aspect flex-shrink-0">
           <img

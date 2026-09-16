@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { useController } from 'react-hook-form';
 
 /**
@@ -17,8 +17,12 @@ const FormInput = React.memo(function FormInput({
   labelClassName = '',
   required = false,
   autoComplete = 'off',
+  id: providedId,
   ...props
 }) {
+  const generatedId = useId();
+  const inputId = providedId || `${name}-${generatedId}`;
+  const errorId = `${inputId}-error`;
   const {
     field,
     fieldState: { error, isTouched },
@@ -34,7 +38,7 @@ const FormInput = React.memo(function FormInput({
     <div className={`space-y-2 ${className}`}>
       {label && (
         <label
-          htmlFor={name}
+          htmlFor={inputId}
           className={`block text-sm font-medium text-gray-700 ${
             hasError ? 'text-red-600' : ''
           } ${labelClassName}`}
@@ -45,11 +49,13 @@ const FormInput = React.memo(function FormInput({
       )}
       
       <input
-        id={name}
+        id={inputId}
         type={type}
         placeholder={placeholder}
         disabled={disabled}
         autoComplete={autoComplete}
+        aria-invalid={hasError ? "true" : undefined}
+        aria-describedby={hasError ? errorId : undefined}
         className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/20 focus:border-[#D4AF37] ${
           hasError
             ? 'border-red-500 bg-red-50'
@@ -60,7 +66,7 @@ const FormInput = React.memo(function FormInput({
       />
       
       {hasError && (
-        <p className="text-sm text-red-600 font-medium">
+        <p id={errorId} role="alert" className="text-sm text-red-600 font-medium">
           {error.message}
         </p>
       )}

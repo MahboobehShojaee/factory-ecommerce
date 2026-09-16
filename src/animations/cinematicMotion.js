@@ -67,3 +67,23 @@ export const hoverLift = {
   y: -4,
   transition: { duration: MOTION.duration.fast, ease: MOTION.ease.out },
 };
+
+/** Hero entrance — fade + slide-up, plays once on mount */
+export const HERO_ENTER = {
+  distance: 8,
+  duration: 0.65,
+  stagger: 0.15,
+};
+
+export function heroEnterProps(step, reduceMotion) {
+  if (reduceMotion) return {};
+  return {
+    initial: { opacity: 0, y: HERO_ENTER.distance },
+    animate: { opacity: 1, y: 0 },
+    transition: {
+      duration: HERO_ENTER.duration,
+      delay: step * HERO_ENTER.stagger,
+      ease: MOTION.ease.out,
+    },
+  };
+}

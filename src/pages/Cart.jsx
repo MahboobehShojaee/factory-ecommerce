@@ -4,7 +4,6 @@ import { useRTL } from "../hooks/useRTL.js";
 import { useCartStore } from "../features/cart/store/cartStore.js";
 import { getLocalizedNavPath } from "../content/navigation/data.js";
 import SeoHead from "../lib/seo/SeoHead.jsx";
-import { buildBreadcrumbSchema } from "../lib/seo/schema.js";
 import CartItem from "../features/cart/components/CartItem.jsx";
 import EmptyCart from "../features/cart/components/EmptyCart.jsx";
 import { FadeInUp } from "../animations/motionPresets.jsx";
@@ -30,13 +29,7 @@ export default function Cart() {
             ? "سبد خرید شما - مدیریت و درخواست استعلام محصولات انتخاب شده"
             : "Your cart - manage items and request a quotation"
         }
-        canonical="/cart"
-        jsonLd={[
-          buildBreadcrumbSchema([
-            { name: isRTL ? "خانه" : "Home", url: "https://setarehkerman.com" },
-            { name: isRTL ? "سبد خرید" : "Cart", url: "https://setarehkerman.com/cart" },
-          ]),
-        ]}
+        noindex
       />
 
       <section className={`min-h-[60vh] py-10 sm:py-12 md:py-16 ${dirClass}`}>
@@ -44,6 +37,7 @@ export default function Cart() {
           title={t.title}
           description={`${totalItems} ${t.items}`}
           align="center"
+          headingLevel={1}
         />
 
         {items.length === 0 ? (

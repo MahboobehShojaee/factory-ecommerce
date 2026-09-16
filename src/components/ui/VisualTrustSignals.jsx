@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 
 /**
@@ -111,12 +111,12 @@ const VisualTrustSignals = ({
     },
   ];
 
-  const AnimatedCounter = ({ value, suffix = '' }) => {
+  const AnimatedCounter = ({ value, suffix = '', isVisible }) => {
     const [count, setCount] = useState(0);
     const targetValue = typeof value === 'number' ? value : parseInt(value.replace(/,/g, '')) || 0;
     
     useEffect(() => {
-      if (!isInView) return;
+      if (!isVisible) return;
       
       const duration = 2000;
       const steps = 60;
@@ -134,7 +134,7 @@ const VisualTrustSignals = ({
       }, duration / steps);
       
       return () => clearInterval(timer);
-    }, [isInView, targetValue]);
+    }, [isVisible, targetValue]);
 
     return (
       <span>
@@ -210,7 +210,7 @@ const VisualTrustSignals = ({
                 className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-5 sm:p-6 md:p-8 text-center shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
                 <div className="text-4xl sm:text-5xl font-bold text-[#D4AF37] mb-2">
-                  <AnimatedCounter value={metric.value} suffix={metric.suffix} />
+                  <AnimatedCounter value={metric.value} suffix={metric.suffix} isVisible={isInView} />
                 </div>
                 <div className="text-gray-700 font-medium">
                   {metric.label[lang]}

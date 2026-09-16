@@ -13,7 +13,7 @@
  * - Bilingual support (English + Persian)
  */
 
-import { createArticle, pillarArticleTemplate } from './articleTemplate.js';
+import { createArticle } from './articleTemplate.js';
 import { generateAllMetadata } from './metadataTemplate.js';
 
 export const xlpeVsPvcArticle = createArticle({

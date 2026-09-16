@@ -38,7 +38,9 @@ export const ProductSearchBar = React.memo(({
       <div className="flex-1">
         <div className="relative">
           <input
+            id="product-search"
             type="text"
+            aria-label={placeholder || defaultPlaceholder}
             placeholder={placeholder || defaultPlaceholder}
             value={searchTerm}
             onChange={handleSearchChange}
@@ -64,9 +66,12 @@ export const ProductSearchBar = React.memo(({
 
       {/* Filter Toggle Button */}
       <motion.button
+        type="button"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={handleToggleFilters}
+        aria-expanded={showFilters}
+        aria-controls="product-category-filters"
         className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border transition-all duration-300 ${
           showFilters
             ? "bg-[#D4AF37] text-white border-[#D4AF37]"

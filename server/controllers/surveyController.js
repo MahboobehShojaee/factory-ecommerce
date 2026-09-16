@@ -3,6 +3,10 @@ import { isMailConfigured, sendSurveyEmail } from "../services/mailService.js";
 
 export async function submitSurvey(req, res, next) {
   try {
+    if (typeof req.body?.website === "string" && req.body.website.trim()) {
+      return res.status(204).end();
+    }
+
     if (!isMailConfigured()) {
       return res.status(503).json({
         error: "Survey form is temporarily unavailable. Please try again later or email us directly.",

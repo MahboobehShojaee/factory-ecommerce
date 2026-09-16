@@ -2,7 +2,6 @@
  * Section layout — consistent spacing & calm headers
  */
 
-import { motion } from "framer-motion";
 import { useRTL } from "../../hooks/useRTL.js";
 import { MOTION } from "../../animations/cinematicMotion.js";
 import ScrollReveal from "../common/ScrollReveal.jsx";
@@ -13,8 +12,10 @@ export function SectionHeader({
   description,
   className = "",
   align = "center",
+  headingLevel = 2,
 }) {
   const { isRTL } = useRTL();
+  const HeadingTag = `h${headingLevel}`;
 
   const alignClass =
     align === "center"
@@ -42,9 +43,9 @@ export function SectionHeader({
         </div>
       )}
       {title && (
-        <h2 className="text-2xl sm:text-3xl font-black text-[#374151] leading-tight tracking-tight text-balance">
+        <HeadingTag className="text-2xl sm:text-3xl font-black text-[#374151] leading-tight tracking-tight text-balance">
           {title}
-        </h2>
+        </HeadingTag>
       )}
       {description && (
         <p className="mt-3 prose-calm max-w-2xl mx-auto text-balance">

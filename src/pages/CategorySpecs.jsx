@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext.jsx";
@@ -10,6 +10,8 @@ import { LoadingState, ErrorState } from "../components/ui/AsyncState.jsx";
 import { FadeInUp } from "../animations/motionPresets.jsx";
 import { SpecificationTable } from "../components/ui/TechnicalTable.jsx";
 import { Heading, Text } from "../components/ui/Typography.jsx";
+import { getLocalizedNavPath } from "../content/navigation/data.js";
+import { absoluteUrl } from "../config/site.js";
 
 const labels = {
   conductor: { en: "Conductor", fa: "هادی" },
@@ -29,6 +31,8 @@ export default function CategorySpecs() {
   const { lang } = useLanguage();
   const { isRTL, dirClass } = useRTL();
   const [isGenerating, setIsGenerating] = useState(false);
+  const [pdfError, setPdfError] = useState("");
+  const productsPath = getLocalizedNavPath("/products", lang);
   const categoryQuery = useCategorySpecsQuery(categorySlug);
   const categoriesQuery = useProductCategoriesQuery();
   const categoryConfig = categoryQuery.data;
@@ -50,7 +54,14 @@ export default function CategorySpecs() {
 
   if (!categoryConfig) {
     return (
-      <section className={`min-h-screen bg-gray-50 py-10 sm:py-14 md:py-20 ${dirClass}`}>
+      <>
+        <SeoHead
+          title={lang === "fa" ? "دسته یافت نشد" : "Category Not Found"}
+          description={lang === "fa" ? "دسته درخواست‌شده یافت نشد." : "The requested category could not be found."}
+          noindex
+          lang={lang}
+        />
+        <section className={`min-h-screen bg-gray-50 py-10 sm:py-14 md:py-20 ${dirClass}`}>
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center">
             <Heading level={1} className="text-4xl mb-4">
@@ -60,14 +71,15 @@ export default function CategorySpecs() {
               {lang === "fa" ? "دسته درخواست شده وجود ندارد" : "The requested category does not exist"}
             </Text>
             <button
-              onClick={() => navigate('/products')}
+              onClick={() => navigate(productsPath)}
               className="px-6 py-3 bg-[#D4AF37] text-white rounded-lg hover:bg-[#B8941F] transition-colors"
             >
               {lang === "fa" ? "بازگشت به محصولات" : "Back to Products"}
             </button>
           </div>
         </div>
-      </section>
+        </section>
+      </>
     );
   }
 
@@ -80,6 +92,7 @@ export default function CategorySpecs() {
   const otherCategories = allCategories.filter((cat) => cat.slug !== categorySlug);
 
   const handleDownloadPDF = async () => {
+    setPdfError("");
     setIsGenerating(true);
     try {
       const { generateProfessionalPDF } = await import("../lib/pdf/professionalPDFGenerator.js");
@@ -87,7 +100,10 @@ export default function CategorySpecs() {
       const filename = `${categoryConfig.slug}-technical-specs.pdf`;
       pdf.save(filename);
     } catch (error) {
-      console.error("Error generating PDF:", error);
+      if (import.meta.env.DEV) {
+        console.error("Error generating PDF:", error);
+      }
+      setPdfError(lang === "fa" ? "تولید فایل ناموفق بود. لطفاً دوباره تلاش کنید." : "Could not generate the file. Please try again.");
     } finally {
       setIsGenerating(false);
     }
@@ -104,11 +120,11 @@ export default function CategorySpecs() {
             name: categoryConfig.titles[lang],
             description: seoDescription,
             category: categoryConfig.titles.en,
-            url: `https://setarehkerman.com/products/${categorySlug}/specifications`,
+            url: absoluteUrl(getLocalizedNavPath(`/products/${categorySlug}/specifications`, lang)),
           }),
           buildBreadcrumbSchema([
-            { name: isRTL ? "محصولات" : "Products", url: "https://setarehkerman.com/products" },
-            { name: categoryConfig.titles[lang], url: `https://setarehkerman.com/products/${categorySlug}/specifications` },
+            { name: isRTL ? "محصولات" : "Products", url: absoluteUrl(productsPath) },
+            { name: categoryConfig.titles[lang], url: absoluteUrl(getLocalizedNavPath(`/products/${categorySlug}/specifications`, lang)) },
           ]),
         ]}
       />
@@ -117,7 +133,7 @@ export default function CategorySpecs() {
           <nav className="mb-8" aria-label="Breadcrumb">
             <ol className={`flex flex-wrap items-center gap-x-2 gap-y-1 text-sm ${isRTL ? "flex-row-reverse" : ""}`}>
               <li>
-                <Link to="/products" className="text-gray-500 hover:text-[#D4AF37] transition-colors">
+                <Link to={productsPath} className="text-gray-500 hover:text-[#D4AF37] transition-colors">
                   {lang === "fa" ? "محصولات" : "Products"}
                 </Link>
               </li>
@@ -130,7 +146,7 @@ export default function CategorySpecs() {
 
           <FadeInUp>
             <button
-              onClick={() => navigate("/products")}
+              onClick={() => navigate(productsPath)}
               className="mb-8 flex items-center gap-2 text-gray-600 hover:text-[#D4AF37] transition-colors"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,6 +185,11 @@ export default function CategorySpecs() {
                   </>
                 )}
               </motion.button>
+              {pdfError && (
+                <p role="alert" className="w-full text-right text-sm font-medium text-red-600">
+                  {pdfError}
+                </p>
+              )}
             </div>
           </FadeInUp>
 

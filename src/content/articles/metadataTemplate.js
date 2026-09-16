@@ -7,6 +7,7 @@
 import { generateArticleMetadata, generateArticleSchema } from './articleTemplate.js';
 import { buildBreadcrumbSchema } from '../../lib/seo/schema.js';
 import { generateArticleBreadcrumbItems } from '../../components/ui/Breadcrumb.jsx';
+import { localizedBlogUrl, siteUrl } from '../../config/site.js';
 
 /**
  * Base metadata template
@@ -50,8 +51,8 @@ export const baseMetadataTemplate = {
  * Generate complete metadata for article
  */
 export function generateCompleteMetadata(article, lang) {
-  const baseUrl = 'https://setarehkerman.com';
-  const url = `${baseUrl}/${lang === 'fa' ? 'fa/' : ''}blog/${article.slug}`;
+  const baseUrl = siteUrl;
+  const url = localizedBlogUrl(article.slug, lang);
   
   // Generate article metadata
   const articleMetadata = generateArticleMetadata(article, lang);
@@ -141,8 +142,8 @@ export function generateMetadataByContentType(article, lang) {
  * Generate Open Graph metadata
  */
 export function generateOpenGraphMetadata(article, lang) {
-  const baseUrl = 'https://setarehkerman.com';
-  const url = `${baseUrl}/${lang === 'fa' ? 'fa/' : ''}blog/${article.slug}`;
+  const baseUrl = siteUrl;
+  const url = localizedBlogUrl(article.slug, lang);
   
   return {
     title: article.title[lang],
@@ -185,8 +186,8 @@ export function generateTwitterMetadata(article, lang) {
  * Generate structured data for rich snippets
  */
 export function generateStructuredData(article, lang) {
-  const baseUrl = 'https://setarehkerman.com';
-  const url = `${baseUrl}/${lang === 'fa' ? 'fa/' : ''}blog/${article.slug}`;
+  const baseUrl = siteUrl;
+  const url = localizedBlogUrl(article.slug, lang);
   
   const structuredData = {
     '@context': 'https://schema.org',
@@ -237,23 +238,21 @@ export function generateStructuredData(article, lang) {
  * Generate hreflang tags for multilingual SEO
  */
 export function generateHreflangTags(article) {
-  const baseUrl = 'https://setarehkerman.com';
-  
   return [
     {
       rel: 'alternate',
       hrefLang: 'en',
-      href: `${baseUrl}/blog/${article.slug}`,
+      href: localizedBlogUrl(article.slug, "en"),
     },
     {
       rel: 'alternate',
       hrefLang: 'fa',
-      href: `${baseUrl}/fa/blog/${article.slug}`,
+      href: localizedBlogUrl(article.slug, "fa"),
     },
     {
       rel: 'alternate',
       hrefLang: 'x-default',
-      href: `${baseUrl}/blog/${article.slug}`,
+      href: localizedBlogUrl(article.slug, "en"),
     },
   ];
 }
@@ -262,10 +261,8 @@ export function generateHreflangTags(article) {
  * Generate canonical URL
  */
 export function generateCanonicalUrl(article, lang) {
-  const baseUrl = 'https://setarehkerman.com';
-  
   // English is the default/canonical version
-  return `${baseUrl}/blog/${article.slug}`;
+  return localizedBlogUrl(article.slug, "en");
 }
 
 /**
@@ -299,8 +296,8 @@ export function generateAllMetadata(article, lang) {
     alternates: {
       canonical: generateCanonicalUrl(article, lang),
       languages: {
-        en: `https://setarehkerman.com/blog/${article.slug}`,
-        fa: `https://setarehkerman.com/fa/blog/${article.slug}`,
+        en: localizedBlogUrl(article.slug, "en"),
+        fa: localizedBlogUrl(article.slug, "fa"),
       },
     },
     robots: generateRobotsMeta(article),

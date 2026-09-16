@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -53,6 +53,7 @@ export default function ContactForm({ t, projectOptions, cableOptions }) {
       urgency: "normal",
       details: "",
       terms: false,
+      website: "",
     },
   });
 
@@ -78,6 +79,7 @@ export default function ContactForm({ t, projectOptions, cableOptions }) {
     urgency: "normal",
     details: "",
     terms: false,
+    website: "",
   };
 
   const onSubmit = async (data) => {
@@ -127,6 +129,16 @@ export default function ContactForm({ t, projectOptions, cableOptions }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="ds-form-panel space-y-6">
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
+      </div>
       <div className="mb-2 space-y-3">
         <h2
           className={`text-xl sm:text-2xl font-black text-[#374151] ${isRTL ? "text-right" : "text-left"}`}
@@ -263,9 +275,10 @@ export default function ContactForm({ t, projectOptions, cableOptions }) {
 
       <div className="grid gap-6 sm:grid-cols-2">
         <div className={`space-y-2 ${dirClass}`}>
-          <label className={labelClass(isRTL)}>{t.projectType}</label>
+          <label htmlFor="contact-project-type" className={labelClass(isRTL)}>{t.projectType}</label>
           <FormSelect
             name="projectType"
+            id="contact-project-type"
             control={control}
             placeholder={t.projectTypePlaceholder}
             options={projectOptions.map((opt) => ({ value: opt, label: opt }))}
@@ -309,11 +322,12 @@ export default function ContactForm({ t, projectOptions, cableOptions }) {
                 required
               />
               <div className={`space-y-2 ${dirClass}`}>
-                <label className={labelClass(isRTL)}>
+                <label htmlFor="contact-urgency" className={labelClass(isRTL)}>
                   {t.urgency || (lang === "fa" ? "اولویت زمانی" : "Urgency")}
                 </label>
                 <FormSelect
                   name="urgency"
+                  id="contact-urgency"
                   control={control}
                   placeholder={
                     t.urgencyPlaceholder ||

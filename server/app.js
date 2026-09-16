@@ -64,7 +64,9 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-app.use("/chat", chatLimiter, chatRoutes);
+if (env.enableChatbot) {
+  app.use("/chat", chatLimiter, chatRoutes);
+}
 app.use("/api/products", productsRoutes);
 app.use("/api/content", contentRoutes);
 app.use("/api/contact", submissionLimiter, contactRoutes);

@@ -1,15 +1,19 @@
 import { useEffect, useRef } from 'react';
 
+const DEFAULT_SCROLL_THRESHOLDS = [25, 50, 75, 100];
+const DEFAULT_TIME_INTERVALS = [30, 60, 120, 300];
+
 /**
  * Hook to track scroll depth for analytics
  * Tracks scroll progress at 25%, 50%, 75%, and 100%
  */
 export const useScrollDepthTracking = (eventName = 'scroll_depth', options = {}) => {
-  const { threshold = [25, 50, 75, 100], enabled = true } = options;
+  const { threshold = DEFAULT_SCROLL_THRESHOLDS, enabled = true } = options;
   const trackedThresholds = useRef(new Set());
 
   useEffect(() => {
     if (!enabled) return;
+    const tracked = trackedThresholds.current;
 
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -17,8 +21,8 @@ export const useScrollDepthTracking = (eventName = 'scroll_depth', options = {})
       const scrollPercent = Math.round((scrollTop / scrollHeight) * 100);
 
       threshold.forEach((percent) => {
-        if (scrollPercent >= percent && !trackedThresholds.current.has(percent)) {
-          trackedThresholds.current.add(percent);
+        if (scrollPercent >= percent && !tracked.has(percent)) {
+          tracked.add(percent);
 
           // Track scroll depth event
           if (window.analytics && window.analytics.trackEvent) {
@@ -52,7 +56,7 @@ export const useScrollDepthTracking = (eventName = 'scroll_depth', options = {})
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      trackedThresholds.current.clear();
+      tracked.clear();
     };
   }, [eventName, threshold, enabled]);
 };
@@ -61,16 +65,17 @@ export const useScrollDepthTracking = (eventName = 'scroll_depth', options = {})
  * Hook to track time on page
  */
 export const useTimeOnPageTracking = (eventName = 'time_on_page', options = {}) => {
-  const { intervals = [30, 60, 120, 300], enabled = true } = options;
+  const { intervals = DEFAULT_TIME_INTERVALS, enabled = true } = options;
   const trackedIntervals = useRef(new Set());
 
   useEffect(() => {
     if (!enabled) return;
+    const tracked = trackedIntervals.current;
 
-    intervals.forEach((seconds) => {
-      const timer = setTimeout(() => {
-        if (!trackedIntervals.current.has(seconds)) {
-          trackedIntervals.current.add(seconds);
+    const timers = intervals.map((seconds) =>
+      setTimeout(() => {
+        if (!tracked.has(seconds)) {
+          tracked.add(seconds);
 
           // Track time on page event
           if (window.analytics && window.analytics.trackEvent) {
@@ -90,13 +95,12 @@ export const useTimeOnPageTracking = (eventName = 'time_on_page', options = {}) 
             });
           }
         }
-      }, seconds * 1000);
-
-      return () => clearTimeout(timer);
-    });
+      }, seconds * 1000),
+    );
 
     return () => {
-      trackedIntervals.current.clear();
+      timers.forEach(clearTimeout);
+      tracked.clear();
     };
   }, [eventName, intervals, enabled]);
 };

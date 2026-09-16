@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useLanguage } from '../../context/LanguageContext.jsx';
+import { useEffect, useState } from 'react';
 import { useRTL } from '../../hooks/useRTL.js';
 import { List, ChevronRight, Menu, X } from 'lucide-react';
 
@@ -8,7 +7,15 @@ export default function TableOfContents({ content, lang }) {
   const [headings, setHeadings] = useState([]);
   const [activeHeading, setActiveHeading] = useState('');
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const tocRef = useRef(null);
+
+  useEffect(() => {
+    if (!isMobileOpen) return;
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setIsMobileOpen(false);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isMobileOpen]);
 
   // Extract headings from content
   useEffect(() => {
@@ -78,9 +85,12 @@ export default function TableOfContents({ content, lang }) {
     <>
       {/* Mobile Toggle Button */}
       <button
+        type="button"
         onClick={() => setIsMobileOpen(!isMobileOpen)}
         className={`lg:hidden fixed bottom-20 right-4 z-40 bg-[#374151] text-white p-3 rounded-full shadow-lg ${isRTL ? 'left-4 right-auto' : ''}`}
         aria-label={lang === 'fa' ? 'محتوا' : 'Contents'}
+        aria-expanded={isMobileOpen}
+        aria-controls="mobile-table-of-contents"
       >
         {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
@@ -89,16 +99,22 @@ export default function TableOfContents({ content, lang }) {
       {isMobileOpen && (
         <div className={`lg:hidden fixed inset-0 z-30 bg-black/50 ${dirClass}`}>
           <div
-            className={`fixed top-0 ${isRTL ? 'left-0' : 'right-0'} h-full w-80 bg-white shadow-2xl overflow-y-auto`}
+            id="mobile-table-of-contents"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-toc-title"
+            className={`fixed top-0 ${isRTL ? 'left-0' : 'right-0'} h-full w-[min(20rem,calc(100vw-2rem))] bg-white shadow-2xl overflow-y-auto`}
           >
             <div className="p-6">
               <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-black text-[#374151]">
+                <h3 id="mobile-toc-title" className="text-lg font-black text-[#374151]">
                   {lang === 'fa' ? 'فهرست مطالب' : 'Table of Contents'}
                 </h3>
                 <button
+                  type="button"
                   onClick={() => setIsMobileOpen(false)}
                   className="text-gray-500 hover:text-[#374151]"
+                  aria-label={lang === 'fa' ? 'بستن فهرست مطالب' : 'Close table of contents'}
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -148,6 +164,7 @@ function TOCList({ headings, activeHeading, onHeadingClick, isRTL, lang }) {
             }}
           >
             <button
+              type="button"
               onClick={() => onHeadingClick(heading.id)}
               className={`w-full text-left text-sm transition-all duration-200 hover:text-[#D4AF37] ${
                 activeHeading === heading.id

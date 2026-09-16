@@ -1,4 +1,3 @@
-import React from "react";
 import { useLanguage } from "../../context/LanguageContext.jsx";
 import { useRTL } from "../../hooks/useRTL.js";
 import JSONProductGrid from "./JSONProductGrid.jsx";

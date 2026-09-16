@@ -42,7 +42,7 @@ export const layoutTranslations = {
       navAbout: "درباره ما",
       navContact: "تماس با ما",
       footerLeft: "© {year} کارخانه سیم و کابل ستاره کرمان.",
-      footerRight: "طراحی‌شده برای توان، کنترل و ارتباطات صنعتی.",
+      footerRight: "طراحی شده برای تولیدی ستاره کرمان",
       footerTagline: "دقت در هر متر کابل.",
       footerAbout:
         "تولید سیم و کابل صنعتی با استانداردهای بین‌المللی برای پروژه‌های برق، کنترل و مخابرات.",

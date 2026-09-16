@@ -7,7 +7,7 @@ export async function submitSurvey(payload) {
   } catch (error) {
     const responseErrors = error?.response?.data?.errors;
     if (Array.isArray(responseErrors) && responseErrors.length > 0) {
-      throw new Error(responseErrors[0].message);
+      throw new Error(responseErrors[0].message, { cause: error });
     }
     throw error;
   }

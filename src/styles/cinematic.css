@@ -24,6 +24,14 @@
   @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
 }
 
+/* Hero is rendered outside page-container padding; keep the class as a no-op for safety. */
+.hero-full-bleed {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+}
+
 /* --- Surfaces --- */
 .ds-card {
   @apply bg-white border border-gray-100 rounded-2xl lg:rounded-3xl;
@@ -83,7 +91,7 @@
 
 /* --- Footer --- */
 .cinematic-footer {
-  @apply bg-[#374151] text-white border-t border-white/[0.06];
+  @apply bg-[#374151] text-white;
 }
 
 /* --- Hero --- */

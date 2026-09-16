@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { useRTL } from "../hooks/useRTL.js";
@@ -97,7 +97,9 @@ export default function Blog() {
                 </span>
                 <div className="flex flex-wrap gap-2">
                   <button
+                    type="button"
                     onClick={() => setSelectedCategory(null)}
+                    aria-pressed={selectedCategory === null}
                     className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                       selectedCategory === null
                         ? "bg-[#374151] text-white"
@@ -108,8 +110,10 @@ export default function Blog() {
                   </button>
                   {categories.map((cat) => (
                     <button
+                      type="button"
                       key={cat.id}
                       onClick={() => setSelectedCategory(cat.id)}
+                      aria-pressed={selectedCategory === cat.id}
                       className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                         selectedCategory === cat.id
                           ? "bg-[#374151] text-white"
@@ -129,7 +133,9 @@ export default function Blog() {
                 </span>
                 <div className="flex flex-wrap gap-2">
                   <button
+                    type="button"
                     onClick={() => setSelectedTag(null)}
+                    aria-pressed={selectedTag === null}
                     className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                       selectedTag === null
                         ? "bg-[#D4AF37] text-white"
@@ -140,8 +146,10 @@ export default function Blog() {
                   </button>
                   {tags.slice(0, 5).map((tag) => (
                     <button
+                      type="button"
                       key={tag.id}
                       onClick={() => setSelectedTag(tag.id)}
+                      aria-pressed={selectedTag === tag.id}
                       className={`px-4 py-2 rounded-lg text-sm font-bold transition-all ${
                         selectedTag === tag.id
                           ? "bg-[#D4AF37] text-white"

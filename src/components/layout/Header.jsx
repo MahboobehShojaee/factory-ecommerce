@@ -20,7 +20,7 @@ export default function Header() {
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -30,18 +30,30 @@ export default function Header() {
     setIsMenuOpen(false);
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (!isMenuOpen) return;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") setIsMenuOpen(false);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [isMenuOpen]);
+
   return (
     <header
       className={`fixed left-1/2 -translate-x-1/2 z-[100] w-[94%] max-w-7xl transition-all duration-500 ${
-        scrolled ? "header-scrolled top-3 sm:top-4" : "top-5 sm:top-6"
+        scrolled ? "top-3" : "top-6"
       }`}
       role="banner"
     >
-      <nav
-        className={`flex items-center justify-between px-4 sm:px-5 py-3 rounded-2xl lg:rounded-3xl border border-gray-100/80 transition-all duration-300 backdrop-blur-xl backdrop-saturate-150 ${
-          scrolled ? "bg-white/65" : "bg-white/50"
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        className={`flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 lg:py-3.5 rounded-full border border-white/60 transition-all duration-300 backdrop-blur-[20px] ${
+          scrolled ? "bg-white/92 shadow-lg" : "bg-white/88 shadow-md"
         }`}
-        style={{ boxShadow: scrolled ? "var(--ds-shadow-hover)" : "var(--ds-shadow)" }}
+        style={{ boxShadow: scrolled ? "0 8px 32px -12px rgba(31,41,55,0.25)" : "0 4px 24px -8px rgba(31,41,55,0.15)" }}
         role="navigation"
         aria-label="Main navigation"
       >
@@ -50,14 +62,14 @@ export default function Header() {
           className="flex items-center gap-2.5 sm:gap-3 group relative z-[110] focus:outline-none focus:ring-2 focus:ring-[#D4AF37] rounded-xl min-w-0"
           aria-label="Setareh Kerman Home"
         >
-          <div className="h-11 w-11 flex shrink-0 items-center justify-center rounded-2xl bg-white border border-gray-100 overflow-hidden shadow-md transition-all group-hover:rotate-[15deg] group-hover:scale-105">
+          <div className="h-10 w-10 lg:h-[2.35rem] lg:w-[2.35rem] flex shrink-0 items-center justify-center rounded-full bg-white border border-gray-100 overflow-hidden shadow-[0_2px_8px_-3px rgba(31,41,55,0.25)] transition-all group-hover:rotate-[15deg] group-hover:scale-105">
             <img
               src={images.logo.nav}
               alt="Setareh Kerman Logo"
               className="h-full w-full object-contain p-1"
-              width={44}
-              height={44}
-              fetchpriority="high"
+              width={56}
+              height={56}
+              fetchPriority="high"
             />
           </div>
           <div
@@ -66,27 +78,24 @@ export default function Header() {
             <Text
               size="xs"
               weight="black"
-              className="text-[#374151] uppercase tracking-tighter truncate"
+              className="text-[#2F3742] text-[12px] tracking-tight truncate"
             >
               {layout.brandLine1}
             </Text>
           </div>
         </Link>
 
-        <div
-          className="hidden lg:flex items-center bg-gray-50/60 p-1 rounded-[20px] border border-gray-100"
-          role="menubar"
-        >
+        <div className="hidden lg:flex items-center gap-1" role="menubar">
           {navLinks.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
               end={item.to === "/" || item.to === "/fa" || item.to === "/fa/"}
               className={({ isActive }) =>
-                `px-4 xl:px-6 py-2 rounded-[16px] text-[10px] font-black uppercase tracking-widest transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37] ${
+                `px-4 xl:px-5 py-2 rounded-full text-[12px] font-bold tracking-normal transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37] ${
                   isActive
-                    ? "bg-[#374151] text-white shadow-lg"
-                    : "text-gray-400 hover:text-[#374151]"
+                    ? "bg-[#374151] text-white shadow-[0_4px_12px_-6px_rgba(31,41,55,0.6)]"
+                    : "text-[#1F2937] hover:text-[#111827]"
                 }`
               }
               role="menuitem"
@@ -111,7 +120,11 @@ export default function Header() {
                   : path || "/";
               navigate(newPath);
             }}
-            className="h-10 sm:h-11 px-4 sm:px-5 rounded-2xl bg-gray-50 border border-gray-100 text-[#374151] text-[10px] font-black hover:bg-gradient-to-r hover:from-[#FFD700] hover:via-[#D4AF37] hover:to-[#B8860B] hover:text-white transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
+            className={`h-9 lg:h-[2.15rem] px-4 rounded-full text-[11px] font-black transition-all focus:outline-none focus:ring-2 focus:ring-[#D4AF37] ${
+              lang === LANGS.FA
+                ? "bg-[#D4AF37] text-[#26313A] shadow-[0_2px_8px_-4px_rgba(212,175,55,0.4)]"
+                : "bg-[#F0F0F2] border border-gray-200/70 text-[#3B424B] hover:bg-[#D4AF37] hover:text-[#26313A] hover:border-[#D4AF37]"
+            }`}
             aria-label={`Switch language to ${lang === LANGS.EN ? "Persian" : "English"}`}
           >
             {lang === LANGS.EN ? "FA" : "EN"}
@@ -123,6 +136,7 @@ export default function Header() {
             className="lg:hidden h-10 w-10 sm:h-11 sm:w-11 flex flex-col items-center justify-center gap-1.5 bg-[#374151] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#D4AF37]"
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation-menu"
           >
             <motion.span
               animate={
@@ -143,7 +157,7 @@ export default function Header() {
             />
           </button>
         </div>
-      </nav>
+      </motion.nav>
 
       <AnimatePresence>
         {isMenuOpen && (
@@ -158,6 +172,7 @@ export default function Header() {
               onClick={() => setIsMenuOpen(false)}
             />
             <motion.div
+              id="mobile-navigation-menu"
               initial={{ opacity: 0, y: -16, scale: 0.98 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -16, scale: 0.98 }}

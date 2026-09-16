@@ -73,7 +73,7 @@ export const createContactFormSchema = (lang = 'en') => {
     phone: z
       .string()
       .min(1, createBilingualMessage(lang, 'required'))
-      .regex(/^[+]?[\d\s\-\(\)]+$/, createBilingualMessage(lang, 'phone'))
+      .regex(/^[+]?[\d\s()-]+$/, createBilingualMessage(lang, 'phone'))
       .min(10, createBilingualMessage(lang, 'minLength', 10))
       .max(20, createBilingualMessage(lang, 'maxLength', 20)),
 
@@ -97,6 +97,8 @@ export const createContactFormSchema = (lang = 'en') => {
     terms: z
       .boolean()
       .refine((val) => val === true, createBilingualMessage(lang, 'required')),
+
+    website: z.string().max(0).optional(),
   });
 
   return baseSchema.superRefine((data, ctx) => {
@@ -135,7 +137,7 @@ export const createFormSchema = (lang, schemaDefinition) => {
  */
 export const patterns = {
   email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  phone: /^[+]?[\d\s\-\(\)]+$/,
+  phone: /^[+]?[\d\s()-]+$/,
   name: /^[a-zA-Z\s\u0600-\u06FF]+$/,
   alphanumeric: /^[a-zA-Z0-9]+$/,
 };

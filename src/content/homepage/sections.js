@@ -12,9 +12,9 @@ export const trustMetrics = [
   },
   {
     id: 2,
-    value: 120000,
+    value: 480000,
     suffix: "",
-    label: { en: "km Annual Capacity", fa: "کیلومتر ظرفیت سالانه" },
+    label: { en: "km Monthly Capacity", fa: "کیلومتر ظرفیت ماهانه" },
     icon: "production",
   },
   {

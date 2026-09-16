@@ -81,6 +81,17 @@
   50% { transform: translateY(-10px); }
 }
 
+@keyframes goldShimmer {
+  0%, 100% {
+    color: #F3D779;
+    text-shadow: 0 0 12px rgba(243, 215, 121, 0.35);
+  }
+  50% {
+    color: #A8791A;
+    text-shadow: 0 0 22px rgba(184, 134, 11, 0.45);
+  }
+}
+
 /* Utility classes */
 .animate-fade-in { animation: fadeIn 0.3s ease-in-out; }
 .animate-fade-out { animation: fadeOut 0.3s ease-in-out; }
@@ -92,6 +103,14 @@
 .animate-pulse { animation: pulse 2s infinite; }
 .animate-spin { animation: spin 1s linear infinite; }
 .animate-bounce { animation: bounce 1s infinite; }
+.animate-gold-shimmer { animation: goldShimmer 3.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-gold-shimmer {
+    animation: none;
+    color: #D4AF37;
+  }
+}
 
 /* Animation delays */
 .animate-delay-100 { animation-delay: 100ms; }

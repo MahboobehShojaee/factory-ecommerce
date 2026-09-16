@@ -21,6 +21,7 @@ export const env = {
   port: Number(process.env.PORT) || 5000,
   host: process.env.HOST || "0.0.0.0",
   openaiApiKey: process.env.OPENAI_API_KEY,
+  enableChatbot: process.env.ENABLE_CHATBOT === "true",
   corsAllowedOrigins: process.env.CORS_ALLOWED_ORIGINS
     ? splitOrigins(process.env.CORS_ALLOWED_ORIGINS)
     : defaultOrigins,

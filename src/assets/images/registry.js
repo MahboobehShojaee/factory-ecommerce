@@ -5,9 +5,10 @@
 import logoNav from "./logo-wb-wt.png";
 import logoWatermark from "./logo-withoutBackground.png";
 import factoryHero from "./factory.jpg";
-import manHero from "./men/men.png";
-import menScene from "./men/1.png";
 import menCableDetail from "./men/2.png";
+import heroBackdrop from "./men/4.png";
+import heroBackdropMobile from "./men/44.jpg";
+import heroBackdropFA from "./men/5.png";
 import processStep1 from "./Process/step1.jpg";
 import processStep2 from "./Process/step2.jpg";
 import processStep3 from "./Process/step3.jpg";
@@ -22,9 +23,10 @@ export const images = {
     watermark: logoWatermark,
   },
   factory: factoryHero,
-  men: manHero,
-  menScene,
   menCableDetail,
+  heroBackdrop,
+  heroBackdropMobile,
+  heroBackdropFA,
   process: {
     step1: processStep1,
     step2: processStep2,

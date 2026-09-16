@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.jsx";
 import { resolveProductImage } from "../../lib/media/resolveProductImage.js";
+import { getLocalizedNavPath } from "../../content/navigation/data.js";
 
 export default function PreviewModal({ 
   product, 
@@ -12,17 +14,37 @@ export default function PreviewModal({
   isRTL 
 }) {
   const { lang } = useLanguage();
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const closeButtonRef = useRef(null);
+  const dialogRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return undefined;
+    const previouslyFocused = document.activeElement;
     closeButtonRef.current?.focus();
-    const handleEsc = (event) => {
+    const handleKeyDown = (event) => {
       if (event.key === "Escape") onClose();
+      if (event.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = dialogRef.current.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     };
-    document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
   }, [isOpen, onClose]);
 
   if (!product) return null;
@@ -38,7 +60,7 @@ export default function PreviewModal({
       contactSection.scrollIntoView({ behavior: 'smooth' });
       onClose();
     } else {
-      window.location.href = '/contact';
+      navigate(getLocalizedNavPath("/contact", lang));
     }
   };
 
@@ -64,6 +86,7 @@ export default function PreviewModal({
             onClick={(e) => e.stopPropagation()}
           >
             <div
+              ref={dialogRef}
               className="relative w-full max-w-2xl max-h-[90vh] bg-white rounded-[30px] shadow-2xl overflow-hidden"
               role="dialog"
               aria-modal="true"
@@ -100,6 +123,7 @@ export default function PreviewModal({
 
                 {/* Close Button */}
                 <button
+                  type="button"
                   ref={closeButtonRef}
                   onClick={onClose}
                   className="absolute top-4 right-4 w-10 h-10 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors z-[10000]"
@@ -143,6 +167,7 @@ export default function PreviewModal({
                 <div className="mb-6">
                   <div className="flex border-b border-gray-200">
                     <button
+                      type="button"
                       onClick={() => setActiveTab('overview')}
                       className={`px-4 py-2 text-sm font-medium transition-colors duration-200 border-b-2 ${
                         activeTab === 'overview'
@@ -153,6 +178,7 @@ export default function PreviewModal({
                       {lang === "fa" ? "مرور کلی" : "Overview"}
                     </button>
                     <button
+                      type="button"
                       onClick={() => setActiveTab('specs')}
                       className={`px-4 py-2 text-sm font-medium transition-colors duration-200 border-b-2 ${
                         activeTab === 'specs'
@@ -273,6 +299,7 @@ export default function PreviewModal({
                 {/* Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3 mt-8">
                   <button
+                    type="button"
                     onClick={handleRequestInfo}
                     className="flex-1 bg-[#D4AF37] text-white py-3 rounded-[20px] font-black text-[10px] uppercase tracking-widest hover:bg-[#B8941F] transition-colors duration-300 shadow-lg hover:shadow-xl"
                   >
@@ -280,6 +307,7 @@ export default function PreviewModal({
                   </button>
                   
                   <button
+                    type="button"
                     onClick={handleAddToWishlist}
                     className={`px-6 py-3 rounded-[20px] border-2 transition-all duration-300 ${
                       isInWishlist 

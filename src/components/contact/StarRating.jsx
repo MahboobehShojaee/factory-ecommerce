@@ -1,12 +1,19 @@
 import { useState } from "react";
 
-export default function StarRating({ value, onChange, isRTL }) {
+export default function StarRating({ value, onChange, isRTL, errorId }) {
   const [hovered, setHovered] = useState(0);
 
   const stars = [1, 2, 3, 4, 5];
 
   return (
-    <div className={`flex gap-1 ${isRTL ? "flex-row-reverse" : ""}`} dir="ltr">
+    <div
+      className={`flex gap-1 ${isRTL ? "flex-row-reverse" : ""}`}
+      dir="ltr"
+      role="radiogroup"
+      aria-labelledby="survey-rating-label"
+      aria-describedby={errorId}
+      aria-invalid={errorId ? "true" : undefined}
+    >
       {stars.map((star) => {
         const filled = star <= (hovered || value);
         return (
@@ -18,6 +25,8 @@ export default function StarRating({ value, onChange, isRTL }) {
             onMouseLeave={() => setHovered(0)}
             className="p-0.5 transition-transform hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37]/60 rounded"
             aria-label={`${star} star${star > 1 ? "s" : ""}`}
+            role="radio"
+            aria-checked={value === star}
           >
             <svg
               className="w-8 h-8 sm:w-9 sm:h-9"

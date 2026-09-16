@@ -35,7 +35,7 @@ function buildSystemPrompt(lang, productContext) {
 }
 
 export async function createChatCompletionStream(apiKey, messages) {
-  const openai = new OpenAI({ apiKey });
+  const openai = new OpenAI({ apiKey, timeout: 15000, maxRetries: 1 });
   const lastMessage = messages[messages.length - 1];
   const queryText = extractQueryText(lastMessage);
   const lang = detectLang(queryText);
@@ -51,6 +51,7 @@ export async function createChatCompletionStream(apiKey, messages) {
     model: "gpt-4o-mini",
     messages: [systemPrompt, ...messages],
     temperature: 0.7,
+    max_tokens: 500,
     stream: true,
   });
 }

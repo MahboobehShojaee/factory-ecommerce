@@ -36,45 +36,41 @@ const ProductCard = React.memo(function ProductCard({
 
   // 🧠 Safety checks and پشتیبانی همزمان از دیتای قدیم و جدید
 
-  if (!category || typeof category !== 'object') {
-
-    return null;
-
-  }
+  const isValidCategory = category && typeof category === 'object';
 
 
 
   const name =
 
-    typeof category.name === "object" ? category.name?.[lang] || category.name?.en || '' : category.name || '';
+    typeof category?.name === "object" ? category.name?.[lang] || category.name?.en || '' : category?.name || '';
 
 
 
   const subtitle =
 
-    typeof category.subtitle === "object"
+    typeof category?.subtitle === "object"
 
       ? category.subtitle?.[lang] || category.subtitle?.en || ''
 
-      : category.subtitle || '';
+      : category?.subtitle || '';
 
 
 
   const description =
 
-    typeof category.description === "object"
+    typeof category?.description === "object"
 
       ? category.description?.[lang] || category.description?.en || ''
 
-      : category.description || '';
+      : category?.description || '';
 
 
 
-  const highlights = Array.isArray(category.features?.[lang]) ? category.features[lang] : 
+  const highlights = Array.isArray(category?.features?.[lang]) ? category.features[lang] :
 
-                     Array.isArray(category.features) ? category.features :
+                     Array.isArray(category?.features) ? category.features :
 
-                     Array.isArray(category.highlights) ? category.highlights : [];
+                     Array.isArray(category?.highlights) ? category.highlights : [];
 
   const firstTwoLetters = name?.substring(0, 2) || "";
 
@@ -115,6 +111,8 @@ const ProductCard = React.memo(function ProductCard({
   }, [isHighlighted]);
 
 
+
+  if (!isValidCategory) return null;
 
   if (!inView) return <div ref={ref} className="h-[350px] w-full"></div>;
 

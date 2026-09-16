@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { useRTL } from "../hooks/useRTL.js";
@@ -8,13 +8,15 @@ import { getAllArticleCategories, getAllArticleTags } from "../content/blog/stru
 import { articlesMap, articles } from "../content/articles/index.js";
 import SeoHead from "../lib/seo/SeoHead.jsx";
 import { buildBreadcrumbSchema, buildArticleSchema, buildFAQSchema } from "../lib/seo/schema.js";
-import { Share2, Clock, User, Calendar, ArrowLeft, Printer } from "lucide-react";
+import { Share2, Clock, ArrowLeft } from "lucide-react";
 import RelatedArticles from "../components/blog/RelatedArticles.jsx";
 import { useScrollDepthTracking, useTimeOnPageTracking } from "../hooks/useScrollDepthTracking.js";
 import Breadcrumb from "../components/ui/Breadcrumb.jsx";
 import TableOfContents from "../components/ui/TableOfContents.jsx";
 import { Heading, Text, ArticleContent } from "../components/ui/Typography.jsx";
 import { SpecificationTable } from "../components/ui/TechnicalTable.jsx";
+import DOMPurify from "dompurify";
+import { localizedBlogUrl } from "../config/site.js";
 
 export default function Article() {
   const { slug } = useParams();
@@ -22,6 +24,7 @@ export default function Article() {
   const { isRTL, dirClass } = useRTL();
   const navigate = useNavigate();
   const [readingProgress, setReadingProgress] = useState(0);
+  const [shareStatus, setShareStatus] = useState("");
   const contentRef = useRef(null);
 
   const categories = getAllArticleCategories();
@@ -37,23 +40,33 @@ export default function Article() {
     const handleScroll = () => {
       if (contentRef.current) {
         const element = contentRef.current;
-        const totalHeight = element.scrollHeight - element.clientHeight;
-        const progress = (element.scrollTop / totalHeight) * 100;
-        setReadingProgress(Math.min(progress, 100));
+        const articleTop = window.scrollY + element.getBoundingClientRect().top;
+        const totalHeight = Math.max(element.offsetHeight - window.innerHeight, 1);
+        const progress = ((window.scrollY - articleTop) / totalHeight) * 100;
+        setReadingProgress(Math.max(0, Math.min(progress, 100)));
       }
     };
 
-    const element = contentRef.current;
-    if (element) {
-      element.addEventListener("scroll", handleScroll);
-      return () => element.removeEventListener("scroll", handleScroll);
-    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, [article]);
 
   if (!article) {
     return (
-      <section className={`min-h-screen bg-[#F8F9FA] flex items-center justify-center ${dirClass}`}>
-        <div className="text-center">
+      <>
+        <SeoHead
+          title={isRTL ? "مقاله یافت نشد" : "Article Not Found"}
+          description={isRTL ? "مقاله درخواست‌شده یافت نشد." : "The requested article could not be found."}
+          noindex
+          lang={lang}
+        />
+        <section className={`min-h-screen bg-[#F8F9FA] flex items-center justify-center ${dirClass}`}>
+          <div className="text-center">
               <Heading level={1} className="mb-4">
                 {isRTL ? "مقاله یافت نشد" : "Article Not Found"}
               </Heading>
@@ -68,13 +81,15 @@ export default function Article() {
           >
             {isRTL ? "بازگشت به مرکز دانش" : "Back to Knowledge Center"}
           </Link>
-        </div>
-      </section>
+          </div>
+        </section>
+      </>
     );
   }
 
   const category = categories.find((c) => c.id === article.category);
-  const content = article.processedContent?.[lang] || article.content?.[lang] || "";
+  const rawContent = article.processedContent?.[lang] || article.content?.[lang] || "";
+  const content = DOMPurify.sanitize(rawContent);
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { name: dict.layout?.navHome || "Home", url: `/${lang === "fa" ? "fa" : ""}` },
@@ -87,18 +102,25 @@ export default function Article() {
     description: article.excerpt?.[lang] || "",
     author: article.author || "Setareh Kerman Engineering Team",
     publishDate: article.publishDate || "",
-    url: `https://setarehkerman.com/${lang === "fa" ? "fa/" : ""}blog/${slug}`,
+    url: localizedBlogUrl(slug, lang),
   });
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
+    try {
+      if (navigator.share) {
         await navigator.share({
           title: article.title?.[lang] || "",
           text: article.excerpt?.[lang] || "",
           url: window.location.href,
         });
-      } catch (err) {}
+        return;
+      }
+      await navigator.clipboard.writeText(window.location.href);
+      setShareStatus(isRTL ? "لینک کپی شد." : "Link copied.");
+    } catch (error) {
+      if (error?.name !== "AbortError") {
+        setShareStatus(isRTL ? "اشتراک‌گذاری انجام نشد." : "Unable to share this article.");
+      }
     }
   };
 
@@ -108,6 +130,7 @@ export default function Article() {
         title={`${article.title?.[lang] || ""} | ${isRTL ? "ستاره کرمان" : "Setareh Kerman"}`}
         description={article.excerpt?.[lang] || ""}
         canonical={lang === "fa" ? `/fa/blog/${slug}` : `/blog/${slug}`}
+        image={article.featuredImage}
         lang={lang}
         jsonLd={[
           breadcrumbSchema,
@@ -190,7 +213,7 @@ export default function Article() {
                   </ArticleContent>
                 </Card>
               </div>
-              <aside className="hidden lg:block w-72 flex-shrink-0">
+              <aside className="contents lg:block lg:w-72 lg:flex-shrink-0">
                 <div className="sticky top-24">
                   <TableOfContents content={content} lang={lang} />
                 </div>
@@ -250,12 +273,16 @@ export default function Article() {
                   </Text>
                 </div>
                 <button
+                  type="button"
                   onClick={handleShare}
                   className="flex items-center gap-2 px-6 py-3 bg-[#374151] text-white rounded-xl font-bold hover:bg-[#D4AF37] transition-colors"
                 >
                   <Share2 className="w-5 h-5" />
                   <span>{isRTL ? "اشتراک‌گذاری" : "Share"}</span>
                 </button>
+                <span className="sr-only" role="status" aria-live="polite">
+                  {shareStatus}
+                </span>
               </Card>
             </div>
           </FadeInUp>

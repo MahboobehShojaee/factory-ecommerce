@@ -37,20 +37,16 @@ export default function Home() {
       />
 
       <div className={`pb-6 sm:pb-10 md:pb-12 ${dirClass}`}>
-        {/* 1. Hero — Who we are */}
-        <section aria-label="Hero introduction" className="px-1 sm:px-0">
+        {/* 1. Hero — full viewport width, no page-container padding */}
+        <section aria-label="Hero introduction" className="relative w-full max-w-none">
           <HeroSection />
         </section>
 
-        {/* 2. Factory capabilities — English only (hidden on Farsi to avoid duplicate/empty blocks) */}
-        {!isRTL && (
-          <>
-            <ScrollReveal>
-              <FactoryCapabilities lang={l} />
-            </ScrollReveal>
-            <SectionDivider />
-          </>
-        )}
+        {/* 2. Factory capabilities — EN: 6 cards with photos; FA: 3 icon-only cards */}
+        <ScrollReveal>
+          <FactoryCapabilities lang={l} />
+        </ScrollReveal>
+        <SectionDivider />
 
         {/* 3. Trust signals — Certifications & metrics */}
         <ScrollReveal>

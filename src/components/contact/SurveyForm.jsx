@@ -44,6 +44,7 @@ function createSurveySchema(lang) {
       .min(10, isFa ? "حداقل ۱۰ کاراکتر" : "At least 10 characters")
       .max(2000, isFa ? "حداکثر ۲۰۰۰ کاراکتر" : "At most 2000 characters"),
     canPublish: z.boolean().optional(),
+    website: z.string().max(0).optional(),
   });
 }
 
@@ -76,6 +77,7 @@ export default function SurveyForm({ t, cableOptions }) {
       rating: 0,
       comments: "",
       canPublish: false,
+      website: "",
     },
   });
 
@@ -88,6 +90,7 @@ export default function SurveyForm({ t, cableOptions }) {
     rating: 0,
     comments: "",
     canPublish: false,
+    website: "",
   };
 
   const onSubmit = async (data) => {
@@ -119,6 +122,16 @@ export default function SurveyForm({ t, cableOptions }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="ds-form-panel space-y-6">
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="survey-website">Website</label>
+        <input
+          id="survey-website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          {...register("website")}
+        />
+      </div>
       <div className="mb-2 space-y-3">
         <h2
           className={`text-xl sm:text-2xl font-black text-[#374151] ${isRTL ? "text-right" : "text-left"}`}
@@ -158,10 +171,11 @@ export default function SurveyForm({ t, cableOptions }) {
       </div>
 
       <div className={`space-y-2 ${dirClass}`}>
-        <label className={labelClass(isRTL)}>
+        <label htmlFor="survey-product-service" className={labelClass(isRTL)}>
           {t.surveyProduct || (lang === "fa" ? "محصول / خدمت استفاده شده" : "Product / Service Used")}
         </label>
         <select
+          id="survey-product-service"
           {...register("productService")}
           className={selectClass(isRTL)}
         >
@@ -172,16 +186,21 @@ export default function SurveyForm({ t, cableOptions }) {
         </select>
       </div>
 
-      <div className={`space-y-2 ${dirClass}`}>
-        <label className={labelClass(isRTL)}>
+      <fieldset className={`space-y-2 ${dirClass}`}>
+        <legend id="survey-rating-label" className={labelClass(isRTL)}>
           {t.surveyRating || (lang === "fa" ? "رضایت کلی" : "Overall Satisfaction")}
           <span className="text-red-500 mr-1">*</span>
-        </label>
-        <StarRating value={rating} onChange={(v) => setValue("rating", v, { shouldValidate: true })} isRTL={isRTL} />
+        </legend>
+        <StarRating
+          value={rating}
+          onChange={(v) => setValue("rating", v, { shouldValidate: true })}
+          isRTL={isRTL}
+          errorId={errors.rating ? "survey-rating-error" : undefined}
+        />
         {errors.rating && (
-          <p className="text-sm text-red-600 font-medium">{errors.rating.message}</p>
+          <p id="survey-rating-error" role="alert" className="text-sm text-red-600 font-medium">{errors.rating.message}</p>
         )}
-      </div>
+      </fieldset>
 
       <FormTextarea
         name="comments"

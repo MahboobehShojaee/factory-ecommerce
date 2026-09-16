@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { useController } from 'react-hook-form';
 
 /**
@@ -16,8 +16,12 @@ const FormSelect = React.memo(function FormSelect({
   selectClassName = '',
   labelClassName = '',
   required = false,
+  id: providedId,
   ...props
 }) {
+  const generatedId = useId();
+  const selectId = providedId || `${name}-${generatedId}`;
+  const errorId = `${selectId}-error`;
   const {
     field,
     fieldState: { error, isTouched },
@@ -33,7 +37,7 @@ const FormSelect = React.memo(function FormSelect({
     <div className={`space-y-2 ${className}`}>
       {label && (
         <label
-          htmlFor={name}
+          htmlFor={selectId}
           className={`block text-sm font-medium text-gray-700 ${
             hasError ? 'text-red-600' : ''
           } ${labelClassName}`}
@@ -44,8 +48,10 @@ const FormSelect = React.memo(function FormSelect({
       )}
       
       <select
-        id={name}
+        id={selectId}
         disabled={disabled}
+        aria-invalid={hasError ? "true" : undefined}
+        aria-describedby={hasError ? errorId : undefined}
         className={`w-full px-4 py-3 border rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]/20 focus:border-[#D4AF37] ${
           hasError
             ? 'border-red-500 bg-red-50'
@@ -65,7 +71,7 @@ const FormSelect = React.memo(function FormSelect({
       </select>
       
       {hasError && (
-        <p className="text-sm text-red-600 font-medium">
+        <p id={errorId} role="alert" className="text-sm text-red-600 font-medium">
           {error.message}
         </p>
       )}

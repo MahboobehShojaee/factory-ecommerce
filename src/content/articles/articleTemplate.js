@@ -4,9 +4,9 @@
  * Leverages existing reusable systems: typography, TOC, technical tables, breadcrumb, FAQ schema
  */
 
-import { buildArticleSchema, buildFAQSchema, buildTechnicalArticleSchema } from '../../lib/seo/schema.js';
-import { generateArticleBreadcrumbItems } from '../../components/ui/Breadcrumb.jsx';
+import { buildArticleSchema, buildFAQSchema } from '../../lib/seo/schema.js';
 import { generateTOCData, addHeadingIds } from '../../components/ui/TableOfContents.jsx';
+import { localizedBlogUrl } from '../../config/site.js';
 
 /**
  * Article Template
@@ -84,8 +84,7 @@ export const articleTemplate = {
  * Generate article with schema
  */
 export function generateArticleSchema(article, lang) {
-  const baseUrl = lang === 'fa' ? 'https://setarehkerman.com/fa' : 'https://setarehkerman.com';
-  const url = `${baseUrl}/blog/${article.slug}`;
+  const url = localizedBlogUrl(article.slug, lang);
   
   // Base article schema
   const schema = buildArticleSchema({
@@ -115,12 +114,12 @@ export function generateArticleMetadata(article, lang) {
   return {
     title: `${article.title[lang]} | Setareh Kerman`,
     description: article.metaDescription || article.excerpt[lang],
-    canonical: `https://setarehkerman.com/${lang === 'fa' ? 'fa/' : ''}blog/${article.slug}`,
+    canonical: localizedBlogUrl(article.slug, lang),
     openGraph: {
       title: article.title[lang],
       description: article.excerpt[lang],
       type: 'article',
-      url: `https://setarehkerman.com/${lang === 'fa' ? 'fa/' : ''}blog/${article.slug}`,
+      url: localizedBlogUrl(article.slug, lang),
       images: article.featuredImage ? [
         {
           url: article.featuredImage,
@@ -137,10 +136,10 @@ export function generateArticleMetadata(article, lang) {
       images: article.featuredImage ? [article.featuredImage] : [],
     },
     alternates: {
-      canonical: `https://setarehkerman.com/blog/${article.slug}`,
+      canonical: localizedBlogUrl(article.slug, "en"),
       languages: {
-        en: `https://setarehkerman.com/blog/${article.slug}`,
-        fa: `https://setarehkerman.com/fa/blog/${article.slug}`,
+        en: localizedBlogUrl(article.slug, "en"),
+        fa: localizedBlogUrl(article.slug, "fa"),
       },
     },
   };
