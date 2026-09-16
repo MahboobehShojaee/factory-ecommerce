@@ -1,7 +1,10 @@
 import { validateContactPayload } from "../utils/contactValidation.js";
 import { isMailConfigured, sendContactEmail } from "../services/mailService.js";
+import { mailUnavailableMessage, requestLang } from "../utils/formResponses.js";
 
-export async function submitContact(req, res, next) {
+export async function submitContact(req, res) {
+  const lang = requestLang(req.body);
+
   try {
     if (typeof req.body?.website === "string" && req.body.website.trim()) {
       return res.status(204).end();
@@ -9,11 +12,10 @@ export async function submitContact(req, res, next) {
 
     if (!isMailConfigured()) {
       return res.status(503).json({
-        error: "Contact form is temporarily unavailable. Please try again later or email us directly.",
+        error: mailUnavailableMessage(lang, "contact"),
       });
     }
 
-    const lang = req.body?.lang === "fa" ? "fa" : "en";
     const result = validateContactPayload(req.body, lang);
 
     if (result.errors) {
@@ -33,6 +35,14 @@ export async function submitContact(req, res, next) {
           : "Your message has been sent successfully.",
     });
   } catch (error) {
-    next(error);
+    console.error("Contact form email failed:", error.message);
+    if (error.code === "EAUTH" || error.code === "ETIMEDOUT" || error.code === "ESOCKET") {
+      return res.status(503).json({
+        error: mailUnavailableMessage(lang, "contact"),
+      });
+    }
+    return res.status(503).json({
+      error: mailUnavailableMessage(lang, "contact"),
+    });
   }
 }

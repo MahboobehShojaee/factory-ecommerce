@@ -1,7 +1,10 @@
 import { validateSurveyPayload } from "../utils/surveyValidation.js";
 import { isMailConfigured, sendSurveyEmail } from "../services/mailService.js";
+import { mailUnavailableMessage, requestLang } from "../utils/formResponses.js";
 
-export async function submitSurvey(req, res, next) {
+export async function submitSurvey(req, res) {
+  const lang = requestLang(req.body);
+
   try {
     if (typeof req.body?.website === "string" && req.body.website.trim()) {
       return res.status(204).end();
@@ -9,11 +12,10 @@ export async function submitSurvey(req, res, next) {
 
     if (!isMailConfigured()) {
       return res.status(503).json({
-        error: "Survey form is temporarily unavailable. Please try again later or email us directly.",
+        error: mailUnavailableMessage(lang, "survey"),
       });
     }
 
-    const lang = req.body?.lang === "fa" ? "fa" : "en";
     const result = validateSurveyPayload(req.body, lang);
 
     if (result.errors) {
@@ -33,6 +35,9 @@ export async function submitSurvey(req, res, next) {
           : "Your feedback has been submitted successfully. Thank you!",
     });
   } catch (error) {
-    next(error);
+    console.error("Survey form email failed:", error.message);
+    return res.status(503).json({
+      error: mailUnavailableMessage(lang, "survey"),
+    });
   }
 }

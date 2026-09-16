@@ -14,6 +14,9 @@ export const corsMiddleware = cors({
     }
     const error = new Error("Origin not allowed");
     error.status = 403;
+    console.warn(
+      `Blocked CORS origin: ${origin}. Allowed: ${env.corsAllowedOrigins.join(", ")}`,
+    );
     callback(error);
   },
   methods: ["GET", "POST", "OPTIONS"],

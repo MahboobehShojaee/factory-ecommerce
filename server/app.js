@@ -8,6 +8,7 @@ import surveyRoutes from "./routes/surveyRoutes.js";
 import { corsMiddleware } from "./middleware/cors.js";
 import { errorHandler, notFoundHandler } from "./middleware/errorHandler.js";
 import { env } from "./config/env.js";
+import { isMailConfigured } from "./services/mailService.js";
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.disable("x-powered-by");
 app.use((req, res, next) => {
   res.set({
     "Content-Security-Policy": "default-src 'none'; base-uri 'none'; frame-ancestors 'none'",
-    "Cross-Origin-Resource-Policy": "same-site",
+    "Cross-Origin-Resource-Policy": "cross-origin",
     "Referrer-Policy": "no-referrer",
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY",
@@ -61,7 +62,11 @@ const chatLimiter = rateLimit({
 app.use("/api", apiLimiter);
 
 app.get("/api/health", (_req, res) => {
-  res.json({ status: "ok", timestamp: new Date().toISOString() });
+  res.json({
+    status: "ok",
+    mailConfigured: isMailConfigured(),
+    timestamp: new Date().toISOString(),
+  });
 });
 
 if (env.enableChatbot) {

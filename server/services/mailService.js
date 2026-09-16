@@ -1,8 +1,6 @@
 import nodemailer from "nodemailer";
 import { env } from "../config/env.js";
 
-let transporter;
-
 function escapeHtml(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -13,23 +11,23 @@ function escapeHtml(value) {
 }
 
 function getTransporter() {
-  if (transporter) return transporter;
-
   if (!env.smtp.host || !env.smtp.user || !env.smtp.pass) {
     return null;
   }
 
-  transporter = nodemailer.createTransport({
+  return nodemailer.createTransport({
     host: env.smtp.host,
     port: env.smtp.port,
     secure: env.smtp.secure,
+    requireTLS: !env.smtp.secure && env.smtp.port === 587,
+    connectionTimeout: 12000,
+    greetingTimeout: 12000,
+    socketTimeout: 20000,
     auth: {
       user: env.smtp.user,
       pass: env.smtp.pass,
     },
   });
-
-  return transporter;
 }
 
 function inquiryTypeLabel(inquiryType, lang) {

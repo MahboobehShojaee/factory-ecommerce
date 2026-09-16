@@ -5,7 +5,7 @@ const baseURL = apiBaseUrl;
 
 export const apiClient = axios.create({
   baseURL,
-  timeout: 15000,
+  timeout: 25000,
 });
 
 apiClient.interceptors.response.use(
