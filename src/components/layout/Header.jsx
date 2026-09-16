@@ -112,6 +112,7 @@ export default function Header() {
             type="button"
             onClick={() => {
               const newLang = lang === LANGS.EN ? LANGS.FA : LANGS.EN;
+              localStorage.setItem("app_lang", newLang);
               setLang(newLang);
               const path = location.pathname.replace(/^\/fa(\/|$)/, "/$1");
               const newPath =

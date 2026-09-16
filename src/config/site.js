@@ -1,5 +1,6 @@
 export const DEFAULT_SITE_URL = "https://setarehkerman.com";
-export const DEFAULT_API_BASE_URL = "http://localhost:5000";
+export const DEFAULT_DEV_API_BASE_URL = "http://localhost:5000";
+export const DEFAULT_PROD_API_BASE_URL = "https://api.setarehkerman.com";
 
 function stripTrailingSlash(value) {
   return String(value || "").trim().replace(/\/$/, "");
@@ -21,7 +22,10 @@ export const siteName =
   import.meta.env.VITE_SITE_NAME || "Setareh Kerman Wire & Cable";
 
 export const apiBaseUrl = stripTrailingSlash(
-  import.meta.env.VITE_API_BASE_URL || DEFAULT_API_BASE_URL,
+  import.meta.env.VITE_API_BASE_URL ||
+    (import.meta.env.PROD
+      ? DEFAULT_PROD_API_BASE_URL
+      : DEFAULT_DEV_API_BASE_URL),
 );
 
 export const defaultOgImage = `${siteUrl}/og-image.jpg`;

@@ -116,12 +116,11 @@ export default function ContactForm({ t, projectOptions, cableOptions }) {
       if (import.meta.env.DEV) {
         console.error(err);
       }
-      toast.error(
-        err.message ||
-          (lang === "fa"
-            ? "ارسال با خطا مواجه شد. لطفاً دوباره تلاش کنید."
-            : "Submission failed. Please try again."),
-      );
+      const fallback =
+        lang === "fa"
+          ? "ارسال با خطا مواجه شد. لطفاً دوباره تلاش کنید."
+          : "Submission failed. Please try again.";
+      toast.error(typeof err?.message === "string" && err.message ? err.message : fallback);
     } finally {
       setIsSubmitting(false);
     }

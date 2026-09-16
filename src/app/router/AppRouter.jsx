@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { LoadingState } from "../../components/ui/AsyncState.jsx";
 import { appRoutes, lazyPages } from "../../routes/routeConfig.jsx";
+import DefaultHomeGate from "./DefaultHomeGate.jsx";
 
 const HomePage = lazyPages.Home;
 const NotFoundPage = lazyPages.NotFound;
@@ -10,7 +11,7 @@ export default function AppRouter() {
   return (
     <Suspense fallback={<LoadingState label="Loading page..." />}>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<DefaultHomeGate />} />
         <Route path="/fa" element={<HomePage />} />
         {appRoutes.map(({ path, page }) => {
           const Page = lazyPages[page];

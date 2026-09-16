@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { normalizeDigits } from '../../../lib/normalizeDigits.js';
 
 /**
  * Bilingual validation messages
@@ -73,9 +74,14 @@ export const createContactFormSchema = (lang = 'en') => {
     phone: z
       .string()
       .min(1, createBilingualMessage(lang, 'required'))
-      .regex(/^[+]?[\d\s()-]+$/, createBilingualMessage(lang, 'phone'))
-      .min(10, createBilingualMessage(lang, 'minLength', 10))
-      .max(20, createBilingualMessage(lang, 'maxLength', 20)),
+      .transform(normalizeDigits)
+      .pipe(
+        z
+          .string()
+          .regex(/^[+]?[\d\s()-]+$/, createBilingualMessage(lang, 'phone'))
+          .min(10, createBilingualMessage(lang, 'minLength', 10))
+          .max(20, createBilingualMessage(lang, 'maxLength', 20)),
+      ),
 
     projectType: z
       .string()
@@ -104,7 +110,8 @@ export const createContactFormSchema = (lang = 'en') => {
   return baseSchema.superRefine((data, ctx) => {
     if (data.inquiryType !== 'quote') return;
 
-    if (!data.quantity || data.quantity.trim().length < 2) {
+    const quantity = normalizeDigits(data.quantity || "");
+    if (!quantity || quantity.trim().length < 2) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         path: ['quantity'],

@@ -1,3 +1,5 @@
+import { normalizeDigits } from "./normalizeDigits.js";
+
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_PATTERN = /^[+]?[\d\s\-()]+$/;
 const VALID_INQUIRY_TYPES = new Set(["general", "quote"]);
@@ -64,7 +66,7 @@ export function validateContactPayload(body, lang = "en") {
     errors.push({ field: "email", message: msg.email });
   }
 
-  const phone = cleanText(body.phone);
+  const phone = normalizeDigits(cleanText(body.phone));
   if (!phone || !PHONE_PATTERN.test(phone) || phone.length < 10 || phone.length > 20) {
     errors.push({ field: "phone", message: msg.phone });
   }
@@ -93,7 +95,7 @@ export function validateContactPayload(body, lang = "en") {
   let urgency = "";
 
   if (inquiryType === "quote") {
-    quantity = cleanText(body.quantity);
+    quantity = normalizeDigits(cleanText(body.quantity));
     urgency = cleanText(body.urgency);
 
     if (!isNonEmptyString(quantity, 2, 50)) {

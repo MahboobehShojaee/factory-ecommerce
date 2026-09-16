@@ -25,20 +25,14 @@ function detectLangFromPath(pathname) {
 export function LanguageProvider({ children }) {
   const { pathname } = useLocation();
 
-  const [lang, setLang] = useState(() => {
-    const pathLang = detectLangFromPath(window.location.pathname);
-    const savedLang = localStorage.getItem("app_lang");
-    if (pathLang !== detectLangFromPath("/")) {
-      return pathLang;
-    }
-    return savedLang === LANGS.EN || savedLang === LANGS.FA
-      ? savedLang
-      : LANGS.FA;
-  });
+  const [lang, setLang] = useState(() =>
+    detectLangFromPath(window.location.pathname),
+  );
 
   useEffect(() => {
     const pathLang = detectLangFromPath(pathname);
-    setLang((current) => (current !== pathLang ? pathLang : current));
+    setLang(pathLang);
+    localStorage.setItem("app_lang", pathLang);
   }, [pathname]);
 
   useEffect(() => {
