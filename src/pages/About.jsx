@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext.jsx";
 import { useRTL } from "../hooks/useRTL.js";
 
@@ -17,7 +17,6 @@ import QualityAssurance from "../components/ui/QualityAssurance.jsx";
 import ScrollReveal from "../components/common/ScrollReveal.jsx";
 import SectionDivider from "../components/common/SectionDivider.jsx";
 import { ScrollRevealStagger } from "../components/common/ScrollReveal.jsx";
-import { images } from "../assets/images/registry.js";
 
 export default function About() {
   const { dict } = useLanguage();
@@ -72,117 +71,55 @@ export default function About() {
   const manufacturingSteps = [
     {
       step: "01",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      ),
+      iconPath: "M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z",
       title: isRTL ? "بازرسی مواد اولیه" : "Raw Material Inspection",
       description: isRTL
         ? "بررسی دقیق کیفیت و استانداردهای مواد اولیه قبل از شروع فرآیند تولید برای تضمین بالاترین کیفیت نهایی."
         : "Thorough quality inspection of raw materials before production begins to ensure the highest final quality standards.",
-      image: images.process.step1,
     },
     {
       step: "02",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
+      iconPath: "M13 10V3L4 14h7v7l9-11h-7z",
       title: isRTL ? "کشش سیم" : "Wire Drawing",
       description: isRTL
         ? "فرآیند کشش دقیق سیم‌های مسی با استفاده از دستگاه‌های پیشرفته برای رسیدن به ابعاد و خواص مکانیکی مورد نظر."
         : "Precision wire drawing process using advanced machinery to achieve desired dimensions and mechanical properties.",
-      image: images.process.step2,
     },
     {
       step: "03",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-      ),
+      iconPath:
+        "M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15",
       title: isRTL ? "تابیدن و عایق‌کاری" : "Twisting & Insulation",
       description: isRTL
         ? "تابیدن سیم‌ها و اعمال عایق‌کاری با مواد پلیمری با کیفیت بالا برای محافظت در برابر عوامل محیطی و الکتریکی."
         : "Twisting wires and applying high-quality polymer insulation for protection against environmental and electrical factors.",
-      image: images.process.step3,
     },
     {
       step: "04",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
+      iconPath:
+        "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
       title: isRTL ? "کابل‌سازی و زره‌دار کردن" : "Cable Assembly & Armoring",
       description: isRTL
         ? "مونتاژ نهایی کابل‌ها و اعمال لایه زره برای افزایش مقاومت مکانیکی و محافظت در برابر آسیب‌های فیزیکی."
         : "Final cable assembly and armoring layer application to enhance mechanical strength and protect against physical damage.",
-      image: images.process.step4,
     },
     {
       step: "05",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      ),
+      iconPath:
+        "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
       title: isRTL ? "آزمایش کیفیت" : "Quality Testing",
       description: isRTL
         ? "انجام تست‌های جامع الکتریکی، مکانیکی و حرارتی مطابق با استانداردهای بین‌المللی برای تضمین عملکرد بهینه."
         : "Comprehensive electrical, mechanical, and thermal testing in compliance with international standards to ensure optimal performance.",
-      image: images.process.step5,
     },
     {
       step: "06",
-      icon: (
-        <svg
-          className="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-        >
-          <path d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
-        </svg>
-      ),
+      iconPath:
+        "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4",
       title: isRTL ? "بسته‌بندی و ارسال" : "Packaging & Shipping",
       description: isRTL
         ? "بسته‌بندی حرفه‌ای کابل‌ها با برچسب‌گذاری دقیق و آماده‌سازی برای حمل‌ونقل ایمن به مقصد مشتری."
         : "Professional cable packaging with precise labeling and preparation for safe transportation to customer destinations.",
-      image: images.process.step6,
     },
   ];
 
@@ -509,6 +446,120 @@ export default function About() {
   );
 }
 
+function StepIcon({ path, className }) {
+  return (
+    <svg
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path d={path} />
+    </svg>
+  );
+}
+
+function ProcessStepVisual({ step, isRTL }) {
+  const reduceMotion = useReducedMotion() === true;
+  const ring = reduceMotion
+    ? undefined
+    : { scale: [1, 1.22, 1], opacity: [0.55, 0.1, 0.55] };
+
+  return (
+    <div className="relative aspect-[16/6] overflow-hidden rounded-[16px] border border-[#D4AF37]/20 bg-gradient-to-br from-[#26313A] via-[#36414B] to-[#26313A] shadow-md shadow-gray-200/40">
+      <div
+        className="absolute inset-0 opacity-[0.13]"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, rgba(212,175,55,0.55) 1px, transparent 1px), linear-gradient(to bottom, rgba(212,175,55,0.55) 1px, transparent 1px)",
+          backgroundSize: "22px 22px",
+        }}
+        aria-hidden="true"
+      />
+
+      <motion.div
+        aria-hidden="true"
+        animate={reduceMotion ? undefined : { opacity: [0.3, 0.6, 0.3] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        className={`absolute top-1/2 h-32 w-32 -translate-y-1/2 rounded-full bg-[#D4AF37]/30 blur-[46px] ${
+          isRTL ? "right-[16%]" : "left-[16%]"
+        }`}
+      />
+
+      {!reduceMotion && (
+        <motion.div
+          aria-hidden="true"
+          initial={{ x: "-130%" }}
+          animate={{ x: "130%" }}
+          transition={{
+            duration: 3.4,
+            repeat: Infinity,
+            repeatDelay: 1.4,
+            ease: "easeInOut",
+          }}
+          className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-white/10 to-transparent"
+        />
+      )}
+
+      <div
+        className={`relative flex h-full items-center gap-4 px-6 sm:gap-5 sm:px-8 ${
+          isRTL ? "flex-row-reverse" : ""
+        }`}
+      >
+        <div className="relative flex h-16 w-16 shrink-0 items-center justify-center">
+          <motion.span
+            aria-hidden="true"
+            animate={ring}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeOut" }}
+            className="absolute inset-0 rounded-full border border-[#D4AF37]/45"
+          />
+          <motion.span
+            aria-hidden="true"
+            animate={ring}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeOut", delay: 1.5 }}
+            className="absolute inset-0 rounded-full border border-[#D4AF37]/30"
+          />
+          <motion.span
+            aria-hidden="true"
+            animate={reduceMotion ? undefined : { rotate: 360 }}
+            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            className="absolute -inset-2 rounded-full border border-dashed border-[#D4AF37]/25"
+          />
+          <motion.span
+            animate={reduceMotion ? undefined : { y: [0, -3, 0] }}
+            transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
+            className="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#D4AF37]/35 bg-[#D4AF37]/12 text-[#E3C359] backdrop-blur-sm"
+          >
+            <StepIcon path={step.iconPath} className="h-6 w-6" />
+          </motion.span>
+        </div>
+
+        <div className={`min-w-0 ${isRTL ? "text-right" : "text-left"}`}>
+          <p
+            className={`text-[10px] font-black text-[#D4AF37]/85 ${
+              isRTL ? "" : "uppercase tracking-[0.3em]"
+            }`}
+          >
+            {isRTL ? "مرحله" : "STEP"}
+          </p>
+          <p className="text-3xl font-black leading-none tabular-nums text-white/90 sm:text-4xl">
+            {step.step}
+          </p>
+        </div>
+      </div>
+
+      <div
+        className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#D4AF37]/45 to-transparent"
+        aria-hidden="true"
+      />
+    </div>
+  );
+}
+
 function ManufacturingStep({ step, index, isRTL, isLast }) {
   const stepRef = useRef(null);
   const stepInView = useInView(stepRef, {
@@ -536,15 +587,7 @@ function ManufacturingStep({ step, index, isRTL, isLast }) {
           transition={{ duration: 0.4, delay: 0.05 }}
           className="w-full md:w-1/2"
         >
-          <div className="relative aspect-[16/6] overflow-hidden rounded-[16px] shadow-md shadow-gray-200/40">
-            <img
-              src={step.image}
-              alt={step.title}
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#374151]/15 via-transparent to-transparent opacity-30" />
-          </div>
+          <ProcessStepVisual step={step} isRTL={isRTL} />
         </motion.div>
 
         <motion.div
@@ -555,7 +598,7 @@ function ManufacturingStep({ step, index, isRTL, isLast }) {
         >
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-[#D4AF37]/5 rounded-lg flex items-center justify-center border border-[#D4AF37]/10">
-              <div className="text-[#D4AF37]">{step.icon}</div>
+              <StepIcon path={step.iconPath} className="w-5 h-5 text-[#D4AF37]" />
             </div>
             <Text size="xs" weight="black" className="text-[#D4AF37] tracking-[0.15em] uppercase">
               {isRTL ? "مرحله" : "STEP"} {step.step}

@@ -15,7 +15,7 @@ export const footerConfig = {
       tagline: "Precision in every meter",
     },
     fa: {
-      name: "کارخانه ستاره کرمان",
+      name: "کارخانه سیم و کابل ستاره کرمان",
       tagline: "دقت در هر متر",
     },
   },

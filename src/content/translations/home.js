@@ -16,7 +16,7 @@ export const homeTranslations = {
       stats: [
         {
           label: "Industrial Experience",
-          value: "+25 Years",
+          value: "+20 Years",
           sub: "Wire & cable manufacturing",
         },
         {
@@ -66,7 +66,7 @@ export const homeTranslations = {
       stats: [
         {
           label: "تجربه صنعتی",
-          value: "+۲۵ سال",
+          value: "+۲۰ سال",
           sub: "در صنعت سیم و کابل",
         },
         {
